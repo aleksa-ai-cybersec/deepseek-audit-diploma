@@ -1,3 +1,14 @@
+<div align="center">
+
+# 🛡️ Аудит безопасности DeepSeek
+
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
+[![Streamlit](https://img.shields.io/badge/Streamlit-Демо-red)]()
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Сайт-brightgreen)]()
+
+</div>
+
 # 🛡️ Аудит безопасности DeepSeek
 
 **Дипломная работа Воробьевой Александры Александровны**  
