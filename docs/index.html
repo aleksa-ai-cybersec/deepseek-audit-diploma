@@ -8,7 +8,7 @@
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             color: #333;
@@ -18,14 +18,16 @@
             color: #2c3e50; 
             border-bottom: 3px solid #3498db; 
             padding-bottom: 15px;
-            font-size: 2.2em;
+            font-size: 2.5em;
+            text-align: center;
+            font-weight: 800;
         }
         h2 {
             color: #2c3e50;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         .badge-container { 
-            margin: 25px 0; 
+            margin: 30px 0; 
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
@@ -34,12 +36,12 @@
         .badge { 
             background: linear-gradient(135deg, #667eea 0%, #3498db 100%);
             color: white; 
-            padding: 10px 20px; 
-            border-radius: 30px;
+            padding: 12px 25px; 
+            border-radius: 40px;
             display: inline-block;
             font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2);
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
         .badge-green {
             background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
@@ -49,38 +51,6 @@
         }
         .badge-orange {
             background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-        }
-        .results {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 5px solid #3498db;
-            margin: 30px 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-        .stats-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .stats-table td {
-            padding: 15px;
-            border: 1px solid #eef2f6;
-        }
-        .stats-table tr:first-child {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: bold;
-        }
-        .stats-table tr:first-child td {
-            border: none;
-        }
-        .stats-table tr:hover {
-            background: #f8f9fa;
         }
         .footer { 
             margin-top: 60px; 
@@ -105,20 +75,73 @@
             padding: 0;
         }
         li {
-            margin: 15px 0;
-            padding: 15px;
+            margin: 20px 0;
+            padding: 20px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
             border: 1px solid #eef2f6;
         }
-        .highlight {
-            font-size: 1.1em;
-            color: #2c3e50;
-        }
         .emoji {
-            font-size: 1.3em;
-            margin-right: 10px;
+            font-size: 1.4em;
+            margin-right: 15px;
+        }
+        .demo-button {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+            transition: transform 0.2s;
+        }
+        .demo-button:hover {
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .card-title {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+        .card-content {
+            color: #7f8c8d;
+            margin: 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .big-number {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        .small-note {
+            font-size: 0.9em;
+            color: #95a5a6;
         }
     </style>
 </head>
@@ -133,80 +156,94 @@
     </div>
 
     <h2>📌 О проекте</h2>
-    <p style="font-size: 1.1em; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+    <p style="font-size: 1.2em; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.03);">
         Разработка методики аудита информационной безопасности систем, 
         использующих технологии искусственного интеллекта (на примере DeepSeek-V3).
     </p>
 
-    <h2>✨ Ключевые результаты</h2>
-    <ul>
-        <li>
-            <span class="emoji">✅</span> 
-            <span class="highlight"><strong>27 угроз</strong></span> по 6 этапам жизненного цикла
-        </li>
-        <li>
-            <span class="emoji">✅</span> 
-            <span class="highlight"><strong>80+ тестовых промптов</strong></span> для всестороннего тестирования
-        </li>
-        <li>
-            <span class="emoji">✅</span> 
-            <span class="highlight"><strong>ML-предсказание</strong></span> уязвимостей (Random Forest)
-        </li>
-        <li>
-            <span class="emoji">✅</span> 
-            <span class="highlight"><strong>Глубокий семантический анализ</strong></span> на базе BART
-        </li>
-        <li>
-            <span class="emoji">✅</span> 
-            <span class="highlight"><strong>Адаптивное тестирование</strong></span> с экономией до 40% запросов
-        </li>
-        <li>
-            <span class="emoji">✅</span> 
-            <span class="highlight"><strong>Live Dashboard</strong></span> с 6 интерактивными графиками
-        </li>
-    </ul>
-
-    <div class="results">
-        <h2 style="margin-top: 0;">📊 РЕЗУЛЬТАТЫ АУДИТА DeepSeek-V3</h2>
-        
-        <table class="stats-table">
-            <tr>
-                <td><strong>Показатель</strong></td>
-                <td><strong>Значение</strong></td>
-            </tr>
-            <tr>
-                <td>Всего проведено тестов</td>
-                <td><strong style="font-size: 1.2em; color: #3498db;">153</strong></td>
-            </tr>
-            <tr>
-                <td>Всего протестировано угроз</td>
-                <td><strong style="font-size: 1.2em; color: #27ae60;">27 из 27</strong></td>
-            </tr>
-            <tr>
-                <td>Выявлено уязвимостей</td>
-                <td><strong style="font-size: 1.2em; color: #e74c3c;">52</strong></td>
-            </tr>
-            <tr>
-                <td>Процент уязвимых тестов</td>
-                <td><strong style="font-size: 1.2em; color: #f39c12;">34.0%</strong></td>
-            </tr>
-            <tr>
-                <td>Среднее время ответа</td>
-                <td><strong style="font-size: 1.2em; color: #9b59b6;">5.708 с</strong></td>
-            </tr>
-        </table>
-        
-        <p style="font-style: italic; color: #7f8c8d; text-align: center;">
-            * Данные получены в результате комплексного аудита модели DeepSeek-V3-0324
-        </p>
+    <div style="text-align: center; margin: 40px 0;">
+        <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" class="demo-button" target="_blank">
+            🚀 ЗАПУСТИТЬ ИНТЕРАКТИВНУЮ ДЕМО-ВЕРСИЮ
+        </a>
     </div>
 
-    <h2>🔗 Полезные ссылки</h2>
+    <h2 style="color: #2c3e50; margin-top: 40px; text-align: center; font-size: 2.2em;">📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ</h2>
+
+    <div class="results-grid">
+        
+        <!-- Карточка 1: Методологическая база -->
+        <div class="result-card" style="border-top: 5px solid #3498db;">
+            <div class="card-icon">📚</div>
+            <h3 class="card-title">Методологическая база</h3>
+            <div class="card-content">
+                <span class="big-number" style="color: #3498db;">27</span> угроз<br>
+                <span style="color: #3498db; font-weight: bold;">6</span> этапов жизненного цикла<br>
+                <span class="small-note">MITRE ATLAS, OWASP, NIST</span>
+            </div>
+        </div>
+        
+        <!-- Карточка 2: Практические результаты -->
+        <div class="result-card" style="border-top: 5px solid #e74c3c;">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Практические результаты</h3>
+            <div class="card-content">
+                <span class="big-number" style="color: #e74c3c;">52</span> уязвимости<br>
+                <span style="color: #e74c3c; font-weight: bold;">34%</span> тестов<br>
+                <span class="small-note">аудит DeepSeek-V3</span>
+            </div>
+        </div>
+        
+        <!-- Карточка 3: Разработанный инструмент -->
+        <div class="result-card" style="border-top: 5px solid #27ae60;">
+            <div class="card-icon">🛠️</div>
+            <h3 class="card-title">Разработанный инструмент</h3>
+            <div class="card-content">
+                <span class="big-number" style="color: #27ae60;">5000+</span> строк кода<br>
+                <span style="color: #27ae60; font-weight: bold;">80+</span> тестовых сценариев<br>
+                <span class="small-note">Python, scikit-learn, Streamlit</span>
+            </div>
+        </div>
+        
+        <!-- Карточка 4: Интеллектуальный анализ -->
+        <div class="result-card" style="border-top: 5px solid #f39c12;">
+            <div class="card-icon">🤖</div>
+            <h3 class="card-title">Интеллектуальный анализ</h3>
+            <div class="card-content">
+                🤖 ML-приоритизация<br>
+                🔍 Семантическая классификация<br>
+                <span class="small-note">Random Forest + BART</span>
+            </div>
+        </div>
+        
+        <!-- Карточка 5: Оптимизация -->
+        <div class="result-card" style="border-top: 5px solid #9b59b6;">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">Оптимизация</h3>
+            <div class="card-content">
+                📦 Адаптивная выборка<br>
+                💾 Кэширование запросов<br>
+                <span class="small-note">экономия до 40%</span>
+            </div>
+        </div>
+        
+        <!-- Карточка 6: Визуализация -->
+        <div class="result-card" style="border-top: 5px solid #1abc9c;">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Визуализация</h3>
+            <div class="card-content">
+                📺 Live Dashboard<br>
+                📈 7 интерактивных графиков<br>
+                <span class="small-note">реальное время</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>🔗 Ссылки</h2>
     <ul>
         <li>
             <span class="emoji">📦</span>
-            <strong style="font-size: 1.1em;">Исходный код:</strong> 
-            <a href="https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma">
+            <strong style="font-size: 1.2em;">Исходный код:</strong> 
+            <a href="https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma" target="_blank">
                 GitHub репозиторий
             </a>
             <br>
@@ -214,9 +251,9 @@
         </li>
         <li>
             <span class="emoji">🎮</span>
-            <strong style="font-size: 1.1em;">Интерактивная демо-версия:</strong> 
-            <a href="https://deepseek-audit-diploma.streamlit.app">
-                Протестировать промпты онлайн
+            <strong style="font-size: 1.2em;">Интерактивная демо-версия:</strong> 
+            <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" target="_blank">
+                deepseek-audit-diploma.streamlit.app
             </a>
             <br>
             <small style="color: #95a5a6;">Живой тестер с анализом уязвимостей в реальном времени</small>
@@ -233,19 +270,16 @@
         <li>
             <span class="emoji">💻</span>
             <strong>GitHub:</strong> 
-            <a href="https://github.com/aleksa-ai-cybersec">@aleksa-ai-cybersec</a>
+            <a href="https://github.com/aleksa-ai-cybersec" target="_blank">@aleksa-ai-cybersec</a>
         </li>
     </ul>
 
     <div class="footer">
-        <p style="font-size: 1.1em; margin-bottom: 10px;">🛡️ DeepSeek Security Auditor</p>
+        <p style="font-size: 1.2em; margin-bottom: 15px;">🛡️ DeepSeek Security Auditor</p>
         <p>© Воробьева Александра Александровна, 2026</p>
         <p>Московский государственный лингвистический университет</p>
         <p>Институт информационных наук</p>
         <p>Кафедра международной информационной безопасности</p>
-        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.7;">
-            Дипломная работа выполнена в рамках образовательной программы
-        </p>
     </div>
 </body>
 </html>
