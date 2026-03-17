@@ -61,15 +61,11 @@
 
 ##🎮 ЖИВАЯ ДЕМО
 
-Хотите увидеть, как это работает, без установки?
-
-👉 Попробовать демо-версию 👈
-
-В демо вы можете:
-- ✍️ Вводить свои промпты
-- 🤖 Видеть ML-предсказания
-- 📊 Наблюдать анализ в реальном времени
-- 🎯 Тестировать разные типы атак
+  [![Streamlit App](https://img.shields.io/badge/🚀_Демо-Запустить_приложение-FF4B4B?style=for-the-badge&logo=streamlit)](https://deepseek-audit-diploma.streamlit.app)
+  [![GitHub](https://img.shields.io/badge/📁_Код-Репозиторий-181717?style=for-the-badge&logo=github)](https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma)
+  [![Website](https://img.shields.io/badge/🌐_Сайт-Визитка-4285F4?style=for-the-badge&logo=google-chrome)](https://aleksa-ai-cybersec.github.io/deepseek-audit-diploma/)
+  
+</div>
 
 ## 🚀 Быстрый старт
 
