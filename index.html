@@ -29,10 +29,8 @@
             color: white; 
             padding: 8px 15px; 
             border-radius: 20px;
-            text-decoration: none;
             display: inline-block;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .badge-green {
             background: #27ae60;
@@ -47,13 +45,25 @@
             border-left: 5px solid #3498db;
             margin: 20px 0;
         }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .stats-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .stats-table tr:first-child {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
         .footer { 
             margin-top: 50px; 
             border-top: 1px solid #eee; 
             padding-top: 20px;
             text-align: center;
             color: #777;
-            font-size: 14px;
         }
         a {
             color: #3498db;
@@ -87,25 +97,47 @@
     </ul>
 
     <div class="results">
-        <h2>📊 Результаты аудита DeepSeek-V3</h2>
-        <ul>
-            <li>📝 Проведено тестов: <strong>80+</strong></li>
-            <li>⚠️ Выявлено критических уязвимостей: <strong>4</strong></li>
-            <li>📈 Процент уязвимых тестов: <strong>16.7%</strong></li>
-            <li>🎯 Основные векторы: промпт-инъекции, кража модели, DoS-атаки</li>
-        </ul>
+        <h2>📊 РЕЗУЛЬТАТЫ АУДИТА DeepSeek-V3</h2>
+        
+        <table class="stats-table">
+            <tr>
+                <td><strong>Показатель</strong></td>
+                <td><strong>Значение</strong></td>
+            </tr>
+            <tr>
+                <td>Всего проведено тестов</td>
+                <td><strong>153</strong></td>
+            </tr>
+            <tr>
+                <td>Всего протестировано угроз</td>
+                <td><strong>27 из 27</strong></td>
+            </tr>
+            <tr>
+                <td>Выявлено уязвимостей</td>
+                <td><strong>52</strong></td>
+            </tr>
+            <tr>
+                <td>Процент уязвимых тестов</td>
+                <td><strong>34.0%</strong></td>
+            </tr>
+            <tr>
+                <td>Среднее время ответа</td>
+                <td><strong>5.708 с</strong></td>
+            </tr>
+        </table>
+        
+        <p><em>Данные получены в результате комплексного аудита модели DeepSeek-V3-0324.</em></p>
     </div>
 
     <h2>🔗 Ссылки</h2>
     <ul>
         <li>📦 <a href="https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma">Исходный код на GitHub</a></li>
-        <li>🎮 <a href="https://aleksa-ai-cybersec-deepseek-audit.streamlit.app">Демо-версия (Streamlit)</a></li>
-        <li>🌐 <a href="https://aleksa-ai-cybersec.github.io">Сайт-визитка</a></li>
+        <li>🌐 <a href="https://aleksa-ai-cybersec.github.io/deepseek-audit-diploma">Сайт-визитка</a> (вы здесь)</li>
     </ul>
 
     <h2>📫 Контакты</h2>
     <ul>
-        <li>📧 Email: a.vorobeva@mgpu.ru</li>
+        <li>📧 Email: <strong>china_aleksandravorobeva@mail.ru</strong></li>
         <li>💻 GitHub: <a href="https://github.com/aleksa-ai-cybersec">@aleksa-ai-cybersec</a></li>
     </ul>
 
