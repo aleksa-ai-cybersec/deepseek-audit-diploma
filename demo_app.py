@@ -148,7 +148,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ========== БЕЙДЖИ ==========
+# ========== БЕЙДЖИ (исправлено: убрано "⭐ Отлично") ==========
 st.markdown("""
 <div style="text-align: center; margin: 30px 0;">
     <span class="badge">🎓 Дипломная работа</span>
@@ -157,7 +157,6 @@ st.markdown("""
     <span class="badge">🤖 ML-анализ</span>
     <span class="badge">📊 Live Dashboard</span>
     <span class="badge">🎯 STRIDE-AI</span>
-    <span class="badge badge-outline">⭐ Отлично</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -646,7 +645,7 @@ with tab5:
     df_risk = pd.DataFrame(risk_data)
     st.dataframe(df_risk, use_container_width=True, height=450)
 
-# ==================== ТАБ 6: ОБ АВТОРЕ ====================
+# ==================== ТАБ 6: ОБ АВТОРЕ (исправлено: имена по центру, фамилия с большой) ====================
 with tab6:
     st.markdown("""
     <div class="content-card">
@@ -662,9 +661,9 @@ with tab6:
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                     padding: 30px; border-radius: 15px; color: white; text-align: center;">
             <h1 style="font-size: 60px; margin:0;">👩‍🎓</h1>
-            <h3 style="margin:10px 0 0 0;">Воробьева</h3>
-            <h2 style="margin:0;">Александра</h2>
-            <h3 style="margin:0 0 20px 0;">Александровна</h3>
+            <h2 style="margin:10px 0 5px 0;">Воробьева</h2>
+            <h1 style="margin:0; font-size: 32px;">Александра</h1>
+            <h3 style="margin:5px 0 20px 0;">Александровна</h3>
             <p style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px;">
                 Выпуск 2026
             </p>
