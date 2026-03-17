@@ -23,7 +23,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# ========== СТИЛИ (исправлено: убраны проблемные Unicode-последовательности) ==========
+# ========== СТИЛИ ==========
 st.markdown("""
 <style>
     /* Главный заголовок */
@@ -71,11 +71,6 @@ st.markdown("""
         margin: 5px;
         display: inline-block;
         box-shadow: 0 4px 10px rgba(102, 126, 234, 0.2);
-    }
-    .badge-outline {
-        background: transparent;
-        border: 2px solid #667eea;
-        color: #667eea;
     }
     
     /* Карточки для контента */
@@ -148,7 +143,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ========== БЕЙДЖИ (исправлено: убрано "⭐ Отлично") ==========
+# ========== БЕЙДЖИ ==========
 st.markdown("""
 <div style="text-align: center; margin: 30px 0;">
     <span class="badge">🎓 Дипломная работа</span>
@@ -645,7 +640,7 @@ with tab5:
     df_risk = pd.DataFrame(risk_data)
     st.dataframe(df_risk, use_container_width=True, height=450)
 
-# ==================== ТАБ 6: ОБ АВТОРЕ (исправлено: имена по центру, фамилия с большой) ====================
+# ==================== ТАБ 6: ОБ АВТОРЕ (исправлено: имя одной строкой) ====================
 with tab6:
     st.markdown("""
     <div class="content-card">
@@ -661,10 +656,8 @@ with tab6:
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                     padding: 30px; border-radius: 15px; color: white; text-align: center;">
             <h1 style="font-size: 60px; margin:0;">👩‍🎓</h1>
-            <h2 style="margin:10px 0 5px 0;">Воробьева</h2>
-            <h1 style="margin:0; font-size: 32px;">Александра</h1>
-            <h3 style="margin:5px 0 20px 0;">Александровна</h3>
-            <p style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px;">
+            <h2 style="margin:15px 0 0 0;">Воробьева Александра Александровна</h2>
+            <p style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 5px; margin-top: 20px;">
                 Выпуск 2026
             </p>
         </div>
