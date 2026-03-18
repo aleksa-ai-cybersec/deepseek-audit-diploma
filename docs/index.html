@@ -104,6 +104,36 @@
             color: white;
             text-decoration: none;
         }
+        .garden-button {
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: inline-block;
+            margin: 10px 0 20px 0;
+            box-shadow: 0 0 30px gold;
+            animation: gardenPulse 2s infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .garden-button:hover {
+            transform: scale(1.05);
+            color: white;
+            text-decoration: none;
+        }
+        @keyframes gardenPulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px #ffd700; }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px #ff6b6b; }
+            100% { transform: scale(1); box-shadow: 0 0 30px #ffd700; }
+        }
+        .garden-note {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9em;
+            text-align: center;
+        }
         .results-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -165,6 +195,16 @@
         <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" class="demo-button" target="_blank">
             🚀 ЗАПУСТИТЬ ИНТЕРАКТИВНУЮ ДЕМО-ВЕРСИЮ
         </a>
+        
+        <!-- НОВАЯ КНОПКА ДЛЯ САДА УЯЗВИМОСТЕЙ -->
+        <div style="margin-top: 20px;">
+            <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" class="garden-button" target="_blank">
+                🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ
+            </a>
+            <div class="garden-note">
+                ✨ 27 цветов-угроз • интерактивный квест ✨
+            </div>
+        </div>
     </div>
 
     <h2 style="color: #2c3e50; margin-top: 40px; text-align: center; font-size: 2.2em;">📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ</h2>
