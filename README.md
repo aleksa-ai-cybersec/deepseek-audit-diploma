@@ -59,7 +59,7 @@
 - **Live Dashboard** — визуализация в реальном времени
 - Автоматическая генерация таблицы 3.2 с динамической оценкой рисков
 
-##🎮 ЖИВАЯ ДЕМО
+## 🎮 Попробовать онлайн
 
   [![Streamlit App](https://img.shields.io/badge/🚀_Демо-Запустить_приложение-FF4B4B?style=for-the-badge&logo=streamlit)](https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app)
   [![GitHub](https://img.shields.io/badge/📁_Код-Репозиторий-181717?style=for-the-badge&logo=github)](https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma)
