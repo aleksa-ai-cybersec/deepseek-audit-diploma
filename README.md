@@ -61,7 +61,7 @@
 
 ##🎮 ЖИВАЯ ДЕМО
 
-  [![Streamlit App](https://img.shields.io/badge/🚀_Демо-Запустить_приложение-FF4B4B?style=for-the-badge&logo=streamlit)](https://deepseek-audit-diploma.streamlit.app)
+  [![Streamlit App](https://img.shields.io/badge/🚀_Демо-Запустить_приложение-FF4B4B?style=for-the-badge&logo=streamlit)](https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app)
   [![GitHub](https://img.shields.io/badge/📁_Код-Репозиторий-181717?style=for-the-badge&logo=github)](https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma)
   [![Website](https://img.shields.io/badge/🌐_Сайт-Визитка-4285F4?style=for-the-badge&logo=google-chrome)](https://aleksa-ai-cybersec.github.io/deepseek-audit-diploma/)
   
