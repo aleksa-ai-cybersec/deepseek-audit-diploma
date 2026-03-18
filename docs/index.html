@@ -86,8 +86,11 @@
             font-size: 1.4em;
             margin-right: 15px;
         }
+        
+        /* ========== КРАСИВЫЕ КНОПКИ ========== */
         .demo-button {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            background: linear-gradient(135deg, #3498db, #2980b9, #3498db);
+            background-size: 200% 200%;
             color: white;
             padding: 15px 30px;
             border-radius: 50px;
@@ -95,17 +98,27 @@
             font-weight: bold;
             font-size: 1.2em;
             display: inline-block;
-            margin: 20px 0;
-            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
-            transition: transform 0.2s;
+            margin: 10px 0;
+            box-shadow: 0 0 30px #3498db;
+            animation: bluePulse 2s infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s;
         }
         .demo-button:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
             color: white;
             text-decoration: none;
         }
+        
+        @keyframes bluePulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px #3498db; }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px #2980b9; }
+            100% { transform: scale(1); box-shadow: 0 0 30px #3498db; }
+        }
+        
         .garden-button {
             background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            background-size: 200% 200%;
             color: white;
             padding: 15px 30px;
             border-radius: 50px;
@@ -113,27 +126,39 @@
             font-weight: bold;
             font-size: 1.2em;
             display: inline-block;
-            margin: 10px 0 20px 0;
+            margin: 10px 0;
             box-shadow: 0 0 30px gold;
             animation: gardenPulse 2s infinite;
             border: 2px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s;
         }
         .garden-button:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
             color: white;
             text-decoration: none;
         }
+        
         @keyframes gardenPulse {
             0% { transform: scale(1); box-shadow: 0 0 30px #ffd700; }
             50% { transform: scale(1.05); box-shadow: 0 0 60px #ff6b6b; }
             100% { transform: scale(1); box-shadow: 0 0 30px #ffd700; }
         }
-        .garden-note {
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .button-note {
             color: #666;
             margin-top: 5px;
             font-size: 0.9em;
             text-align: center;
         }
+        
         .results-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -191,19 +216,18 @@
         использующих технологии искусственного интеллекта (на примере DeepSeek-V3).
     </p>
 
-    <div style="text-align: center; margin: 40px 0;">
+    <!-- КОНТЕЙНЕР С КРАСИВЫМИ КНОПКАМИ -->
+    <div class="button-container">
         <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" class="demo-button" target="_blank">
             🚀 ЗАПУСТИТЬ ИНТЕРАКТИВНУЮ ДЕМО-ВЕРСИЮ
         </a>
         
-        <!-- НОВАЯ КНОПКА ДЛЯ САДА УЯЗВИМОСТЕЙ -->
-        <div style="margin-top: 20px;">
-            <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" class="garden-button" target="_blank">
-                🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ
-            </a>
-            <div class="garden-note">
-                ✨ 27 цветов-угроз • интерактивный квест ✨
-            </div>
+        <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" class="garden-button" target="_blank">
+            🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ
+        </a>
+        
+        <div class="button-note">
+            ✨ 27 цветов-угроз • интерактивный квест ✨
         </div>
     </div>
 
@@ -282,12 +306,21 @@
     <ul>
         <li>
             <span class="emoji">📦</span>
-            <strong style="font-size: 1.2em;">Исходный код:</strong> 
+            <strong style="font-size: 1.2em;">Исходный код (основной):</strong> 
             <a href="https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma" target="_blank">
                 GitHub репозиторий
             </a>
             <br>
             <small style="color: #95a5a6;">Полный код аудитора, база угроз, ML-модели</small>
+        </li>
+        <li>
+            <span class="emoji">🌐</span>
+            <strong style="font-size: 1.2em;">Сад уязвимостей:</strong> 
+            <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" target="_blank">
+                vulnerability-garden
+            </a>
+            <br>
+            <small style="color: #95a5a6;">Интерактивная визуализация 27 угроз</small>
         </li>
         <li>
             <span class="emoji">🎮</span>
