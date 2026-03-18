@@ -198,6 +198,64 @@
             font-size: 0.9em;
             color: #95a5a6;
         }
+        
+        /* ========== АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ (ДОБАВЛЕНО) ========== */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+                line-height: 1.3;
+            }
+            .badge-container {
+                gap: 8px;
+            }
+            .badge {
+                padding: 8px 15px;
+                font-size: 13px;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .result-card {
+                padding: 20px;
+            }
+            .demo-button, .garden-button {
+                padding: 12px 20px;
+                font-size: 1em;
+                width: 100%;
+                max-width: 300px;
+            }
+            .button-container {
+                gap: 10px;
+            }
+            ul li {
+                padding: 15px;
+            }
+            .footer {
+                font-size: 12px;
+                padding: 15px 5px;
+            }
+            h2 {
+                font-size: 1.5em;
+                margin-top: 30px;
+            }
+            .big-number {
+                font-size: 1.2em;
+            }
+        }
+        
+        /* ========== ДЛЯ ПЛАНШЕТОВ (ДОБАВЛЕНО) ========== */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+        }
     </style>
 </head>
 <body>
