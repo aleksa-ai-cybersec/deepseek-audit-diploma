@@ -13,16 +13,216 @@
             padding: 20px;
             color: #333;
             background: #fafafa;
+            transition: background 1s ease;
         }
         
-        /* ========== ШИКАРНОЕ НАЗВАНИЕ ========== */
+        body.night-mode {
+            background: #0a0f1e;
+            color: #e0e0e0;
+        }
+        
+        /* ========== АНИМИРОВАННЫЙ ФОН ДЛЯ НОЧНОГО РЕЖИМА ========== */
+        .night-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        body.night-mode .night-background {
+            opacity: 1;
+        }
+        
+        /* ДВИЖУЩИЕСЯ НЕОНОВЫЕ ЛУЧИ */
+        .neon-rays {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 168, 255, 0.15) 0%, transparent 50%);
+            animation: moveRays 15s infinite alternate;
+        }
+        
+        .neon-rays::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 105, 180, 0.15) 0%, transparent 50%);
+            animation: moveRays2 20s infinite alternate;
+        }
+        
+        .neon-rays::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+            animation: moveRays3 18s infinite alternate;
+        }
+        
+        @keyframes moveRays {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(2deg); opacity: 0.6; }
+            100% { transform: scale(1) rotate(-2deg); opacity: 0.3; }
+        }
+        
+        @keyframes moveRays2 {
+            0% { transform: scale(1) translateX(0) translateY(0); opacity: 0.2; }
+            50% { transform: scale(1.3) translateX(5%) translateY(5%); opacity: 0.5; }
+            100% { transform: scale(1) translateX(-5%) translateY(-5%); opacity: 0.2; }
+        }
+        
+        @keyframes moveRays3 {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.2; }
+            33% { transform: scale(1.1) rotate(120deg); opacity: 0.4; }
+            66% { transform: scale(1.2) rotate(240deg); opacity: 0.3; }
+            100% { transform: scale(1) rotate(360deg); opacity: 0.2; }
+        }
+        
+        /* МЕРЦАЮЩИЕ ЗВЕЗДЫ */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 10px 20px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 30px 60px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 120px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 180px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 110px 240px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 140px 300px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 170px 360px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 200px 420px, #ffd700, rgba(0,0,0,0));
+            background-repeat: repeat;
+            opacity: 0.5;
+            animation: twinkle 4s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* НЕОНОВОЕ СВЕЧЕНИЕ ДЛЯ ТЕКСТА В НОЧНОМ РЕЖИМЕ */
+        body.night-mode h1,
+        body.night-mode .fancy-title,
+        body.night-mode .fancy-title span {
+            color: #fff;
+            text-shadow: 
+                0 0 10px #00a8ff,
+                0 0 20px #0097e6,
+                0 0 30px #0097e6,
+                0 0 40px #0097e6;
+            border-bottom-color: #00a8ff;
+        }
+        
+        body.night-mode .badge {
+            background: linear-gradient(135deg, #2c3e50, #1a2632);
+            box-shadow: 0 0 20px #00a8ff;
+            border: 1px solid #00a8ff;
+        }
+        
+        body.night-mode .result-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 30px rgba(0,168,255,0.3);
+        }
+        
+        body.night-mode .result-card .card-title {
+            color: #00a8ff;
+        }
+        
+        body.night-mode .result-card .card-content {
+            color: #e0e0e0;
+        }
+        
+        body.night-mode p {
+            background: rgba(255,255,255,0.1) !important;
+            color: white !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 30px rgba(255,215,0,0.3) !important;
+        }
+        
+        body.night-mode ul li {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 30px rgba(255,105,180,0.3);
+        }
+        
+        body.night-mode a {
+            color: #00a8ff;
+        }
+        
+        body.night-mode .footer {
+            color: #aaa;
+            border-top-color: rgba(255,255,255,0.2);
+        }
+        
+        body.night-mode .badge-green {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            box-shadow: 0 0 20px #2ecc71;
+        }
+        
+        body.night-mode .badge-purple {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            box-shadow: 0 0 20px #9b59b6;
+        }
+        
+        body.night-mode .badge-orange {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            box-shadow: 0 0 20px #e67e22;
+        }
+        
+        /* ========== КНОПКА ПЕРЕКЛЮЧЕНИЯ РЕЖИМА ========== */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 0 20px #3498db;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mode-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #3498db;
+        }
+        
+        body.night-mode .mode-toggle {
+            background: #1a1f35;
+            color: white;
+            border-color: #00a8ff;
+            box-shadow: 0 0 30px #00a8ff;
+        }
+        
+        /* ========== ОСТАЛЬНЫЕ СТИЛИ ========== */
         .title-container {
             text-align: center;
             margin: 30px 0 40px;
             width: 100%;
         }
         
-        /* ДЛЯ КОМПЬЮТЕРА - ВСЁ В ОДНУ СТРОКУ */
         .fancy-title {
             display: block;
             font-size: 3.2em;
@@ -31,6 +231,7 @@
             border-bottom: 4px solid #3498db;
             padding-bottom: 20px;
             white-space: nowrap;
+            transition: all 0.5s ease;
         }
         
         .word {
@@ -112,6 +313,7 @@
             font-weight: 600;
             font-size: 15px;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            transition: all 0.5s ease;
         }
         .badge-green {
             background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
@@ -129,6 +331,7 @@
             text-align: center;
             color: #7f8c8d;
             font-size: 14px;
+            transition: all 0.5s ease;
         }
         a {
             color: #3498db;
@@ -151,13 +354,13 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.03);
             border: 1px solid #eef2f6;
+            transition: all 0.5s ease;
         }
         .emoji {
             font-size: 1.4em;
             margin-right: 15px;
         }
         
-        /* ========== КРАСИВЫЕ КНОПКИ ========== */
         .demo-button {
             background: linear-gradient(135deg, #3498db, #2980b9, #3498db);
             background-size: 200% 200%;
@@ -174,17 +377,6 @@
             border: 2px solid rgba(255,255,255,0.5);
             transition: transform 0.3s;
             text-align: center;
-        }
-        .demo-button:hover {
-            transform: scale(1.08);
-            color: white;
-            text-decoration: none;
-        }
-        
-        @keyframes bluePulse {
-            0% { transform: scale(1); box-shadow: 0 0 30px #3498db; }
-            50% { transform: scale(1.05); box-shadow: 0 0 60px #2980b9; }
-            100% { transform: scale(1); box-shadow: 0 0 30px #3498db; }
         }
         
         .garden-button {
@@ -204,17 +396,6 @@
             transition: transform 0.3s;
             text-align: center;
         }
-        .garden-button:hover {
-            transform: scale(1.08);
-            color: white;
-            text-decoration: none;
-        }
-        
-        @keyframes gardenPulse {
-            0% { transform: scale(1); box-shadow: 0 0 30px #ffd700; }
-            50% { transform: scale(1.05); box-shadow: 0 0 60px #ff6b6b; }
-            100% { transform: scale(1); box-shadow: 0 0 30px #ffd700; }
-        }
         
         .button-container {
             display: flex;
@@ -230,6 +411,11 @@
             margin-top: 5px;
             font-size: 0.9em;
             text-align: center;
+            transition: color 0.5s ease;
+        }
+        
+        body.night-mode .button-note {
+            color: #aaa;
         }
         
         .results-grid {
@@ -243,7 +429,7 @@
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            transition: all 0.5s ease;
         }
         .result-card:hover {
             transform: translateY(-5px);
@@ -314,7 +500,6 @@
                 padding: 20px;
             }
             
-            /* КНОПКИ ПО ЦЕНТРУ И ТЕКСТ ПО ЦЕНТРУ */
             .demo-button, .garden-button {
                 padding: 12px 20px;
                 font-size: 1.1em;
@@ -357,6 +542,13 @@
             p {
                 text-align: center;
             }
+            
+            .mode-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 1em;
+            }
         }
         
         /* ========== ДЛЯ ПЛАНШЕТОВ ========== */
@@ -371,6 +563,18 @@
     </style>
 </head>
 <body>
+    <!-- АНИМИРОВАННЫЙ ФОН ДЛЯ НОЧНОГО РЕЖИМА -->
+    <div class="night-background">
+        <div class="neon-rays"></div>
+        <div class="stars"></div>
+    </div>
+    
+    <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ РЕЖИМА -->
+    <div class="mode-toggle" onclick="toggleMode()">
+        <span id="mode-icon">🌙</span>
+        <span id="mode-text">Ночь</span>
+    </div>
+
     <div class="title-container">
         <div class="fancy-title">
             <span class="word-emoji">🛡️</span>
@@ -531,5 +735,23 @@
         <p>Институт информационных наук</p>
         <p>Кафедра международной информационной безопасности</p>
     </div>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const icon = document.getElementById('mode-icon');
+            const text = document.getElementById('mode-text');
+            
+            body.classList.toggle('night-mode');
+            
+            if (body.classList.contains('night-mode')) {
+                icon.textContent = '☀️';
+                text.textContent = 'День';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = 'Ночь';
+            }
+        }
+    </script>
 </body>
 </html>
