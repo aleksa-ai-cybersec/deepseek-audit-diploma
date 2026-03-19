@@ -42,7 +42,7 @@
             text-shadow: 
                 0 0 10px #00a8ff,
                 0 0 20px #0097e6;
-            margin: 0 -2px;
+            margin: 0 -1px;
             font-weight: 900;
             color: #2c3e50;
         }
@@ -79,7 +79,7 @@
             }
         }
         
-        /* Задержки для каждой буквы - ВСЕ 28 ШТУК! */
+        /* Задержки для каждой буквы */
         .fancy-title span:nth-child(1) { animation-delay: 0.00s; } /* 🛡️ */
         .fancy-title span:nth-child(2) { animation-delay: 0.08s; } /* А */
         .fancy-title span:nth-child(3) { animation-delay: 0.16s; } /* у */
@@ -294,12 +294,14 @@
                 padding: 10px;
             }
             .fancy-title {
-                font-size: 1.8em;
+                font-size: 2.2em;
                 white-space: normal;
                 letter-spacing: normal;
+                line-height: 1.4;
             }
             .fancy-title span {
                 margin: 0 -1px;
+                font-size: 1em;
             }
             .badge-container {
                 gap: 8px;
@@ -346,7 +348,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .fancy-title {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
         }
     </style>
