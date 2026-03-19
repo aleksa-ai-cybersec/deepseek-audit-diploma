@@ -15,36 +15,46 @@
             background: #fafafa;
         }
         
-        /* ========== ШИКАРНОЕ НАЗВАНИЕ ПО СЛОВАМ ========== */
+        /* ========== ШИКАРНОЕ НАЗВАНИЕ ========== */
         .title-container {
             text-align: center;
             margin: 30px 0 40px;
             width: 100%;
         }
         
+        /* ДЛЯ КОМПЬЮТЕРА - ВСЁ В ОДНУ СТРОКУ */
         .fancy-title {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            display: block;
             font-size: 3.2em;
             font-weight: 900;
             color: #2c3e50;
             border-bottom: 4px solid #3498db;
-            padding-bottom: 30px;
+            padding-bottom: 20px;
+            white-space: nowrap;
         }
         
         .word {
+            display: inline;
             opacity: 0;
             transform: translateY(70px) scale(0.5);
             animation: wordAppear 0.8s forwards;
             text-shadow: 
                 0 0 10px #00a8ff,
                 0 0 20px #0097e6;
-            white-space: nowrap;
         }
         
-        .word:hover {
+        .word-emoji {
+            display: inline;
+            opacity: 0;
+            transform: translateY(70px) scale(0.5);
+            animation: wordAppear 0.8s forwards;
+            text-shadow: 
+                0 0 10px #00a8ff,
+                0 0 20px #0097e6;
+            margin-right: 5px;
+        }
+        
+        .word:hover, .word-emoji:hover {
             animation: wordGlow 0.3s forwards;
         }
         
@@ -75,9 +85,10 @@
             }
         }
         
-        .word:nth-child(1) { animation-delay: 0.2s; }
-        .word:nth-child(2) { animation-delay: 0.6s; }
-        .word:nth-child(3) { animation-delay: 1.0s; }
+        .word:nth-child(2) { animation-delay: 0.2s; }
+        .word:nth-child(3) { animation-delay: 0.6s; }
+        .word:nth-child(4) { animation-delay: 1.0s; }
+        .word-emoji { animation-delay: 0.0s; }
         
         h2 {
             color: #2c3e50;
@@ -265,15 +276,23 @@
             }
             
             .fancy-title {
-                font-size: 2.2em;
-                gap: 10px;
-                padding-bottom: 20px;
+                font-size: 2.5em;
+                white-space: normal;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 15px;
             }
             
-            .word {
-                white-space: normal;
+            .word, .word-emoji {
+                display: block;
                 text-align: center;
-                width: 100%;
+            }
+            
+            /* Эмодзи над словом Аудит, чуть левее */
+            .word-emoji {
+                margin-bottom: -10px;
+                margin-left: -15px;
             }
             
             .badge-container {
@@ -329,9 +348,10 @@
 <body>
     <div class="title-container">
         <div class="fancy-title">
-            <div class="word">🛡️ Аудит</div>
-            <div class="word">безопасности</div>
-            <div class="word">DeepSeek</div>
+            <span class="word-emoji">🛡️</span>
+            <span class="word">Аудит</span>
+            <span class="word">безопасности</span>
+            <span class="word">DeepSeek</span>
         </div>
     </div>
     
