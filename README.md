@@ -65,6 +65,7 @@
   [![GitHub](https://img.shields.io/badge/📁_Код-Репозиторий-181717?style=for-the-badge&logo=github)](https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma)
   [![Website](https://img.shields.io/badge/🌐_Сайт-Визитка-4285F4?style=for-the-badge&logo=google-chrome)](https://aleksa-ai-cybersec.github.io/deepseek-audit-diploma/)
   [![Garden](https://img.shields.io/badge/🌸_Сад_уязвимостей-Интерактивная_визуализация-FF69B4?style=for-the-badge&logo=star&logoColor=white)](https://aleksa-ai-cybersec.github.io/vulnerability-garden/)
+  [![Quest](https://img.shields.io/badge/🎯_AI_Security_Simulator-Игровой_квест-9d4edd?style=for-the-badge&logo=playstation&logoColor=white)](https://aleksa-ai-cybersec.github.io/ai-security-quest/)
 
 </div>
 
