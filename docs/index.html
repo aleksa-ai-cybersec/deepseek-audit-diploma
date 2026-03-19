@@ -280,19 +280,20 @@
                 white-space: normal;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                align-items: center;  /* ВЫРАВНИВАЕМ ПО ЦЕНТРУ */
+                justify-content: center;
                 padding-bottom: 15px;
+                width: 100%;
             }
             
             .word, .word-emoji {
                 display: block;
-                text-align: center;
+                text-align: center;   /* ТЕКСТ ПО ЦЕНТРУ */
+                width: 100%;
             }
             
-            /* Эмодзи над словом Аудит, чуть левее */
             .word-emoji {
-                margin-bottom: -10px;
-                margin-left: -15px;
+                margin-bottom: -5px;   /* СМАЙЛИК ЧУТЬ БЛИЖЕ К АУДИТУ */
             }
             
             .badge-container {
