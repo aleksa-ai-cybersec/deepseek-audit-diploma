@@ -14,6 +14,9 @@
             color: #333;
             background: #fafafa;
             transition: background 1s ease;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            overflow-x: hidden;
         }
         
         body.night-mode {
@@ -21,14 +24,40 @@
             color: #e0e0e0;
         }
         
-        /* ========== ЖИВОЙ ТЕКУЧИЙ ФОН ДЛЯ НОЧНОГО РЕЖИМА ========== */
+        /* ========== ПАРАЛЛАКС ЭФФЕКТ ========== */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .parallax-layer-1 {
+            background: radial-gradient(circle at 20% 30%, rgba(0, 168, 255, 0.1) 0%, transparent 40%);
+            animation: parallaxMove 30s infinite alternate;
+        }
+        
+        .parallax-layer-2 {
+            background: radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.1) 0%, transparent 40%);
+            animation: parallaxMove 45s infinite alternate-reverse;
+        }
+        
+        @keyframes parallaxMove {
+            0% { transform: translateZ(-50px) scale(1.1); }
+            100% { transform: translateZ(-100px) scale(1.2); }
+        }
+        
+        /* ========== ЖИВОЙ ТЕКУЧИЙ ФОН ========== */
         .living-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -3;
             opacity: 0;
             transition: opacity 1s ease;
             pointer-events: none;
@@ -40,13 +69,11 @@
             opacity: 1;
         }
         
-        /* ТЕКУЧИЕ СВЕТА (КАК РАСПОЛЗАЮЩАЯСЯ КРАСКА) */
-        .fluid-lights {
+        .fluid-layers {
             position: absolute;
             width: 100%;
             height: 100%;
             filter: blur(40px);
-            animation: fluidMove 20s infinite alternate;
         }
         
         .fluid-layer-1 {
@@ -54,8 +81,7 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at 30% 40%, rgba(0, 100, 255, 0.4) 0%, transparent 40%),
-                        radial-gradient(circle at 70% 60%, rgba(0, 50, 150, 0.3) 0%, transparent 40%),
-                        radial-gradient(circle at 20% 80%, rgba(0, 150, 255, 0.3) 0%, transparent 40%);
+                        radial-gradient(circle at 70% 60%, rgba(0, 50, 150, 0.3) 0%, transparent 40%);
             animation: fluidColor1 8s infinite alternate;
         }
         
@@ -64,25 +90,8 @@
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at 80% 30%, rgba(0, 80, 200, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 70%, rgba(0, 30, 100, 0.4) 0%, transparent 50%),
-                        radial-gradient(circle at 60% 20%, rgba(0, 120, 220, 0.3) 0%, transparent 50%);
+                        radial-gradient(circle at 40% 70%, rgba(0, 30, 100, 0.4) 0%, transparent 50%);
             animation: fluidColor2 12s infinite alternate;
-        }
-        
-        .fluid-layer-3 {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 200, 255, 0.2) 0%, transparent 60%),
-                        radial-gradient(circle at 10% 90%, rgba(0, 60, 180, 0.3) 0%, transparent 60%),
-                        radial-gradient(circle at 90% 10%, rgba(0, 40, 140, 0.3) 0%, transparent 60%);
-            animation: fluidColor3 15s infinite alternate;
-        }
-        
-        @keyframes fluidMove {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.2) rotate(2deg); }
-            100% { transform: scale(1.1) rotate(-2deg); }
         }
         
         @keyframes fluidColor1 {
@@ -97,15 +106,9 @@
             100% { opacity: 0.4; filter: blur(40px); }
         }
         
-        @keyframes fluidColor3 {
-            0% { opacity: 0.2; filter: blur(45px); }
-            50% { opacity: 0.5; filter: blur(60px); }
-            100% { opacity: 0.3; filter: blur(50px); }
-        }
-        
-        /* БЕГУЩАЯ СТРОКА НА ЗАДНЕМ ПЛАНЕ */
+        /* ========== БЕГУЩАЯ СТРОКА ========== */
         .running-text {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -115,6 +118,7 @@
             justify-content: space-around;
             opacity: 0.15;
             pointer-events: none;
+            z-index: -1;
             overflow: hidden;
         }
         
@@ -127,27 +131,12 @@
             letter-spacing: 10px;
             animation: runLine 30s linear infinite;
             transform: rotate(-5deg);
-            text-shadow: 0 0 30px rgba(0, 100, 255, 0.5);
         }
         
         .running-line:nth-child(2) {
             animation: runLineReverse 35s linear infinite;
             font-size: 10vw;
             color: rgba(0, 100, 200, 0.25);
-            margin-left: -20%;
-        }
-        
-        .running-line:nth-child(3) {
-            animation: runLine 40s linear infinite;
-            font-size: 6vw;
-            color: rgba(50, 150, 255, 0.2);
-            margin-left: -10%;
-        }
-        
-        .running-line:nth-child(4) {
-            animation: runLineReverse 45s linear infinite;
-            font-size: 9vw;
-            color: rgba(0, 80, 220, 0.2);
         }
         
         @keyframes runLine {
@@ -160,49 +149,30 @@
             100% { transform: translateX(-100%) rotate(-5deg); }
         }
         
-        /* МЕРЦАЮЩИЕ ЗВЕЗДЫ */
-        .stars {
-            position: absolute;
+        /* ========== ЧАСТИЦЫ (ПЫЛЬЦА) ========== */
+        .particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 10px 20px, #fff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 30px 60px, #ffd700, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 120px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 80px 180px, #fff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 110px 240px, #ffd700, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 140px 300px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 170px 360px, #fff, rgba(0,0,0,0)),
-                radial-gradient(3px 3px at 200px 420px, #ffd700, rgba(0,0,0,0));
-            background-repeat: repeat;
-            opacity: 0.3;
-            animation: twinkle 5s infinite alternate;
             pointer-events: none;
+            z-index: 9998;
         }
         
-        @keyframes twinkle {
-            0% { opacity: 0.2; }
-            100% { opacity: 0.6; }
+        /* ========== 3D-ЭФФЕКТ ДЛЯ КАРТОЧЕК ========== */
+        .result-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+            will-change: transform;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         
-        /* ========== НЕОНОВОЕ СВЕЧЕНИЕ В НОЧНОМ РЕЖИМЕ ========== */
-        body.night-mode h1,
-        body.night-mode .fancy-title,
-        body.night-mode .fancy-title span {
-            color: #fff;
-            text-shadow: 
-                0 0 10px #00a8ff,
-                0 0 20px #0097e6,
-                0 0 30px #0097e6,
-                0 0 40px #0097e6;
-            border-bottom-color: #00a8ff;
-        }
-        
-        body.night-mode .badge {
-            background: linear-gradient(135deg, #1a2632, #0a0f1e);
-            box-shadow: 0 0 30px #00a8ff;
-            border: 1px solid #00a8ff;
-            color: #fff;
+        .result-card:hover {
+            transform: translateY(-5px);
         }
         
         body.night-mode .result-card {
@@ -213,56 +183,123 @@
             box-shadow: 0 0 40px rgba(0, 168, 255, 0.3);
         }
         
-        body.night-mode .result-card .card-title {
-            color: #00a8ff;
+        /* ========== МАГНИТНЫЕ КНОПКИ ========== */
+        .demo-button, .garden-button {
+            transition: transform 0.2s ease;
+            will-change: transform;
         }
         
-        body.night-mode p {
-            background: rgba(10, 15, 30, 0.7) !important;
-            color: white !important;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3) !important;
+        /* ========== НЕОНОВОЕ МЕРЦАНИЕ (15) ========== */
+        .neon-flicker {
+            animation: neonFlicker 3s infinite;
         }
         
-        body.night-mode ul li {
-            background: rgba(10, 15, 30, 0.7);
-            backdrop-filter: blur(10px);
-            color: white;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 30px cyan, 0 0 60px blue; }
+            50% { opacity: 0.8; text-shadow: 0 0 10px cyan, 0 0 20px blue; }
         }
         
-        /* ========== КНОПКА ПЕРЕКЛЮЧЕНИЯ ========== */
-        .mode-toggle {
+        body.night-mode h1,
+        body.night-mode .fancy-title,
+        body.night-mode .fancy-title span {
+            color: #fff;
+            text-shadow: 
+                0 0 10px #00a8ff,
+                0 0 20px #0097e6,
+                0 0 30px #0097e6,
+                0 0 40px #0097e6;
+            border-bottom-color: #00a8ff;
+            animation: neonFlicker 3s infinite;
+        }
+        
+        /* ========== НОВЫЕ НОЧНЫЕ ЭФФЕКТЫ ========== */
+        
+        /* СВЕТЛЯЧКИ */
+        .fireflies {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: white;
-            border: 2px solid #3498db;
-            border-radius: 50px;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            box-shadow: 0 0 20px #3498db;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
         }
         
-        .mode-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #3498db;
+        .firefly {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 150, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 100, 0.8);
+            animation: fireflyMove 8s infinite ease-in-out;
         }
         
-        body.night-mode .mode-toggle {
-            background: #1a1f35;
-            color: white;
-            border-color: #00a8ff;
-            box-shadow: 0 0 30px #00a8ff;
+        @keyframes fireflyMove {
+            0%, 100% { transform: translate(0, 0); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            20% { transform: translate(100px, -50px); }
+            40% { transform: translate(200px, 100px); }
+            60% { transform: translate(50px, 150px); }
+            80% { transform: translate(-50px, 50px); }
+        }
+        
+        /* ПУЛЬСИРУЮЩИЙ ОРЕОЛ ВОКРУГ КНОПОК */
+        .demo-button, .garden-button {
+            position: relative;
+        }
+        
+        .demo-button::after, .garden-button::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            filter: blur(10px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        body.night-mode .demo-button::after,
+        body.night-mode .garden-button::after {
+            opacity: 1;
+            animation: pulseGlow 2s infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+        }
+        
+        /* МЕРЦАЮЩИЕ ЗВЕЗДЫ */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 10px 20px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 30px 60px, #ffd700, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 120px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 110px 240px, #ffd700, rgba(0,0,0,0));
+            background-repeat: repeat;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+            transition: opacity 1s ease;
+        }
+        
+        body.night-mode .stars {
+            opacity: 0.5;
+            animation: twinkle 5s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
         }
         
         /* ========== ОСТАЛЬНЫЕ СТИЛИ ========== */
@@ -290,9 +327,7 @@
             opacity: 0;
             transform: translateY(70px) scale(0.5);
             animation: wordAppear 0.8s forwards;
-            text-shadow: 
-                0 0 10px #00a8ff,
-                0 0 20px #0097e6;
+            text-shadow: 0 0 10px #00a8ff, 0 0 20px #0097e6;
         }
         
         .word-emoji {
@@ -300,9 +335,7 @@
             opacity: 0;
             transform: translateY(70px) scale(0.5);
             animation: wordAppear 0.8s forwards;
-            text-shadow: 
-                0 0 10px #00a8ff,
-                0 0 20px #0097e6;
+            text-shadow: 0 0 10px #00a8ff, 0 0 20px #0097e6;
             margin-right: 5px;
         }
         
@@ -315,10 +348,7 @@
             100% {
                 opacity: 1;
                 transform: translateY(0) scale(1);
-                text-shadow: 
-                    0 0 10px #00a8ff,
-                    0 0 20px #0097e6,
-                    0 0 30px #0097e6;
+                text-shadow: 0 0 10px #00a8ff, 0 0 20px #0097e6, 0 0 30px #0097e6;
             }
         }
         
@@ -327,12 +357,6 @@
         .word:nth-child(4) { animation-delay: 1.0s; }
         .word-emoji { animation-delay: 0.0s; }
         
-        h2 {
-            color: #2c3e50;
-            margin-top: 40px;
-            font-size: 2em;
-            font-weight: 700;
-        }
         .badge-container { 
             margin: 30px 0; 
             display: flex;
@@ -342,6 +366,7 @@
             position: relative;
             z-index: 10;
         }
+        
         .badge { 
             background: linear-gradient(135deg, #667eea 0%, #3498db 100%);
             color: white; 
@@ -353,15 +378,14 @@
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
             transition: all 0.5s ease;
         }
-        .badge-green {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        
+        body.night-mode .badge {
+            background: linear-gradient(135deg, #1a2632, #0a0f1e);
+            box-shadow: 0 0 30px #00a8ff;
+            border: 1px solid #00a8ff;
+            color: #fff;
         }
-        .badge-purple {
-            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
-        }
-        .badge-orange {
-            background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-        }
+        
         .footer { 
             margin-top: 60px; 
             border-top: 2px solid #eef2f6; 
@@ -372,69 +396,6 @@
             transition: all 0.5s ease;
             position: relative;
             z-index: 10;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin: 20px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-            border: 1px solid #eef2f6;
-            transition: all 0.5s ease;
-        }
-        .emoji {
-            font-size: 1.4em;
-            margin-right: 15px;
-        }
-        
-        .demo-button {
-            background: linear-gradient(135deg, #3498db, #2980b9, #3498db);
-            background-size: 200% 200%;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            display: inline-block;
-            margin: 10px 0;
-            box-shadow: 0 0 30px #3498db;
-            animation: bluePulse 2s infinite;
-            border: 2px solid rgba(255,255,255,0.5);
-            transition: transform 0.3s;
-            text-align: center;
-        }
-        
-        .garden-button {
-            background: linear-gradient(135deg, #ff6b6b, #ffd700);
-            background-size: 200% 200%;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-            display: inline-block;
-            margin: 10px 0;
-            box-shadow: 0 0 30px gold;
-            animation: gardenPulse 2s infinite;
-            border: 2px solid rgba(255,255,255,0.5);
-            transition: transform 0.3s;
-            text-align: center;
         }
         
         .button-container {
@@ -453,7 +414,6 @@
             margin-top: 5px;
             font-size: 0.9em;
             text-align: center;
-            transition: color 0.5s ease;
         }
         
         body.night-mode .button-note {
@@ -467,129 +427,83 @@
             margin: 40px 0;
             position: relative;
             z-index: 10;
+            transform-style: preserve-3d;
         }
-        .result-card {
+        
+        /* ========== КНОПКА ПЕРЕКЛЮЧЕНИЯ ========== */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.5s ease;
-        }
-        .result-card:hover {
-            transform: translateY(-5px);
-        }
-        .card-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        .card-title {
-            margin: 0 0 10px 0;
-            color: #2c3e50;
+            border: 2px solid #3498db;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
             font-size: 1.2em;
-        }
-        .card-content {
-            color: #7f8c8d;
-            margin: 0;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        .big-number {
-            font-size: 1.4em;
             font-weight: bold;
+            box-shadow: 0 0 20px #3498db;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .small-note {
-            font-size: 0.9em;
-            color: #95a5a6;
+        
+        .mode-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #3498db;
+        }
+        
+        body.night-mode .mode-toggle {
+            background: #1a1f35;
+            color: white;
+            border-color: #00a8ff;
+            box-shadow: 0 0 30px #00a8ff;
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
             .fancy-title {
                 font-size: 2.5em;
                 white-space: normal;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-                padding-bottom: 15px;
-                width: 100%;
-            }
-            
-            .word, .word-emoji {
-                display: block;
-                text-align: center;
-                width: 100%;
-            }
-            
-            .word-emoji {
-                margin-bottom: -5px;
-            }
-            
-            .badge-container {
-                gap: 8px;
-            }
-            .badge {
-                padding: 8px 15px;
-                font-size: 13px;
             }
             .results-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
-            .result-card {
-                padding: 20px;
-            }
-            
             .demo-button, .garden-button {
-                padding: 12px 20px;
-                font-size: 1.1em;
                 width: 90%;
                 max-width: 320px;
-                margin-left: auto;
-                margin-right: auto;
-                display: block;
-                text-align: center;
-            }
-            
-            .button-container {
-                gap: 15px;
-            }
-            
-            .mode-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 8px 15px;
-                font-size: 1em;
-            }
-            
-            .running-line {
-                font-size: 15vw;
             }
         }
     </style>
 </head>
 <body>
-    <!-- ЖИВОЙ ТЕКУЧИЙ ФОН -->
+    <!-- ПАРАЛЛАКС СЛОИ -->
+    <div class="parallax-layer parallax-layer-1"></div>
+    <div class="parallax-layer parallax-layer-2"></div>
+    
+    <!-- ЖИВОЙ ФОН -->
     <div class="living-background">
         <div class="fluid-layers">
             <div class="fluid-layer-1"></div>
             <div class="fluid-layer-2"></div>
-            <div class="fluid-layer-3"></div>
         </div>
-        
-        <!-- БЕГУЩАЯ СТРОКА -->
-        <div class="running-text">
-            <div class="running-line">АУДИТ БЕЗОПАСНОСТИ DEEPSEEK</div>
-            <div class="running-line">⚡ АУДИТ БЕЗОПАСНОСТИ DEEPSEEK ⚡</div>
-            <div class="running-line">DEEPSEEK АУДИТ БЕЗОПАСНОСТИ</div>
-            <div class="running-line">✨ БЕЗОПАСНОСТЬ DEEPSEEK ✨</div>
-        </div>
-        
-        <div class="stars"></div>
     </div>
+    
+    <!-- БЕГУЩАЯ СТРОКА -->
+    <div class="running-text">
+        <div class="running-line">АУДИТ БЕЗОПАСНОСТИ DEEPSEEK</div>
+        <div class="running-line">⚡ DEEPSEEK АУДИТ ⚡</div>
+    </div>
+    
+    <!-- ЗВЕЗДЫ -->
+    <div class="stars"></div>
+    
+    <!-- СВЕТЛЯЧКИ -->
+    <div class="fireflies" id="fireflies"></div>
     
     <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ -->
     <div class="mode-toggle" onclick="toggleMode()">
@@ -635,108 +549,46 @@
 
     <h2 style="color: #2c3e50; margin-top: 40px; text-align: center; font-size: 2.2em;">📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ</h2>
 
-    <div class="results-grid">
-        <div class="result-card" style="border-top: 5px solid #3498db;">
+    <div class="results-grid" id="results-grid">
+        <div class="result-card" data-tilt>
             <div class="card-icon">📚</div>
             <h3 class="card-title">Методологическая база</h3>
-            <div class="card-content">
-                <span class="big-number" style="color: #3498db;">27</span> угроз<br>
-                <span style="color: #3498db; font-weight: bold;">6</span> этапов жизненного цикла<br>
-                <span class="small-note">MITRE ATLAS, OWASP, NIST</span>
-            </div>
+            <div class="card-content">27 угроз • 6 этапов</div>
         </div>
-        
-        <div class="result-card" style="border-top: 5px solid #e74c3c;">
+        <div class="result-card" data-tilt>
             <div class="card-icon">⚡</div>
             <h3 class="card-title">Практические результаты</h3>
-            <div class="card-content">
-                <span class="big-number" style="color: #e74c3c;">52</span> уязвимости<br>
-                <span style="color: #e74c3c; font-weight: bold;">34%</span> тестов<br>
-                <span class="small-note">аудит DeepSeek-V3</span>
-            </div>
+            <div class="card-content">52 уязвимости • 34%</div>
         </div>
-        
-        <div class="result-card" style="border-top: 5px solid #27ae60;">
+        <div class="result-card" data-tilt>
             <div class="card-icon">🛠️</div>
             <h3 class="card-title">Разработанный инструмент</h3>
-            <div class="card-content">
-                <span class="big-number" style="color: #27ae60;">5000+</span> строк кода<br>
-                <span style="color: #27ae60; font-weight: bold;">80+</span> тестовых сценариев<br>
-                <span class="small-note">Python, scikit-learn, Streamlit</span>
-            </div>
+            <div class="card-content">5000+ строк • 80+ тестов</div>
         </div>
-        
-        <div class="result-card" style="border-top: 5px solid #f39c12;">
+        <div class="result-card" data-tilt>
             <div class="card-icon">🤖</div>
             <h3 class="card-title">Интеллектуальный анализ</h3>
-            <div class="card-content">
-                🤖 ML-приоритизация<br>
-                🔍 Семантическая классификация<br>
-                <span class="small-note">Random Forest + BART</span>
-            </div>
+            <div class="card-content">ML • NLP • BART</div>
         </div>
-        
-        <div class="result-card" style="border-top: 5px solid #9b59b6;">
+        <div class="result-card" data-tilt>
             <div class="card-icon">⚡</div>
             <h3 class="card-title">Оптимизация</h3>
-            <div class="card-content">
-                📦 Адаптивная выборка<br>
-                💾 Кэширование запросов<br>
-                <span class="small-note">экономия до 40%</span>
-            </div>
+            <div class="card-content">Кэш • адаптивность</div>
         </div>
-        
-        <div class="result-card" style="border-top: 5px solid #1abc9c;">
+        <div class="result-card" data-tilt>
             <div class="card-icon">📊</div>
             <h3 class="card-title">Визуализация</h3>
-            <div class="card-content">
-                📺 Live Dashboard<br>
-                📈 7 интерактивных графиков<br>
-                <span class="small-note">реальное время</span>
-            </div>
+            <div class="card-content">7 графиков • Live Dashboard</div>
         </div>
     </div>
 
-    <h2>🔗 Ссылки</h2>
-    <ul>
-        <li>
-            <span class="emoji">📦</span>
-            <strong>Исходный код:</strong> 
-            <a href="https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma" target="_blank">
-                GitHub репозиторий
-            </a>
-        </li>
-        <li>
-            <span class="emoji">🌐</span>
-            <strong>Сад уязвимостей:</strong> 
-            <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" target="_blank">
-                vulnerability-garden
-            </a>
-        </li>
-        <li>
-            <span class="emoji">🎮</span>
-            <strong>Демо-версия:</strong> 
-            <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" target="_blank">
-                deepseek-audit-diploma.streamlit.app
-            </a>
-        </li>
-    </ul>
-
-    <h2>📫 Контакты</h2>
-    <ul>
-        <li><span class="emoji">📧</span> <strong>Email:</strong> <a href="mailto:china_aleksandravorobeva@mail.ru">china_aleksandravorobeva@mail.ru</a></li>
-        <li><span class="emoji">💻</span> <strong>GitHub:</strong> <a href="https://github.com/aleksa-ai-cybersec" target="_blank">@aleksa-ai-cybersec</a></li>
-    </ul>
-
     <div class="footer">
-        <p style="font-size: 1.2em; margin-bottom: 15px;">🛡️ DeepSeek Security Auditor</p>
         <p>© Воробьева Александра Александровна, 2026</p>
         <p>Московский государственный лингвистический университет</p>
-        <p>Институт информационных наук</p>
-        <p>Кафедра международной информационной безопасности</p>
     </div>
 
     <script>
+        // ПЕРЕКЛЮЧЕНИЕ РЕЖИМА
         function toggleMode() {
             const body = document.body;
             const icon = document.getElementById('mode-icon');
@@ -751,6 +603,115 @@
                 icon.textContent = '🌙';
                 text.textContent = 'Ночь';
             }
+        }
+
+        // 3D КАРТОЧКИ ЗА КУРСОРОМ (2)
+        const cards = document.querySelectorAll('.result-card');
+        const container = document.body;
+        
+        container.addEventListener('mousemove', (e) => {
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardCenterX = rect.left + rect.width / 2;
+                const cardCenterY = rect.top + rect.height / 2;
+                
+                const rotateX = (e.clientY - cardCenterY) * 0.01;
+                const rotateY = (e.clientX - cardCenterX) * 0.01;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            cards.forEach(card => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        });
+
+        // МАГНИТНЫЕ КНОПКИ (3)
+        const buttons = document.querySelectorAll('.demo-button, .garden-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // ЧАСТИЦЫ (4)
+        const canvas = document.createElement('canvas');
+        canvas.className = 'particles-canvas';
+        document.body.appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let particles = [];
+        
+        canvas.width = width;
+        canvas.height = height;
+        
+        window.addEventListener('resize', () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 3; i++) {
+                particles.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    life: 1,
+                    size: Math.random() * 3 + 1,
+                    color: `hsl(${Math.random() * 60 + 180}, 80%, 70%)`
+                });
+            }
+        });
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles = particles.filter(p => p.life > 0);
+            
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.life -= 0.005;
+                
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.shadowColor = p.color;
+                ctx.shadowBlur = 10;
+                ctx.fill();
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+
+        // СВЕТЛЯЧКИ
+        const firefliesContainer = document.getElementById('fireflies');
+        for (let i = 0; i < 20; i++) {
+            const firefly = document.createElement('div');
+            firefly.className = 'firefly';
+            firefly.style.left = Math.random() * 100 + '%';
+            firefly.style.top = Math.random() * 100 + '%';
+            firefly.style.animationDelay = Math.random() * 5 + 's';
+            firefly.style.animationDuration = (8 + Math.random() * 10) + 's';
+            firefliesContainer.appendChild(firefly);
         }
     </script>
 </body>
