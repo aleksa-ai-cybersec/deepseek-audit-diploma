@@ -286,6 +286,43 @@
             text-shadow: 0 0 15px #00a8ff, 0 0 30px #0097e6;
         }
         
+        /* ========== СТИЛИ ДЛЯ НОВОЙ КНОПКИ КВЕСТА ========== */
+        .quest-sim-button {
+            background: linear-gradient(135deg, #9d4edd, #6a2c9e, #9d4edd);
+            background-size: 200% 200%;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 0 30px #9d4edd;
+            animation: questPulse 2s infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+            transition: transform 0.3s;
+            text-align: center;
+            position: relative;
+        }
+        
+        .quest-sim-button:hover {
+            transform: scale(1.08);
+            color: white;
+            text-decoration: none;
+        }
+        
+        @keyframes questPulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px #9d4edd; }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px #c77dff; }
+            100% { transform: scale(1); box-shadow: 0 0 30px #9d4edd; }
+        }
+        
+        body.night-mode .quest-sim-button {
+            box-shadow: 0 0 40px #c77dff, 0 0 80px #9d4edd;
+            border-color: #c77dff;
+        }
+        
         /* ========== ЧАСТИЦЫ ========== */
         .particles-canvas {
             position: fixed;
@@ -648,7 +685,7 @@
                 padding: 20px;
             }
             
-            .demo-button, .garden-button {
+            .demo-button, .garden-button, .quest-sim-button {
                 padding: 12px 20px;
                 font-size: 1em;
                 width: 100%;
@@ -692,7 +729,8 @@
             }
             
             body.night-mode .demo-button,
-            body.night-mode .garden-button {
+            body.night-mode .garden-button,
+            body.night-mode .quest-sim-button {
                 transition: transform 0.2s ease;
                 will-change: transform;
             }
@@ -761,6 +799,11 @@
         
         <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" class="garden-button" target="_blank">
             🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ
+        </a>
+        
+        <!-- НОВАЯ КНОПКА ДЛЯ КВЕСТА -->
+        <a href="https://aleksa-ai-cybersec.github.io/ai-security-quest/" class="quest-sim-button" target="_blank">
+            🎮 AI-SECURITY SIMULATOR
         </a>
         
         <div class="button-note">
@@ -854,6 +897,16 @@
             <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" target="_blank">
                 deepseek-audit-diploma.streamlit.app
             </a>
+        </li>
+        <!-- НОВЫЙ ПУНКТ ДЛЯ КВЕСТА -->
+        <li>
+            <span class="emoji">🎯</span>
+            <strong>AI-Security Simulator:</strong> 
+            <a href="https://aleksa-ai-cybersec.github.io/ai-security-quest/" target="_blank">
+                интерактивный квест
+            </a>
+            <br>
+            <small style="color: #95a5a6;">Игровой симулятор аудита на основе 27 угроз из диплома</small>
         </li>
     </ul>
 
@@ -984,8 +1037,8 @@
                 });
             });
 
-            // Магнитные кнопки
-            const buttons = document.querySelectorAll('.demo-button, .garden-button');
+            // Магнитные кнопки (включая новую)
+            const buttons = document.querySelectorAll('.demo-button, .garden-button, .quest-sim-button');
             
             buttons.forEach(button => {
                 button.addEventListener('mousemove', (e) => {
