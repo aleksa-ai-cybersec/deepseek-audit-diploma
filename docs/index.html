@@ -293,16 +293,34 @@
             body {
                 padding: 10px;
             }
+            
+            /* КАЖДОЕ СЛОВО НА ОТДЕЛЬНОЙ СТРОЧКЕ */
             .fancy-title {
-                font-size: 2.2em;
+                font-size: 2.5em;
                 white-space: normal;
                 letter-spacing: normal;
-                line-height: 1.4;
+                line-height: 1.8;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                border-bottom: 3px solid #3498db;
             }
+            
             .fancy-title span {
-                margin: 0 -1px;
+                margin: 0;
                 font-size: 1em;
             }
+            
+            /* Группировка букв в слова */
+            .fancy-title .word1,
+            .fancy-title .word2,
+            .fancy-title .word3 {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
             .badge-container {
                 gap: 8px;
             }
@@ -356,6 +374,7 @@
 <body>
     <div class="title-container">
         <div class="fancy-title">
+            <!-- Первое слово: Аудит -->
             <span>🛡️</span>
             <span>А</span>
             <span>у</span>
@@ -363,6 +382,8 @@
             <span>и</span>
             <span>т</span>
             <span> </span>
+            
+            <!-- Второе слово: безопасности -->
             <span>б</span>
             <span>е</span>
             <span>з</span>
@@ -376,6 +397,8 @@
             <span>т</span>
             <span>и</span>
             <span> </span>
+            
+            <!-- Третье слово: DeepSeek -->
             <span>D</span>
             <span>e</span>
             <span>e</span>
