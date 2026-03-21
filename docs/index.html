@@ -33,7 +33,7 @@
         .lang-buttons {
             position: fixed;
             top: 20px;
-            right: 140px;
+            right: 200px;
             z-index: 10000;
             display: flex;
             gap: 8px;
@@ -748,7 +748,7 @@
             
             .lang-buttons {
                 top: 10px;
-                right: 100px;
+                right: 120px;
                 gap: 5px;
             }
             
@@ -882,7 +882,7 @@
     </ul>
 
     <div class="footer" id="footer">
-        <p style="font-size: 1.2em; margin-bottom: 15px;">🛡️ DeepSeek Security Auditor</p>
+        <p style="font-size: 1.2em; margin-bottom: 15px;" id="footerTitle">🛡️ DeepSeek Security Auditor</p>
         <p id="footerCopyright">© VOROBEVA ALEKSANDRA, 2026</p>
         <p id="footerUni">Московский государственный лингвистический университет</p>
         <p id="footerInstitute">Институт информационных наук</p>
@@ -895,26 +895,20 @@
         // ========== ПЕРЕВОДЫ ==========
         const translations = {
             ru: {
-                // Заголовок
                 titleEmoji: "🛡️",
                 titleWord1: "Аудит",
                 titleWord2: "безопасности",
                 titleWord3: "DeepSeek",
-                // Бейджи
                 badge1: "🎓 Дипломная работа 2026",
                 badge2: "🏛️ МГЛУ",
                 badge3: "👩‍🎓 VOROBEVA ALEKSANDRA",
                 badge4: "⭐ Институт информационных наук",
-                // О проекте
                 aboutTitle: "📌 О проекте",
                 aboutText: "Разработка методики аудита информационной безопасности систем, использующих технологии искусственного интеллекта (на примере DeepSeek-V3).",
-                // Кнопки
                 demoButton: "🚀 ЗАПУСТИТЬ ИНТЕРАКТИВНУЮ ДЕМО-ВЕРСИЮ",
                 gardenButton: "🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ",
                 questButton: "🎮 AI-SECURITY SIMULATOR",
-                // Результаты
                 resultsTitle: "📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ",
-                // Карточки
                 cards: [
                     { title: "Методологическая база", line1: "27 угроз", line2: "6 этапов жизненного цикла", line3: "MITRE ATLAS, OWASP, NIST", color: "#3498db" },
                     { title: "Практические результаты", line1: "52 уязвимости", line2: "34% тестов", line3: "аудит DeepSeek-V3", color: "#e74c3c" },
@@ -923,7 +917,6 @@
                     { title: "Оптимизация", line1: "Адаптивная выборка", line2: "Кэширование запросов", line3: "экономия до 40%", color: "#9b59b6" },
                     { title: "Визуализация", line1: "Live Dashboard", line2: "7 интерактивных графиков", line3: "реальное время", color: "#1abc9c" }
                 ],
-                // Ссылки
                 linksTitle: "🔗 Ссылки",
                 links: [
                     { emoji: "📦", label: "Исходный код (основной):", url: "https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma", text: "GitHub репозиторий", desc: "Полный код аудитора, база угроз, ML-модели" },
@@ -931,11 +924,10 @@
                     { emoji: "🎮", label: "Демо-версия:", url: "https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app", text: "deepseek-audit-diploma.streamlit.app", desc: "Живой тестер с анализом уязвимостей в реальном времени" },
                     { emoji: "🎯", label: "AI-Security Simulator:", url: "https://aleksa-ai-cybersec.github.io/ai-security-quest/", text: "интерактивный квест", desc: "Игровой симулятор аудита на основе 27 угроз из диплома" }
                 ],
-                // Контакты
                 contactsTitle: "📫 Контакты",
                 emailLabel: "Email:",
                 githubLabel: "GitHub:",
-                // Футер
+                footerTitle: "🛡️ DeepSeek Security Auditor",
                 footerCopyright: "© VOROBEVA ALEKSANDRA, 2026",
                 footerUni: "Московский государственный лингвистический университет",
                 footerInstitute: "Институт информационных наук",
@@ -974,6 +966,7 @@
                 contactsTitle: "📫 Contacts",
                 emailLabel: "Email:",
                 githubLabel: "GitHub:",
+                footerTitle: "🛡️ DeepSeek Security Auditor",
                 footerCopyright: "© VOROBEVA ALEKSANDRA, 2026",
                 footerUni: "Moscow State Linguistic University",
                 footerInstitute: "Institute of Information Sciences",
@@ -1012,6 +1005,7 @@
                 contactsTitle: "📫 联系方式",
                 emailLabel: "电子邮件：",
                 githubLabel: "GitHub：",
+                footerTitle: "🛡️ DeepSeek 安全审计",
                 footerCopyright: "© VOROBEVA ALEKSANDRA, 2026",
                 footerUni: "莫斯科国立语言大学",
                 footerInstitute: "信息科学研究所",
@@ -1025,37 +1019,30 @@
             currentLang = lang;
             const t = translations[lang];
             
-            // Обновляем активный класс кнопок
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`).classList.add('active');
             
-            // Заголовок
             document.getElementById('titleEmoji').textContent = t.titleEmoji;
             document.getElementById('titleWord1').textContent = t.titleWord1;
             document.getElementById('titleWord2').textContent = t.titleWord2;
             document.getElementById('titleWord3').textContent = t.titleWord3;
             
-            // Бейджи
             document.getElementById('badge1').textContent = t.badge1;
             document.getElementById('badge2').textContent = t.badge2;
             document.getElementById('badge3').textContent = t.badge3;
             document.getElementById('badge4').textContent = t.badge4;
             
-            // О проекте
             document.getElementById('aboutTitle').textContent = t.aboutTitle;
             document.getElementById('aboutText').textContent = t.aboutText;
             
-            // Кнопки
             document.getElementById('demoButton').innerHTML = t.demoButton;
             document.getElementById('gardenButton').innerHTML = t.gardenButton;
             document.getElementById('questButton').innerHTML = t.questButton;
             
-            // Заголовок результатов
             document.getElementById('resultsTitle').textContent = t.resultsTitle;
             
-            // Карточки
             const grid = document.getElementById('resultsGrid');
             grid.innerHTML = '';
             const colors = ['#3498db', '#e74c3c', '#27ae60', '#f39c12', '#9b59b6', '#1abc9c'];
@@ -1074,7 +1061,6 @@
                 grid.innerHTML += cardHtml;
             });
             
-            // Ссылки
             document.getElementById('linksTitle').textContent = t.linksTitle;
             const linksList = document.getElementById('linksList');
             linksList.innerHTML = '';
@@ -1090,19 +1076,17 @@
                 `;
             });
             
-            // Контакты
             document.getElementById('contactsTitle').textContent = t.contactsTitle;
             document.getElementById('emailLabel').textContent = t.emailLabel;
             document.getElementById('githubLabel').textContent = t.githubLabel;
             
-            // Футер
+            document.getElementById('footerTitle').textContent = t.footerTitle;
             document.getElementById('footerCopyright').textContent = t.footerCopyright;
             document.getElementById('footerUni').textContent = t.footerUni;
             document.getElementById('footerInstitute').textContent = t.footerInstitute;
             document.getElementById('footerDepartment').textContent = t.footerDepartment;
         }
 
-        // ПЕРЕКЛЮЧЕНИЕ РЕЖИМА
         function toggleMode() {
             const body = document.body;
             const icon = document.getElementById('mode-icon');
@@ -1212,7 +1196,6 @@
                 });
             });
 
-            // Магнитные кнопки
             const buttons = document.querySelectorAll('.demo-button, .garden-button, .quest-sim-button');
             
             buttons.forEach(button => {
@@ -1234,7 +1217,6 @@
             });
         }
         
-        // Инициализация
         setLanguage('ru');
     </script>
 </body>
