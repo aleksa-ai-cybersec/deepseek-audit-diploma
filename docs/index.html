@@ -29,6 +29,54 @@
             color: #ffffff;
         }
         
+        /* ========== КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА ========== */
+        .lang-buttons {
+            position: fixed;
+            top: 20px;
+            right: 140px;
+            z-index: 10000;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .lang-btn {
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 30px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s;
+            color: #333;
+        }
+        
+        .lang-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #3498db;
+        }
+        
+        body.night-mode .lang-btn {
+            background: #1a2a3a;
+            color: white;
+            border-color: #00a8ff;
+        }
+        
+        body.night-mode .lang-btn:hover {
+            box-shadow: 0 0 15px #00a8ff;
+        }
+        
+        .lang-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: white;
+        }
+        
+        body.night-mode .lang-btn.active {
+            background: #00a8ff;
+            color: white;
+        }
+        
         /* ========== ЖИВОЙ ТЕКУЧИЙ ФОН ========== */
         .living-background {
             position: fixed;
@@ -698,6 +746,17 @@
                 font-size: 1em;
             }
             
+            .lang-buttons {
+                top: 10px;
+                right: 100px;
+                gap: 5px;
+            }
+            
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.8em;
+            }
+            
             .running-line {
                 font-size: 5rem;
                 animation-duration: 8s !important;
@@ -756,7 +815,14 @@
         <div class="stars"></div>
     </div>
     
-    <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ -->
+    <!-- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКА -->
+    <div class="lang-buttons">
+        <button class="lang-btn active" onclick="setLanguage('ru')">🇷🇺 RU</button>
+        <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 EN</button>
+        <button class="lang-btn" onclick="setLanguage('zh')">🇨🇳 中文</button>
+    </div>
+    
+    <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ РЕЖИМА -->
     <div class="mode-toggle" onclick="toggleMode()">
         <span id="mode-icon">🌙</span>
         <span id="mode-text">Ночь</span>
@@ -764,158 +830,278 @@
 
     <div class="title-container">
         <div class="fancy-title">
-            <span class="word-emoji">🛡️</span>
-            <span class="word">Аудит</span>
-            <span class="word">безопасности</span>
-            <span class="word">DeepSeek</span>
+            <span class="word-emoji" id="titleEmoji">🛡️</span>
+            <span class="word" id="titleWord1">Аудит</span>
+            <span class="word" id="titleWord2">безопасности</span>
+            <span class="word" id="titleWord3">DeepSeek</span>
         </div>
     </div>
     
-    <div class="badge-container">
-        <span class="badge">🎓 Дипломная работа 2026</span>
-        <span class="badge badge-green">🏛️ МГЛУ</span>
-        <span class="badge badge-purple">👩‍🎓 Воробьева А.А.</span>
-        <span class="badge badge-orange">⭐ Институт информационных наук</span>
+    <div class="badge-container" id="badgeContainer">
+        <span class="badge" id="badge1">🎓 Дипломная работа 2026</span>
+        <span class="badge badge-green" id="badge2">🏛️ МГЛУ</span>
+        <span class="badge badge-purple" id="badge3">👩‍🎓 VOROBEVA ALEKSANDRA</span>
+        <span class="badge badge-orange" id="badge4">⭐ Институт информационных наук</span>
     </div>
 
-    <h2>📌 О проекте</h2>
-    <p style="font-size: 1.2em; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.03); text-align: center;">
+    <h2 id="aboutTitle">📌 О проекте</h2>
+    <p id="aboutText" style="font-size: 1.2em; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.03); text-align: center;">
         Разработка методики аудита информационной безопасности систем, 
         использующих технологии искусственного интеллекта (на примере DeepSeek-V3).
     </p>
 
     <div class="button-container">
-        <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" class="demo-button" target="_blank">
+        <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" class="demo-button" id="demoButton" target="_blank">
             🚀 ЗАПУСТИТЬ ИНТЕРАКТИВНУЮ ДЕМО-ВЕРСИЮ
         </a>
         
-        <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" class="garden-button" target="_blank">
+        <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" class="garden-button" id="gardenButton" target="_blank">
             🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ
         </a>
         
-        <a href="https://aleksa-ai-cybersec.github.io/ai-security-quest/" class="quest-sim-button" target="_blank">
+        <a href="https://aleksa-ai-cybersec.github.io/ai-security-quest/" class="quest-sim-button" id="questButton" target="_blank">
             🎮 AI-SECURITY SIMULATOR
         </a>
-        
-        <!-- ПОДПИСЬ УДАЛЕНА -->
     </div>
 
-    <h2 style="text-align: center;">📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ</h2>
+    <h2 id="resultsTitle" style="text-align: center;">📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ</h2>
 
-    <div class="results-grid">
-        <div class="result-card" style="border-top: 5px solid #3498db;">
-            <div class="card-icon">📚</div>
-            <h3 class="card-title">Методологическая база</h3>
-            <div class="card-content">
-                <span class="big-number" style="color: #3498db;">27</span> угроз<br>
-                <span style="color: #3498db; font-weight: bold;">6</span> этапов жизненного цикла<br>
-                <div class="small-note">MITRE ATLAS, OWASP, NIST</div>
-            </div>
-        </div>
-        
-        <div class="result-card" style="border-top: 5px solid #e74c3c;">
-            <div class="card-icon">⚡</div>
-            <h3 class="card-title">Практические результаты</h3>
-            <div class="card-content">
-                <span class="big-number" style="color: #e74c3c;">52</span> уязвимости<br>
-                <span style="color: #e74c3c; font-weight: bold;">34%</span> тестов<br>
-                <div class="small-note">аудит DeepSeek-V3</div>
-            </div>
-        </div>
-        
-        <div class="result-card" style="border-top: 5px solid #27ae60;">
-            <div class="card-icon">🛠️</div>
-            <h3 class="card-title">Разработанный инструмент</h3>
-            <div class="card-content">
-                <span class="big-number" style="color: #27ae60;">5000+</span> строк кода<br>
-                <span style="color: #27ae60; font-weight: bold;">80+</span> тестовых сценариев<br>
-                <div class="small-note">Python, scikit-learn, Streamlit</div>
-            </div>
-        </div>
-        
-        <div class="result-card" style="border-top: 5px solid #f39c12;">
-            <div class="card-icon">🤖</div>
-            <h3 class="card-title">Интеллектуальный анализ</h3>
-            <div class="card-content">
-                🤖 ML-приоритизация<br>
-                🔍 Семантическая классификация<br>
-                <div class="small-note">Random Forest + BART</div>
-            </div>
-        </div>
-        
-        <div class="result-card" style="border-top: 5px solid #9b59b6;">
-            <div class="card-icon">⚡</div>
-            <h3 class="card-title">Оптимизация</h3>
-            <div class="card-content">
-                📦 Адаптивная выборка<br>
-                💾 Кэширование запросов<br>
-                <div class="small-note">экономия до 40%</div>
-            </div>
-        </div>
-        
-        <div class="result-card" style="border-top: 5px solid #1abc9c;">
-            <div class="card-icon">📊</div>
-            <h3 class="card-title">Визуализация</h3>
-            <div class="card-content">
-                📺 Live Dashboard<br>
-                📈 7 интерактивных графиков<br>
-                <div class="small-note">реальное время</div>
-            </div>
-        </div>
+    <div class="results-grid" id="resultsGrid">
+        <!-- Карточки будут заполняться через JavaScript -->
     </div>
 
-    <h2>🔗 Ссылки</h2>
-    <ul>
-        <li>
-            <span class="emoji">📦</span>
-            <strong>Исходный код:</strong> 
-            <a href="https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma" target="_blank">
-                GitHub репозиторий
-            </a>
-        </li>
-        <li>
-            <span class="emoji">🌐</span>
-            <strong>Сад уязвимостей:</strong> 
-            <a href="https://aleksa-ai-cybersec.github.io/vulnerability-garden/" target="_blank">
-                vulnerability-garden
-            </a>
-        </li>
-        <li>
-            <span class="emoji">🎮</span>
-            <strong>Демо-версия:</strong> 
-            <a href="https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app" target="_blank">
-                deepseek-audit-diploma.streamlit.app
-            </a>
-        </li>
-        <!-- НОВЫЙ ПУНКТ ДЛЯ КВЕСТА -->
-        <li>
-            <span class="emoji">🎯</span>
-            <strong>AI-Security Simulator:</strong> 
-            <a href="https://aleksa-ai-cybersec.github.io/ai-security-quest/" target="_blank">
-                интерактивный квест
-            </a>
-            <br>
-            <small style="color: #95a5a6;">Игровой симулятор аудита на основе 27 угроз из диплома</small>
-        </li>
+    <h2 id="linksTitle">🔗 Ссылки</h2>
+    <ul id="linksList">
+        <!-- Ссылки будут заполняться через JavaScript -->
     </ul>
 
-    <h2>📫 Контакты</h2>
-    <ul>
-        <li><span class="emoji">📧</span> <strong>Email:</strong> <a href="mailto:china_aleksandravorobeva@mail.ru">china_aleksandravorobeva@mail.ru</a></li>
-        <li><span class="emoji">💻</span> <strong>GitHub:</strong> <a href="https://github.com/aleksa-ai-cybersec" target="_blank">@aleksa-ai-cybersec</a></li>
+    <h2 id="contactsTitle">📫 Контакты</h2>
+    <ul id="contactsList">
+        <li><span class="emoji">📧</span> <strong id="emailLabel">Email:</strong> <a href="mailto:china_aleksandravorobeva@mail.ru">china_aleksandravorobeva@mail.ru</a></li>
+        <li><span class="emoji">💻</span> <strong id="githubLabel">GitHub:</strong> <a href="https://github.com/aleksa-ai-cybersec" target="_blank">@aleksa-ai-cybersec</a></li>
     </ul>
 
-    <div class="footer">
+    <div class="footer" id="footer">
         <p style="font-size: 1.2em; margin-bottom: 15px;">🛡️ DeepSeek Security Auditor</p>
-        <p>© Воробьева Александра Александровна, 2026</p>
-        <p>Московский государственный лингвистический университет</p>
-        <p>Институт информационных наук</p>
-        <p>Кафедра международной информационной безопасности</p>
+        <p id="footerCopyright">© VOROBEVA ALEKSANDRA, 2026</p>
+        <p id="footerUni">Московский государственный лингвистический университет</p>
+        <p id="footerInstitute">Институт информационных наук</p>
+        <p id="footerDepartment">Кафедра международной информационной безопасности</p>
     </div>
 
     <canvas class="particles-canvas" id="particles-canvas"></canvas>
 
     <script>
+        // ========== ПЕРЕВОДЫ ==========
+        const translations = {
+            ru: {
+                // Заголовок
+                titleEmoji: "🛡️",
+                titleWord1: "Аудит",
+                titleWord2: "безопасности",
+                titleWord3: "DeepSeek",
+                // Бейджи
+                badge1: "🎓 Дипломная работа 2026",
+                badge2: "🏛️ МГЛУ",
+                badge3: "👩‍🎓 VOROBEVA ALEKSANDRA",
+                badge4: "⭐ Институт информационных наук",
+                // О проекте
+                aboutTitle: "📌 О проекте",
+                aboutText: "Разработка методики аудита информационной безопасности систем, использующих технологии искусственного интеллекта (на примере DeepSeek-V3).",
+                // Кнопки
+                demoButton: "🚀 ЗАПУСТИТЬ ИНТЕРАКТИВНУЮ ДЕМО-ВЕРСИЮ",
+                gardenButton: "🌸 ОТКРЫТЬ САД УЯЗВИМОСТЕЙ",
+                questButton: "🎮 AI-SECURITY SIMULATOR",
+                // Результаты
+                resultsTitle: "📊 КЛЮЧЕВЫЕ РЕЗУЛЬТАТЫ",
+                // Карточки
+                cards: [
+                    { title: "Методологическая база", line1: "27 угроз", line2: "6 этапов жизненного цикла", line3: "MITRE ATLAS, OWASP, NIST", color: "#3498db" },
+                    { title: "Практические результаты", line1: "52 уязвимости", line2: "34% тестов", line3: "аудит DeepSeek-V3", color: "#e74c3c" },
+                    { title: "Разработанный инструмент", line1: "5000+ строк кода", line2: "80+ тестовых сценариев", line3: "Python, scikit-learn, Streamlit", color: "#27ae60" },
+                    { title: "Интеллектуальный анализ", line1: "ML-приоритизация", line2: "Семантическая классификация", line3: "Random Forest + BART", color: "#f39c12" },
+                    { title: "Оптимизация", line1: "Адаптивная выборка", line2: "Кэширование запросов", line3: "экономия до 40%", color: "#9b59b6" },
+                    { title: "Визуализация", line1: "Live Dashboard", line2: "7 интерактивных графиков", line3: "реальное время", color: "#1abc9c" }
+                ],
+                // Ссылки
+                linksTitle: "🔗 Ссылки",
+                links: [
+                    { emoji: "📦", label: "Исходный код (основной):", url: "https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma", text: "GitHub репозиторий", desc: "Полный код аудитора, база угроз, ML-модели" },
+                    { emoji: "🌐", label: "Сад уязвимостей:", url: "https://aleksa-ai-cybersec.github.io/vulnerability-garden/", text: "vulnerability-garden", desc: "Интерактивная визуализация 27 угроз" },
+                    { emoji: "🎮", label: "Демо-версия:", url: "https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app", text: "deepseek-audit-diploma.streamlit.app", desc: "Живой тестер с анализом уязвимостей в реальном времени" },
+                    { emoji: "🎯", label: "AI-Security Simulator:", url: "https://aleksa-ai-cybersec.github.io/ai-security-quest/", text: "интерактивный квест", desc: "Игровой симулятор аудита на основе 27 угроз из диплома" }
+                ],
+                // Контакты
+                contactsTitle: "📫 Контакты",
+                emailLabel: "Email:",
+                githubLabel: "GitHub:",
+                // Футер
+                footerCopyright: "© VOROBEVA ALEKSANDRA, 2026",
+                footerUni: "Московский государственный лингвистический университет",
+                footerInstitute: "Институт информационных наук",
+                footerDepartment: "Кафедра международной информационной безопасности"
+            },
+            en: {
+                titleEmoji: "🛡️",
+                titleWord1: "DeepSeek",
+                titleWord2: "Security",
+                titleWord3: "Audit",
+                badge1: "🎓 Diploma Thesis 2026",
+                badge2: "🏛️ MSLU",
+                badge3: "👩‍🎓 VOROBEVA ALEKSANDRA",
+                badge4: "⭐ Institute of Information Sciences",
+                aboutTitle: "📌 About the Project",
+                aboutText: "Development of an information security audit methodology for systems utilizing artificial intelligence technologies (case study: DeepSeek-V3).",
+                demoButton: "🚀 LAUNCH INTERACTIVE DEMO",
+                gardenButton: "🌸 OPEN VULNERABILITY GARDEN",
+                questButton: "🎮 AI-SECURITY SIMULATOR",
+                resultsTitle: "📊 KEY RESULTS",
+                cards: [
+                    { title: "Methodological Framework", line1: "27 threats", line2: "6 lifecycle stages", line3: "MITRE ATLAS, OWASP, NIST", color: "#3498db" },
+                    { title: "Practical Results", line1: "52 vulnerabilities", line2: "34% of tests", line3: "DeepSeek-V3 audit", color: "#e74c3c" },
+                    { title: "Developed Tool", line1: "5000+ lines of code", line2: "80+ test scenarios", line3: "Python, scikit-learn, Streamlit", color: "#27ae60" },
+                    { title: "Intelligent Analysis", line1: "ML prioritization", line2: "Semantic Classification", line3: "Random Forest + BART", color: "#f39c12" },
+                    { title: "Optimization", line1: "Adaptive Sampling", line2: "Query Caching", line3: "up to 40% savings", color: "#9b59b6" },
+                    { title: "Visualization", line1: "Live Dashboard", line2: "7 interactive graphs", line3: "real-time", color: "#1abc9c" }
+                ],
+                linksTitle: "🔗 Links",
+                links: [
+                    { emoji: "📦", label: "Source Code (main):", url: "https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma", text: "GitHub Repository", desc: "Full auditor code, threat database, ML models" },
+                    { emoji: "🌐", label: "Vulnerability Garden:", url: "https://aleksa-ai-cybersec.github.io/vulnerability-garden/", text: "vulnerability-garden", desc: "Interactive visualization of 27 threats" },
+                    { emoji: "🎮", label: "Demo Version:", url: "https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app", text: "deepseek-audit-diploma.streamlit.app", desc: "Live tester with real-time vulnerability analysis" },
+                    { emoji: "🎯", label: "AI-Security Simulator:", url: "https://aleksa-ai-cybersec.github.io/ai-security-quest/", text: "interactive quest", desc: "Game simulator based on 27 threats from the thesis" }
+                ],
+                contactsTitle: "📫 Contacts",
+                emailLabel: "Email:",
+                githubLabel: "GitHub:",
+                footerCopyright: "© VOROBEVA ALEKSANDRA, 2026",
+                footerUni: "Moscow State Linguistic University",
+                footerInstitute: "Institute of Information Sciences",
+                footerDepartment: "Department of International Information Security"
+            },
+            zh: {
+                titleEmoji: "🛡️",
+                titleWord1: "DeepSeek",
+                titleWord2: "安全",
+                titleWord3: "审计",
+                badge1: "🎓 毕业论文 2026",
+                badge2: "🏛️ 莫语大",
+                badge3: "👩‍🎓 VOROBEVA ALEKSANDRA",
+                badge4: "⭐ 信息科学研究所",
+                aboutTitle: "📌 关于项目",
+                aboutText: "针对基于人工智能技术的系统开发信息安全审计方法（以 DeepSeek-V3 为例）。",
+                demoButton: "🚀 启动交互式演示",
+                gardenButton: "🌸 打开漏洞花园",
+                questButton: "🎮 AI 安全模拟器",
+                resultsTitle: "📊 关键成果",
+                cards: [
+                    { title: "方法论基础", line1: "27 种威胁", line2: "6 个生命周期阶段", line3: "MITRE ATLAS, OWASP, NIST", color: "#3498db" },
+                    { title: "实践成果", line1: "52 个漏洞", line2: "34% 的测试", line3: "DeepSeek-V3 审计", color: "#e74c3c" },
+                    { title: "开发工具", line1: "5000+ 行代码", line2: "80+ 测试场景", line3: "Python, scikit-learn, Streamlit", color: "#27ae60" },
+                    { title: "智能分析", line1: "机器学习优先级", line2: "语义分类", line3: "随机森林 + BART", color: "#f39c12" },
+                    { title: "优化", line1: "自适应采样", line2: "查询缓存", line3: "节省高达 40%", color: "#9b59b6" },
+                    { title: "可视化", line1: "实时仪表板", line2: "7 个交互式图表", line3: "实时", color: "#1abc9c" }
+                ],
+                linksTitle: "🔗 链接",
+                links: [
+                    { emoji: "📦", label: "源代码（主）：", url: "https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma", text: "GitHub 仓库", desc: "完整审计器代码、威胁数据库、机器学习模型" },
+                    { emoji: "🌐", label: "漏洞花园：", url: "https://aleksa-ai-cybersec.github.io/vulnerability-garden/", text: "漏洞花园", desc: "27 种威胁的交互式可视化" },
+                    { emoji: "🎮", label: "演示版本：", url: "https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app", text: "deepseek-audit-diploma.streamlit.app", desc: "实时漏洞分析测试器" },
+                    { emoji: "🎯", label: "AI 安全模拟器：", url: "https://aleksa-ai-cybersec.github.io/ai-security-quest/", text: "交互式任务", desc: "基于论文中 27 种威胁的游戏模拟器" }
+                ],
+                contactsTitle: "📫 联系方式",
+                emailLabel: "电子邮件：",
+                githubLabel: "GitHub：",
+                footerCopyright: "© VOROBEVA ALEKSANDRA, 2026",
+                footerUni: "莫斯科国立语言大学",
+                footerInstitute: "信息科学研究所",
+                footerDepartment: "国际信息安全系"
+            }
+        };
+
+        let currentLang = 'ru';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            
+            // Обновляем активный класс кнопок
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-btn[onclick="setLanguage('${lang}')"]`).classList.add('active');
+            
+            // Заголовок
+            document.getElementById('titleEmoji').textContent = t.titleEmoji;
+            document.getElementById('titleWord1').textContent = t.titleWord1;
+            document.getElementById('titleWord2').textContent = t.titleWord2;
+            document.getElementById('titleWord3').textContent = t.titleWord3;
+            
+            // Бейджи
+            document.getElementById('badge1').textContent = t.badge1;
+            document.getElementById('badge2').textContent = t.badge2;
+            document.getElementById('badge3').textContent = t.badge3;
+            document.getElementById('badge4').textContent = t.badge4;
+            
+            // О проекте
+            document.getElementById('aboutTitle').textContent = t.aboutTitle;
+            document.getElementById('aboutText').textContent = t.aboutText;
+            
+            // Кнопки
+            document.getElementById('demoButton').innerHTML = t.demoButton;
+            document.getElementById('gardenButton').innerHTML = t.gardenButton;
+            document.getElementById('questButton').innerHTML = t.questButton;
+            
+            // Заголовок результатов
+            document.getElementById('resultsTitle').textContent = t.resultsTitle;
+            
+            // Карточки
+            const grid = document.getElementById('resultsGrid');
+            grid.innerHTML = '';
+            const colors = ['#3498db', '#e74c3c', '#27ae60', '#f39c12', '#9b59b6', '#1abc9c'];
+            t.cards.forEach((card, idx) => {
+                const cardHtml = `
+                    <div class="result-card" style="border-top: 5px solid ${colors[idx % colors.length]};">
+                        <div class="card-icon">${idx === 0 ? '📚' : idx === 1 ? '⚡' : idx === 2 ? '🛠️' : idx === 3 ? '🤖' : idx === 4 ? '⚡' : '📊'}</div>
+                        <h3 class="card-title">${card.title}</h3>
+                        <div class="card-content">
+                            ${card.line1}<br>
+                            ${card.line2}<br>
+                            <div class="small-note">${card.line3}</div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+            
+            // Ссылки
+            document.getElementById('linksTitle').textContent = t.linksTitle;
+            const linksList = document.getElementById('linksList');
+            linksList.innerHTML = '';
+            t.links.forEach(link => {
+                linksList.innerHTML += `
+                    <li>
+                        <span class="emoji">${link.emoji}</span>
+                        <strong>${link.label}</strong> 
+                        <a href="${link.url}" target="_blank">${link.text}</a>
+                        <br>
+                        <small style="color: #95a5a6;">${link.desc}</small>
+                    </li>
+                `;
+            });
+            
+            // Контакты
+            document.getElementById('contactsTitle').textContent = t.contactsTitle;
+            document.getElementById('emailLabel').textContent = t.emailLabel;
+            document.getElementById('githubLabel').textContent = t.githubLabel;
+            
+            // Футер
+            document.getElementById('footerCopyright').textContent = t.footerCopyright;
+            document.getElementById('footerUni').textContent = t.footerUni;
+            document.getElementById('footerInstitute').textContent = t.footerInstitute;
+            document.getElementById('footerDepartment').textContent = t.footerDepartment;
+        }
+
         // ПЕРЕКЛЮЧЕНИЕ РЕЖИМА
         function toggleMode() {
             const body = document.body;
@@ -1026,7 +1212,7 @@
                 });
             });
 
-            // Магнитные кнопки (включая новую)
+            // Магнитные кнопки
             const buttons = document.querySelectorAll('.demo-button, .garden-button, .quest-sim-button');
             
             buttons.forEach(button => {
@@ -1047,6 +1233,9 @@
                 });
             });
         }
+        
+        // Инициализация
+        setLanguage('ru');
     </script>
 </body>
 </html>
