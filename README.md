@@ -5,14 +5,9 @@
 
 ## Интеллектуальная система аудита безопасности больших языковых моделей
 
-![Дипломная работа 2026](https://img.shields.io/badge/Дипломная%20работа-2026-8A2BE2?style=for-the-badge)
-![МГЛУ Институт информационных наук](https://img.shields.io/badge/МГЛУ-Институт%20информационных%20наук-blue?style=for-the-badge)
+**🎓 Дипломная работа 2026 | 🏛️ МГЛУ | 🔬 Институт информационных наук**
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Random%20Forest-orange?style=flat-square)
-![Deep NLP](https://img.shields.io/badge/Deep%20NLP-Transformers-FF6F00?style=flat-square&logo=huggingface&logoColor=white)
-![Live Dashboard](https://img.shields.io/badge/Live%20Dashboard-Plotly-3F4F75?style=flat-square&logo=plotly&logoColor=white)
-![Interface](https://img.shields.io/badge/Interface-Gradio-8A2BE2?style=flat-square&logo=gradio&logoColor=white)
+🐍 Python 3.10+ | 🤖 Random Forest | 🧠 Transformers | 📊 Plotly | 🎨 Gradio
 
 </div>
 
@@ -68,7 +63,7 @@
 ## 🎮 Попробовать онлайн
 
 | Ссылка | Описание |
-|--------|----------|
+|:-------|:---------|
 | [🚀 Демо-приложение](https://deepseek-audit-diploma-n26kk2ohkcmofvox6hbdas.streamlit.app) | Интерактивная демо-версия |
 | [📁 GitHub-репозиторий](https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma) | Исходный код |
 | [🌐 Сайт-визитка](https://aleksa-ai-cybersec.github.io/deepseek-audit-diploma/) | Презентация диплома |
@@ -86,23 +81,18 @@
 ### Установка и запуск
 
 ```bash
-# Клонируйте репозиторий
 git clone https://github.com/aleksa-ai-cybersec/deepseek-audit-diploma.git
 cd deepseek-audit-diploma
 
-# Создайте виртуальное окружение
 python3 -m venv venv
 source venv/bin/activate  # Linux/Mac
 # venv\Scripts\activate  # Windows
 
-# Установите зависимости
 pip install pandas numpy plotly scipy tqdm gradio requests langdetect
 
-# Создайте файл с токенами
 nano tokens.txt
 # (вставьте 6 токенов, каждый с новой строки)
 
-# Запустите аудит
 python3 deepseek_auditor.py
 ```
 
@@ -139,5 +129,3 @@ deepseek-audit-diploma/
 Дипломная работа. Московский государственный лингвистический университет, 2026.
 
 ```
-
----
