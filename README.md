@@ -258,7 +258,6 @@ Diploma work. Moscow State Linguistic University, 2026.
 
 
 
-```markdown
 ---
 
 <div align="center">
