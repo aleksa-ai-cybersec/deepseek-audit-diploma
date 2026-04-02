@@ -37,8 +37,8 @@ translations = {
         "vuln_found_value": "52",
         "vuln_percent": "34% от всех тестов",
         "critical_threats": "Критических угроз",
-        "critical_threats_value": "8",
-        "priority_text": "priority 1",
+        "critical_threats_value": "5",
+        "priority_text": "уровень риска 9",
         "avg_response": "Среднее время ответа",
         "avg_response_value": "5.71 с",
         "response_text": "быстродействие",
@@ -132,8 +132,8 @@ translations = {
         "vuln_found_value": "52",
         "vuln_percent": "34% of all tests",
         "critical_threats": "Critical threats",
-        "critical_threats_value": "8",
-        "priority_text": "priority 1",
+        "critical_threats_value": "5",
+        "priority_text": "risk level 9",
         "avg_response": "Average response time",
         "avg_response_value": "5.71 s",
         "response_text": "performance",
@@ -227,8 +227,8 @@ translations = {
         "vuln_found_value": "52",
         "vuln_percent": "占所有测试的34%",
         "critical_threats": "严重威胁",
-        "critical_threats_value": "8",
-        "priority_text": "优先级1",
+        "critical_threats_value": "5",
+        "priority_text": "风险等级9",
         "avg_response": "平均响应时间",
         "avg_response_value": "5.71秒",
         "response_text": "性能",
@@ -430,8 +430,8 @@ with tab1:
         'Категория': ['Промпт-инъекции', 'DoS-атаки', 'Кража модели', 'Утечка данных', 
                       'Вредоносные URL', 'Отравление данных', 'Компрометация API', 
                       'Манипуляция метриками', 'Конфиденциальность', 'Обновления'],
-        'Уязвимо': [18, 8, 7, 12, 10, 5, 4, 6, 9, 3],
-        'Всего': [24, 15, 12, 18, 15, 10, 8, 12, 15, 8]
+        'Уязвимо': [18, 8, 7, 12, 0, 5, 4, 6, 9, 3],
+        'Всего': [24, 15, 12, 18, 12, 10, 8, 12, 15, 8]
     }
     df_cat = pd.DataFrame(data_categories)
     df_cat['Процент'] = (df_cat['Уязвимо'] / df_cat['Всего'] * 100).round(1)
@@ -464,9 +464,9 @@ with tab1:
     with col2:
         st.markdown(f"### {t['chart3_title']}")
         top_threats = pd.DataFrame({
-            t['threat']: ['Прямые промпт-инъекции', 'DoS-атаки', 'Кража модели', 'Атаки на конфиденциальность', 'Генерация вредоносных URL'],
-            t['successful_attacks']: [15, 8, 7, 12, 10],
-            t['risk']: [t['critical'], t['high'], t['high'], t['critical'], t['low']]
+            t['threat']: ['Прямые промпт-инъекции', 'Манипуляция тестированием', 'Подмена модели', 'Кража модели', 'Нарушение при обновлении'],
+            t['successful_attacks']: [15, 12, 10, 7, 6],
+            t['risk']: [t['critical'], t['critical'], t['critical'], t['critical'], t['critical']]
         })
         fig3 = px.bar(top_threats, x=t['successful_attacks'], y=t['threat'], orientation='h', 
                       color=t['risk'], color_discrete_map={t['critical']: '#ff4b4b', t['high']: '#ffa726', t['low']: '#66bb6a'},
@@ -539,11 +539,11 @@ with tab2:
                 elif "архитектур" in text or "слоев" in text or "параметр" in text:
                     threat_type = t['threat_labels']['model_theft']
                     probability = 0.68
-                    risk_level = t['high']
+                    risk_level = t['critical']
                 elif "фишинг" in text or "url" in text or "ссылк" in text:
                     threat_type = t['threat_labels']['malicious_url']
-                    probability = 0.79
-                    risk_level = t['high']
+                    probability = 0.05
+                    risk_level = t['low']
                 else:
                     threat_type = t['threat_labels']['safe']
                     probability = 0.12
@@ -606,7 +606,7 @@ with tab3:
     
     st.markdown(f"#### {t['ci_title']}")
     ci_data = {'Категория': ['Промпт-инъекции', 'DoS-атаки', 'Кража модели', 'Утечка данных', 'Вредоносные URL'],
-               'Процент': [75, 53, 58, 67, 73], 'CI_нижний': [68, 45, 49, 59, 65], 'CI_верхний': [82, 61, 67, 75, 81]}
+               'Процент': [75, 53, 58, 67, 0], 'CI_нижний': [68, 45, 49, 59, 0], 'CI_верхний': [82, 61, 67, 75, 5]}
     df_ci = pd.DataFrame(ci_data)
     fig6 = go.Figure()
     for i, row in df_ci.iterrows():
@@ -653,8 +653,8 @@ with tab4:
                    'T', 'T', 'R', 'T', 'I,DoS,E', 'E',
                    'I,DoS', 'E,I', 'E,I', 'E,I', 'I,E', 'I', 'I', 'DoS',
                    'I', 'I', 'T', 'T', 'T'],
-        'Приоритет': [2,2,2,2, 1,2,2,2, 2,2,2, 2,2,2, 1,1,1,1,2,1,2,1,1,2, 2,2,2],
-        'Обнаружено': [3,2,4,5, 7,2,3,4, 2,3,4, 3,4,3, 6,8,7,5,3,6,2,8,6,5, 2,3,2]
+        'Приоритет': [2,2,2,2, 1,2,2,2, 2,2,2, 2,2,2, 1,1,1,1,2,1,2,1,2,2, 2,2,2],
+        'Обнаружено': [3,2,4,5, 7,2,3,4, 2,3,4, 3,4,3, 6,8,7,5,3,6,2,8,0,5, 2,3,2]
     }
     df_threats = pd.DataFrame(threats_data)
     
@@ -686,13 +686,13 @@ with tab5:
             'Манипуляция тестированием', 'Небезопасная конфигурация', 'Изменение распределения данных', 'Нарушение при обновлении'
         ],
         t['probability_col']: [
-            'Низкая', 'Высокая', 'Средняя', 'Средняя', 'Низкая', 'Средняя', 'Низкая', 'Низкая', 'Низкая', 'Низкая', 'Средняя', 'Низкая', 'Низкая'
+            'Низкая', 'Высокая', 'Средняя', 'Средняя', 'Высокая', 'Средняя', 'Высокая', 'Высокая', 'Высокая', 'Высокая', 'Высокая', 'Средняя', 'Высокая'
         ],
         t['impact']: [
-            'Низкое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Среднее', 'Высокое', 'Среднее', 'Среднее', 'Среднее', 'Высокое', 'Низкое', 'Среднее'
+            'Низкое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Высокое', 'Среднее', 'Низкое', 'Высокое'
         ],
-        t['risk_score']: [1, 9, 6, 6, 3, 4, 3, 2, 2, 2, 3, 1, 2],
-        t['level']: [t['low'], t['critical'], t['high'], t['high'], t['medium'], t['medium'], t['medium'], t['low'], t['low'], t['low'], t['medium'], t['low'], t['low']]
+        t['risk_score']: [1, 9, 6, 6, 9, 6, 9, 9, 9, 9, 6, 2, 9],
+        t['level']: [t['low'], t['critical'], t['high'], t['high'], t['critical'], t['high'], t['critical'], t['critical'], t['critical'], t['critical'], t['high'], t['low'], t['critical']]
     }
     df_risk = pd.DataFrame(risk_data)
     st.dataframe(df_risk, use_container_width=True, height=450)
