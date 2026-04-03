@@ -483,13 +483,19 @@ with tab1:
                   color='Процент', color_continuous_scale='RdYlGn_r',
                   orientation='h', text='Процент')
     fig1.update_traces(
-        texttemplate='%{text}%', 
-        textposition='outside', 
-        textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+        texttemplate='<b>%{text}%</b>',
+        textposition='outside',
+        textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif')
     )
-    fig1.update_layout(height=500, showlegend=False, coloraxis_showscale=False,
-                       plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                       xaxis=dict(gridcolor='#f0f0f0'), yaxis=dict(gridcolor='#f0f0f0'))
+    fig1.update_layout(
+        height=500, 
+        showlegend=False, 
+        coloraxis_showscale=False,
+        plot_bgcolor='rgba(0,0,0,0)', 
+        paper_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12)),
+        yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12))
+    )
     st.plotly_chart(fig1, use_container_width=True)
     
     col1, col2 = st.columns(2)
@@ -500,13 +506,18 @@ with tab1:
         fig2.add_trace(go.Bar(
             x=t['stages'], y=t['stages_pct'], 
             marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
-            text=[f'{p}%' for p in t['stages_pct']], 
+            text=[f'<b>{p}%</b>' for p in t['stages_pct']], 
             textposition='outside',
-            textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+            textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif')
         ))
-        fig2.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                          xaxis=dict(gridcolor='#f0f0f0', tickangle=-30), yaxis=dict(gridcolor='#f0f0f0', title="%"),
-                          showlegend=False)
+        fig2.update_layout(
+            height=400, 
+            plot_bgcolor='rgba(0,0,0,0)', 
+            paper_bgcolor='rgba(0,0,0,0)',
+            xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color='#FFFFFF', size=12)), 
+            yaxis=dict(gridcolor='#f0f0f0', title="%", tickfont=dict(color='#FFFFFF', size=12)),
+            showlegend=False
+        )
         st.plotly_chart(fig2, use_container_width=True)
     
     with col2:
@@ -521,11 +532,19 @@ with tab1:
                       color=t['risk'], color_discrete_map=risk_color_map,
                       text=t['successful_attacks'])
         fig3.update_traces(
-            textposition='outside', 
-            textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+            textposition='outside',
+            textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif'),
+            insidetextanchor='middle'
         )
-        fig3.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                          xaxis=dict(gridcolor='#f0f0f0'), yaxis=dict(gridcolor='#f0f0f0'), showlegend=True)
+        fig3.update_layout(
+            height=350, 
+            plot_bgcolor='rgba(0,0,0,0)', 
+            paper_bgcolor='rgba(0,0,0,0)',
+            xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12)), 
+            yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12)), 
+            showlegend=True,
+            legend=dict(font=dict(color='#FFFFFF'))
+        )
         st.plotly_chart(fig3, use_container_width=True)
 
 # ==================== ТАБ 2: ТЕСТИРОВАНИЕ ПРОМПТОВ ====================
@@ -636,16 +655,16 @@ with tab3:
         fig4.add_trace(go.Bar(x=df_time['Дата'], y=df_time[t['new_vuln']], name=t['new_vuln'], 
                               marker_color='#FFA726',
                               text=df_time[t['new_vuln']], textposition='outside',
-                              textfont=dict(size=12, color='#1a1a2e', weight='bold')), secondary_y=False)
+                              textfont=dict(size=12, color='#FFFFFF', weight='bold')), secondary_y=False)
         fig4.add_trace(go.Scatter(x=df_time['Дата'], y=df_time[t['cumulative']], name=t['cumulative'], 
                                   mode='lines+markers',
                                   line=dict(color='#667EEA', width=3), marker=dict(size=8, color='#667EEA')),
                                   secondary_y=True)
         fig4.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5))
-        fig4.update_xaxes(gridcolor='#f0f0f0')
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False)
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True)
+                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF')))
+        fig4.update_xaxes(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF'))
+        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False, tickfont=dict(color='#FFFFFF'))
+        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True, tickfont=dict(color='#FFFFFF'))
         st.plotly_chart(fig4, use_container_width=True)
     
     with col2:
@@ -654,7 +673,12 @@ with tab3:
                        'Количество': [4, 12, 3, 18, 8, 7]}
         df_stride = pd.DataFrame(stride_data)
         fig5 = px.pie(df_stride, values='Количество', names='Класс', color_discrete_sequence=px.colors.qualitative.Set2)
-        fig5.update_traces(textposition='inside', textinfo='percent+label', textfont=dict(size=14, color='white', weight='bold'))
+        fig5.update_traces(
+            textposition='inside', 
+            textinfo='percent+label', 
+            textfont=dict(size=14, color='#FFFFFF', weight='bold'),
+            insidetextorientation='radial'
+        )
         fig5.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=False)
         st.plotly_chart(fig5, use_container_width=True)
     
@@ -674,10 +698,10 @@ with tab3:
         y=df_ci['Процент'],
         mode='markers',
         name='Оценка',
-        marker=dict(size=18, color='#667EEA', symbol='diamond', line=dict(width=2, color='white')),
-        text=[f"{p}%" for p in df_ci['Процент']],
+        marker=dict(size=22, color='#667EEA', symbol='diamond', line=dict(width=3, color='white')),
+        text=[f'<b>{p}%</b>' for p in df_ci['Процент']],
         textposition='top center',
-        textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+        textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif')
     ))
     
     for i, row in df_ci.iterrows():
@@ -686,7 +710,7 @@ with tab3:
             y=[row['CI_нижний'], row['CI_верхний']],
             mode='lines',
             name='95% CI' if i == 0 else '',
-            line=dict(color='#2C3E50', width=6),
+            line=dict(color='#FFFFFF', width=6),
             showlegend=True if i == 0 else False
         ))
         
@@ -694,14 +718,14 @@ with tab3:
             x=[row['Категория']],
             y=[row['CI_нижний']],
             mode='markers',
-            marker=dict(size=10, color='#2C3E50', symbol='line-ns'),
+            marker=dict(size=10, color='#FFFFFF', symbol='line-ns'),
             showlegend=False
         ))
         fig6.add_trace(go.Scatter(
             x=[row['Категория']],
             y=[row['CI_верхний']],
             mode='markers',
-            marker=dict(size=10, color='#2C3E50', symbol='line-ns'),
+            marker=dict(size=10, color='#FFFFFF', symbol='line-ns'),
             showlegend=False
         ))
     
@@ -709,10 +733,10 @@ with tab3:
         height=500,
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(size=12)),
-        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(size=12)),
+        xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color='#FFFFFF', size=12)),
+        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color='#FFFFFF', size=12)),
         showlegend=True,
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5)
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF'))
     )
     st.plotly_chart(fig6, use_container_width=True)
 
