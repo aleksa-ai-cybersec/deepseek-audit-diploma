@@ -390,10 +390,11 @@ st.markdown("""
     .stProgress > div > div { animation: pulse 2s infinite; }
     
     @media (max-width: 768px) {
-        .main-header h1 { font-size: 2em; }
-        .metric-card { padding: 15px; }
-        .metric-card h2 { font-size: 32px; }
-        .badge { padding: 6px 15px; font-size: 12px; }
+        .main-header h1 { font-size: 1.8em; }
+        .metric-card { padding: 10px; }
+        .metric-card h2 { font-size: 24px; }
+        .badge { padding: 4px 10px; font-size: 10px; }
+        .content-card { padding: 15px; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -485,16 +486,17 @@ with tab1:
     fig1.update_traces(
         texttemplate='<b>%{text}%</b>',
         textposition='outside',
-        textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif')
+        textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif')
     )
     fig1.update_layout(
-        height=500, 
+        height=450, 
         showlegend=False, 
         coloraxis_showscale=False,
         plot_bgcolor='rgba(0,0,0,0)', 
         paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12)),
-        yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12))
+        xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=10)),
+        yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=10)),
+        margin=dict(l=5, r=5, t=30, b=5)
     )
     st.plotly_chart(fig1, use_container_width=True)
     
@@ -508,15 +510,16 @@ with tab1:
             marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
             text=[f'<b>{p}%</b>' for p in t['stages_pct']], 
             textposition='outside',
-            textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif')
+            textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif')
         ))
         fig2.update_layout(
-            height=400, 
+            height=350, 
             plot_bgcolor='rgba(0,0,0,0)', 
             paper_bgcolor='rgba(0,0,0,0)',
-            xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color='#FFFFFF', size=12)), 
-            yaxis=dict(gridcolor='#f0f0f0', title="%", tickfont=dict(color='#FFFFFF', size=12)),
-            showlegend=False
+            xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color='#FFFFFF', size=9)), 
+            yaxis=dict(gridcolor='#f0f0f0', title="%", tickfont=dict(color='#FFFFFF', size=10)),
+            showlegend=False,
+            margin=dict(l=5, r=5, t=30, b=5)
         )
         st.plotly_chart(fig2, use_container_width=True)
     
@@ -533,17 +536,20 @@ with tab1:
                       text=t['successful_attacks'])
         fig3.update_traces(
             textposition='outside',
-            textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif'),
-            insidetextanchor='middle'
+            textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
+            insidetextanchor='middle',
+            cliponaxis=False
         )
         fig3.update_layout(
             height=350, 
             plot_bgcolor='rgba(0,0,0,0)', 
             paper_bgcolor='rgba(0,0,0,0)',
-            xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12)), 
-            yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=12)), 
+            xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=10), 
+                       title=t['successful_attacks'], title_font=dict(color='#FFFFFF', size=10)),
+            yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=9)),
             showlegend=True,
-            legend=dict(font=dict(color='#FFFFFF'))
+            legend=dict(font=dict(color='#FFFFFF', size=9), orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
+            margin=dict(l=5, r=30, t=30, b=5)
         )
         st.plotly_chart(fig3, use_container_width=True)
 
@@ -655,16 +661,17 @@ with tab3:
         fig4.add_trace(go.Bar(x=df_time['Дата'], y=df_time[t['new_vuln']], name=t['new_vuln'], 
                               marker_color='#FFA726',
                               text=df_time[t['new_vuln']], textposition='outside',
-                              textfont=dict(size=12, color='#FFFFFF', weight='bold')), secondary_y=False)
+                              textfont=dict(size=11, color='#FFFFFF', weight='bold')), secondary_y=False)
         fig4.add_trace(go.Scatter(x=df_time['Дата'], y=df_time[t['cumulative']], name=t['cumulative'], 
                                   mode='lines+markers',
                                   line=dict(color='#667EEA', width=3), marker=dict(size=8, color='#667EEA')),
                                   secondary_y=True)
-        fig4.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF')))
-        fig4.update_xaxes(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF'))
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False, tickfont=dict(color='#FFFFFF'))
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True, tickfont=dict(color='#FFFFFF'))
+        fig4.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF', size=9)),
+                          margin=dict(l=5, r=5, t=30, b=5))
+        fig4.update_xaxes(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=9))
+        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False, tickfont=dict(color='#FFFFFF', size=9))
+        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True, tickfont=dict(color='#FFFFFF', size=9))
         st.plotly_chart(fig4, use_container_width=True)
     
     with col2:
@@ -676,10 +683,10 @@ with tab3:
         fig5.update_traces(
             textposition='inside', 
             textinfo='percent+label', 
-            textfont=dict(size=14, color='#FFFFFF', weight='bold'),
+            textfont=dict(size=11, color='#FFFFFF', weight='bold'),
             insidetextorientation='radial'
         )
-        fig5.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=False)
+        fig5.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=False)
         st.plotly_chart(fig5, use_container_width=True)
     
     st.markdown(f"#### {t['ci_title']}")
@@ -698,10 +705,10 @@ with tab3:
         y=df_ci['Процент'],
         mode='markers',
         name='Оценка',
-        marker=dict(size=22, color='#667EEA', symbol='diamond', line=dict(width=3, color='white')),
+        marker=dict(size=16, color='#667EEA', symbol='diamond', line=dict(width=2, color='white')),
         text=[f'<b>{p}%</b>' for p in df_ci['Процент']],
         textposition='top center',
-        textfont=dict(size=16, color='#FFFFFF', family='Arial, sans-serif')
+        textfont=dict(size=12, color='#FFFFFF', family='Arial, sans-serif')
     ))
     
     for i, row in df_ci.iterrows():
@@ -710,7 +717,7 @@ with tab3:
             y=[row['CI_нижний'], row['CI_верхний']],
             mode='lines',
             name='95% CI' if i == 0 else '',
-            line=dict(color='#FFFFFF', width=6),
+            line=dict(color='#FFFFFF', width=4),
             showlegend=True if i == 0 else False
         ))
         
@@ -718,25 +725,26 @@ with tab3:
             x=[row['Категория']],
             y=[row['CI_нижний']],
             mode='markers',
-            marker=dict(size=10, color='#FFFFFF', symbol='line-ns'),
+            marker=dict(size=8, color='#FFFFFF', symbol='line-ns'),
             showlegend=False
         ))
         fig6.add_trace(go.Scatter(
             x=[row['Категория']],
             y=[row['CI_верхний']],
             mode='markers',
-            marker=dict(size=10, color='#FFFFFF', symbol='line-ns'),
+            marker=dict(size=8, color='#FFFFFF', symbol='line-ns'),
             showlegend=False
         ))
     
     fig6.update_layout(
-        height=500,
+        height=450,
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color='#FFFFFF', size=12)),
-        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color='#FFFFFF', size=12)),
+        xaxis=dict(gridcolor='#f0f0f0', tickangle=-45, tickfont=dict(color='#FFFFFF', size=9)),
+        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color='#FFFFFF', size=10)),
         showlegend=True,
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF'))
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF', size=9)),
+        margin=dict(l=5, r=5, t=30, b=40)
     )
     st.plotly_chart(fig6, use_container_width=True)
 
