@@ -102,6 +102,11 @@ translations = {
         "risk_level": "УРОВЕНЬ РИСКА",
         "select_prompt": "👆 Выберите пример промпта или введите свой и нажмите кнопку 'ЗАПУСТИТЬ АНАЛИЗ'",
         "threat_labels": {"prompt_injection": "Прямая промпт-инъекция", "dos": "DoS-атака", "model_theft": "Кража модели", "malicious_url": "Генерация вредоносного URL", "safe": "Безопасный запрос", "role_attack": "Ролевая атака (DAN)"},
+        # Статусы при анализе
+        "status_semantic": "Анализ семантики...",
+        "status_ml": "ML-предсказание...",
+        "status_risk": "Оценка рисков...",
+        "status_report": "Формирование отчета...",
         
         # Таб 3
         "deep_analytics": "📈 Глубокая аналитика безопасности",
@@ -260,6 +265,11 @@ translations = {
         "risk_level": "RISK LEVEL",
         "select_prompt": "👆 Select a prompt example or enter your own and click 'RUN ANALYSIS'",
         "threat_labels": {"prompt_injection": "Direct prompt injection", "dos": "DoS attack", "model_theft": "Model theft", "malicious_url": "Malicious URL generation", "safe": "Safe request", "role_attack": "Role-play attack (DAN)"},
+        "status_semantic": "Semantic analysis...",
+        "status_ml": "ML prediction...",
+        "status_risk": "Risk assessment...",
+        "status_report": "Generating report...",
+        
         "deep_analytics": "📈 Deep Security Analytics",
         "deep_subtitle": "Multi-level vulnerability analysis with time series and STRIDE classification",
         "dynamics_title": "Vulnerability detection dynamics",
@@ -397,6 +407,11 @@ translations = {
         "risk_level": "风险等级",
         "select_prompt": "👆 选择提示词示例或输入您自己的提示词，然后点击'运行分析'",
         "threat_labels": {"prompt_injection": "直接提示注入", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "malicious_url": "恶意URL生成", "safe": "安全请求", "role_attack": "角色扮演攻击 (DAN)"},
+        "status_semantic": "语义分析...",
+        "status_ml": "机器学习预测...",
+        "status_risk": "风险评估...",
+        "status_report": "生成报告...",
+        
         "deep_analytics": "📈 深度安全分析",
         "deep_subtitle": "基于时间序列和STRIDE分类的多层次漏洞分析",
         "dynamics_title": "漏洞检测动态",
@@ -722,13 +737,13 @@ with tab2:
                     time.sleep(0.02)
                     progress.progress(i + 1)
                     if i < 30:
-                        status_text.text("Анализ семантики...")
+                        status_text.text(t['status_semantic'])
                     elif i < 60:
-                        status_text.text("ML-предсказание...")
+                        status_text.text(t['status_ml'])
                     elif i < 90:
-                        status_text.text("Оценка рисков...")
+                        status_text.text(t['status_risk'])
                     else:
-                        status_text.text("Формирование отчета...")
+                        status_text.text(t['status_report'])
                 status_text.empty()
                 
                 text = prompt.lower()
