@@ -357,7 +357,7 @@ lang = st.sidebar.selectbox(
 
 t = translations[lang]
 
-# ========== СТИЛИ (АДАПТИВНЫЕ, БЕЗ УМЕНЬШЕНИЯ ШРИФТА) ==========
+# ========== СТИЛИ ==========
 st.markdown("""
 <style>
     .main-header {
@@ -389,7 +389,6 @@ st.markdown("""
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
     .stProgress > div > div { animation: pulse 2s infinite; }
     
-    /* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ - ТОЛЬКО РАЗМЕРЫ КОНТЕЙНЕРОВ, ШРИФТ ОСТАЁТСЯ */
     @media (max-width: 768px) {
         .main-header h1 { font-size: 2em; }
         .metric-card { padding: 15px; }
@@ -483,7 +482,11 @@ with tab1:
                   labels={'Процент': '%', 'Категория': ''},
                   color='Процент', color_continuous_scale='RdYlGn_r',
                   orientation='h', text='Процент')
-    fig1.update_traces(texttemplate='%{text}%', textposition='outside', textfont=dict(size=14, color='#333', weight='bold'))
+    fig1.update_traces(
+        texttemplate='%{text}%', 
+        textposition='outside', 
+        textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+    )
     fig1.update_layout(height=500, showlegend=False, coloraxis_showscale=False,
                        plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                        xaxis=dict(gridcolor='#f0f0f0'), yaxis=dict(gridcolor='#f0f0f0'))
@@ -494,10 +497,13 @@ with tab1:
     with col1:
         st.markdown(f"### {t['chart2_title']}")
         fig2 = go.Figure()
-        fig2.add_trace(go.Bar(x=t['stages'], y=t['stages_pct'], 
-                              marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
-                              text=[f'{p}%' for p in t['stages_pct']], 
-                              textposition='outside', textfont=dict(size=14, color='#333', weight='bold')))
+        fig2.add_trace(go.Bar(
+            x=t['stages'], y=t['stages_pct'], 
+            marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
+            text=[f'{p}%' for p in t['stages_pct']], 
+            textposition='outside',
+            textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+        ))
         fig2.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                           xaxis=dict(gridcolor='#f0f0f0', tickangle=-30), yaxis=dict(gridcolor='#f0f0f0', title="%"),
                           showlegend=False)
@@ -514,7 +520,10 @@ with tab1:
         fig3 = px.bar(top_threats, x=t['successful_attacks'], y=t['threat'], orientation='h', 
                       color=t['risk'], color_discrete_map=risk_color_map,
                       text=t['successful_attacks'])
-        fig3.update_traces(textposition='outside', textfont=dict(size=14, color='#333', weight='bold'))
+        fig3.update_traces(
+            textposition='outside', 
+            textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
+        )
         fig3.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                           xaxis=dict(gridcolor='#f0f0f0'), yaxis=dict(gridcolor='#f0f0f0'), showlegend=True)
         st.plotly_chart(fig3, use_container_width=True)
@@ -624,9 +633,14 @@ with tab3:
             cumulative.append(total)
         df_time = pd.DataFrame({'Дата': dates, t['new_vuln']: daily, t['cumulative']: cumulative})
         fig4 = make_subplots(specs=[[{"secondary_y": True}]])
-        fig4.add_trace(go.Bar(x=df_time['Дата'], y=df_time[t['new_vuln']], name=t['new_vuln'], marker_color='#FFA726'), secondary_y=False)
-        fig4.add_trace(go.Scatter(x=df_time['Дата'], y=df_time[t['cumulative']], name=t['cumulative'], mode='lines+markers',
-                                  line=dict(color='#667EEA', width=3), marker=dict(size=8)), secondary_y=True)
+        fig4.add_trace(go.Bar(x=df_time['Дата'], y=df_time[t['new_vuln']], name=t['new_vuln'], 
+                              marker_color='#FFA726',
+                              text=df_time[t['new_vuln']], textposition='outside',
+                              textfont=dict(size=12, color='#1a1a2e', weight='bold')), secondary_y=False)
+        fig4.add_trace(go.Scatter(x=df_time['Дата'], y=df_time[t['cumulative']], name=t['cumulative'], 
+                                  mode='lines+markers',
+                                  line=dict(color='#667EEA', width=3), marker=dict(size=8, color='#667EEA')),
+                                  secondary_y=True)
         fig4.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                           hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5))
         fig4.update_xaxes(gridcolor='#f0f0f0')
@@ -640,7 +654,7 @@ with tab3:
                        'Количество': [4, 12, 3, 18, 8, 7]}
         df_stride = pd.DataFrame(stride_data)
         fig5 = px.pie(df_stride, values='Количество', names='Класс', color_discrete_sequence=px.colors.qualitative.Set2)
-        fig5.update_traces(textposition='inside', textinfo='percent+label')
+        fig5.update_traces(textposition='inside', textinfo='percent+label', textfont=dict(size=14, color='white', weight='bold'))
         fig5.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=False)
         st.plotly_chart(fig5, use_container_width=True)
     
@@ -660,7 +674,10 @@ with tab3:
         y=df_ci['Процент'],
         mode='markers',
         name='Оценка',
-        marker=dict(size=18, color='#667EEA', symbol='diamond', line=dict(width=2, color='white'))
+        marker=dict(size=18, color='#667EEA', symbol='diamond', line=dict(width=2, color='white')),
+        text=[f"{p}%" for p in df_ci['Процент']],
+        textposition='top center',
+        textfont=dict(size=14, color='#1a1a2e', weight='bold', family='Arial Black')
     ))
     
     for i, row in df_ci.iterrows():
