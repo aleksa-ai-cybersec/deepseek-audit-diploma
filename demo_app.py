@@ -102,7 +102,7 @@ translations = {
         "risk_level": "УРОВЕНЬ РИСКА",
         "select_prompt": "👆 Выберите пример промпта или введите свой и нажмите кнопку 'ЗАПУСТИТЬ АНАЛИЗ'",
         "threat_labels": {"prompt_injection": "Прямая промпт-инъекция", "dos": "DoS-атака", "model_theft": "Кража модели", "malicious_url": "Генерация вредоносного URL", "safe": "Безопасный запрос", "role_attack": "Ролевая атака (DAN)"},
-        # Статусы при анализе
+        "ml_analyzer_working": "🔄 ML-анализатор в работе...",
         "status_semantic": "Анализ семантики...",
         "status_ml": "ML-предсказание...",
         "status_risk": "Оценка рисков...",
@@ -265,6 +265,7 @@ translations = {
         "risk_level": "RISK LEVEL",
         "select_prompt": "👆 Select a prompt example or enter your own and click 'RUN ANALYSIS'",
         "threat_labels": {"prompt_injection": "Direct prompt injection", "dos": "DoS attack", "model_theft": "Model theft", "malicious_url": "Malicious URL generation", "safe": "Safe request", "role_attack": "Role-play attack (DAN)"},
+        "ml_analyzer_working": "🔄 ML analyzer working...",
         "status_semantic": "Semantic analysis...",
         "status_ml": "ML prediction...",
         "status_risk": "Risk assessment...",
@@ -407,6 +408,7 @@ translations = {
         "risk_level": "风险等级",
         "select_prompt": "👆 选择提示词示例或输入您自己的提示词，然后点击'运行分析'",
         "threat_labels": {"prompt_injection": "直接提示注入", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "malicious_url": "恶意URL生成", "safe": "安全请求", "role_attack": "角色扮演攻击 (DAN)"},
+        "ml_analyzer_working": "🔄 机器学习分析器中...",
         "status_semantic": "语义分析...",
         "status_ml": "机器学习预测...",
         "status_risk": "风险评估...",
@@ -730,7 +732,7 @@ with tab2:
     with col2:
         st.markdown(f"#### {t['results_analysis']}")
         if st.session_state.get('analyze'):
-            with st.spinner("🔄 ML-анализатор в работе..."):
+            with st.spinner(t['ml_analyzer_working']):
                 progress = st.progress(0)
                 status_text = st.empty()
                 for i in range(100):
