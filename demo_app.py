@@ -29,6 +29,7 @@ translations = {
         "subtitle": "Дипломная работа Воробьевой Александры Александровны",
         "university": "Московский государственный лингвистический университет | Институт информационных наук | 2026",
         "badges": ["🎓 Дипломная работа", "🔬 27 векторов атак", "⚡ 80+ тестовых промптов", "🤖 ML-анализ", "📊 Live Dashboard", "🎯 STRIDE-AI"],
+        "plus80": "+80 запросов",
         
         # Метрики
         "metrics_title": "📊 Ключевые показатели аудита",
@@ -112,7 +113,7 @@ translations = {
         "ci_lower": [68, 45, 49, 59, 0],
         "ci_upper": [82, 61, 67, 75, 5],
         
-        # Таб 4 - База угроз (ПОЛНОСТЬЮ ПЕРЕВЕДЕНО)
+        # Таб 4 - База угроз
         "threats_db_title": "📚 Полная база угроз (Таблицы 1.1-1.6)",
         "threats_db_subtitle": "27 векторов атак, классифицированных по этапам жизненного цикла",
         "filter_stage": "Фильтр по этапу",
@@ -127,7 +128,6 @@ translations = {
         "col_priority": "Приоритет",
         "col_detected": "Обнаружено",
         
-        # Названия угроз (27 штук)
         "threats_names": [
             "Отравление данных", "Компрометация источников", "Модификация разметки", "Нарушение конфиденциальности",
             "Кража модели", "Отравление гиперпараметров", "Компрометация кода", "Атаки на среду обучения",
@@ -139,8 +139,6 @@ translations = {
             "Генерация вредоносных URL", "Генерация вредоносного кода",
             "Откат к уязвимой версии", "Компрометация пайплайна", "Нарушение целостности"
         ],
-        
-        # Этапы для каждой угрозы
         "threats_stages": [
             "Сбор данных", "Сбор данных", "Сбор данных", "Сбор данных",
             "Обучение", "Обучение", "Обучение", "Обучение",
@@ -150,22 +148,16 @@ translations = {
             "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация",
             "Эксплуатация", "Эксплуатация", "Обновление", "Обновление", "Обновление"
         ],
-        
-        # STRIDE классы
         "threats_stride": [
             "T", "I", "T", "I", "I,E", "T", "T", "DoS,E",
             "T", "T", "R", "T", "I,DoS,E", "E",
             "I,DoS", "E,I", "E,I", "E,I", "I,E", "I", "I", "DoS",
             "I", "I", "T", "T", "T"
         ],
-        
-        # Приоритеты
         "threats_priority": [2,2,2,2, 1,2,2,2, 2,2,2, 2,2,2, 1,1,1,1,2,1,2,1,2,2, 2,2,2],
-        
-        # Обнаружено уязвимостей
         "threats_detected": [3,2,4,5, 7,2,3,4, 2,3,4, 3,4,3, 6,8,7,5,3,6,2,8,0,5, 2,3,2],
         
-        # Таб 5 - Таблица 3.2
+        # Таб 5
         "risk_table_title": "📋 Таблица 3.2: Оценка рисков",
         "risk_table_subtitle": "Динамическая оценка рисков на основе результатов аудита",
         "risk_category": "Категория риска",
@@ -173,7 +165,6 @@ translations = {
         "impact": "Воздействие",
         "risk_score": "Оценка риска",
         "level": "Уровень",
-        
         "risk_categories": [
             "Генерация вредоносных URL", "Джейлбрейк-атаки (снятие ограничений)", "Утечка конфиденциальных данных",
             "Генерация вредоносного кода", "Кража модели и IP", "DoS-атаки и отказ в обслуживании",
@@ -209,6 +200,8 @@ translations = {
         "subtitle": "Diploma work of VOROBEVA ALEKSANDRA",
         "university": "Moscow State Linguistic University | Institute of Information Sciences | 2026",
         "badges": ["🎓 Diploma Thesis", "🔬 27 attack vectors", "⚡ 80+ test prompts", "🤖 ML analysis", "📊 Live Dashboard", "🎯 STRIDE-AI"],
+        "plus80": "+80 requests",
+        
         "metrics_title": "📊 Key Audit Metrics",
         "total_tests": "Total tests",
         "total_tests_value": "153",
@@ -322,7 +315,7 @@ translations = {
         "university_name": "Moscow State Linguistic University",
         "institute": "Institute of Information Sciences",
         "department": "Department of International Information Security",
-        "group": "Group: 1-22-2 IIN",
+        "group": "Group: 1-22-2",
         "graduation_year": "Graduation year: 2026",
         "contacts": "Contacts",
         "email": "china_aleksandravorobeva@mail.ru",
@@ -337,6 +330,8 @@ translations = {
         "subtitle": "毕业论文作者：VOROBEVA ALEKSANDRA",
         "university": "莫斯科国立语言大学 | 信息科学研究所 | 2026",
         "badges": ["🎓 毕业论文", "🔬 27个攻击向量", "⚡ 80+测试提示词", "🤖 机器学习分析", "📊 实时仪表板", "🎯 STRIDE-AI"],
+        "plus80": "+80次请求",
+        
         "metrics_title": "📊 关键审计指标",
         "total_tests": "总测试数",
         "total_tests_value": "153",
@@ -450,7 +445,7 @@ translations = {
         "university_name": "莫斯科国立语言大学",
         "institute": "信息科学研究所",
         "department": "国际信息安全系",
-        "group": "班级：1-22-2 ИИН",
+        "group": "班级：1-22-2",
         "graduation_year": "毕业年份：2026",
         "contacts": "联系方式",
         "email": "china_aleksandravorobeva@mail.ru",
@@ -539,7 +534,7 @@ with col1:
     <div class="metric-card">
         <h3 style="margin:0; color:#666; font-size:16px;">{t['total_tests']}</h3>
         <h2 style="margin:10px 0; color:#667eea; font-size:36px;">{t['total_tests_value']}</h2>
-        <p style="color:#4CAF50; margin:0;">+80 запросов</p>
+        <p style="color:#4CAF50; margin:0;">{t['plus80']}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -862,7 +857,7 @@ with tab3:
     )
     st.plotly_chart(fig6, use_container_width=True)
 
-# ==================== ТАБ 4: БАЗА УГРОЗ (ПОЛНОСТЬЮ ПЕРЕВЕДЕНО) ====================
+# ==================== ТАБ 4: БАЗА УГРОЗ ====================
 with tab4:
     st.markdown(f"""
     <div class="content-card">
