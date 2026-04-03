@@ -357,7 +357,7 @@ lang = st.sidebar.selectbox(
 
 t = translations[lang]
 
-# ========== СТИЛИ (АДАПТИВНЫЕ) ==========
+# ========== СТИЛИ (АДАПТИВНЫЕ, БЕЗ УМЕНЬШЕНИЯ ШРИФТА) ==========
 st.markdown("""
 <style>
     .main-header {
@@ -389,18 +389,12 @@ st.markdown("""
     @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
     .stProgress > div > div { animation: pulse 2s infinite; }
     
-    /* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ */
+    /* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ - ТОЛЬКО РАЗМЕРЫ КОНТЕЙНЕРОВ, ШРИФТ ОСТАЁТСЯ */
     @media (max-width: 768px) {
-        .main-header h1 { font-size: 1.5em; }
-        .main-header h3 { font-size: 1em; }
-        .main-header p { font-size: 0.8em; }
-        .badge { padding: 4px 10px; font-size: 10px; margin: 3px; }
-        .metric-card { padding: 10px; }
-        .metric-card h3 { font-size: 12px; }
-        .metric-card h2 { font-size: 24px; }
-        .content-card { padding: 15px; }
-        .content-card h2 { font-size: 1.2em; }
-        .result-high, .result-medium, .result-low { padding: 10px; font-size: 12px; }
+        .main-header h1 { font-size: 2em; }
+        .metric-card { padding: 15px; }
+        .metric-card h2 { font-size: 32px; }
+        .badge { padding: 6px 15px; font-size: 12px; }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -489,7 +483,7 @@ with tab1:
                   labels={'Процент': '%', 'Категория': ''},
                   color='Процент', color_continuous_scale='RdYlGn_r',
                   orientation='h', text='Процент')
-    fig1.update_traces(texttemplate='%{text}%', textposition='outside', textfont=dict(size=14, color='#333'))
+    fig1.update_traces(texttemplate='%{text}%', textposition='outside', textfont=dict(size=14, color='#333', weight='bold'))
     fig1.update_layout(height=500, showlegend=False, coloraxis_showscale=False,
                        plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                        xaxis=dict(gridcolor='#f0f0f0'), yaxis=dict(gridcolor='#f0f0f0'))
@@ -503,7 +497,7 @@ with tab1:
         fig2.add_trace(go.Bar(x=t['stages'], y=t['stages_pct'], 
                               marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
                               text=[f'{p}%' for p in t['stages_pct']], 
-                              textposition='outside', textfont=dict(size=14, color='#333')))
+                              textposition='outside', textfont=dict(size=14, color='#333', weight='bold')))
         fig2.update_layout(height=400, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                           xaxis=dict(gridcolor='#f0f0f0', tickangle=-30), yaxis=dict(gridcolor='#f0f0f0', title="%"),
                           showlegend=False)
@@ -520,7 +514,7 @@ with tab1:
         fig3 = px.bar(top_threats, x=t['successful_attacks'], y=t['threat'], orientation='h', 
                       color=t['risk'], color_discrete_map=risk_color_map,
                       text=t['successful_attacks'])
-        fig3.update_traces(textposition='outside', textfont=dict(size=14))
+        fig3.update_traces(textposition='outside', textfont=dict(size=14, color='#333', weight='bold'))
         fig3.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                           xaxis=dict(gridcolor='#f0f0f0'), yaxis=dict(gridcolor='#f0f0f0'), showlegend=True)
         st.plotly_chart(fig3, use_container_width=True)
@@ -652,7 +646,6 @@ with tab3:
     
     st.markdown(f"#### {t['ci_title']}")
     
-    # УЛУЧШЕННЫЙ ГРАФИК ДОВЕРИТЕЛЬНЫХ ИНТЕРВАЛОВ - С УВЕЛИЧЕННЫМИ ЛИНИЯМИ
     df_ci = pd.DataFrame({
         'Категория': t['ci_categories'],
         'Процент': t['ci_percent'],
@@ -662,7 +655,6 @@ with tab3:
     
     fig6 = go.Figure()
     
-    # Добавляем точки оценок
     fig6.add_trace(go.Scatter(
         x=df_ci['Категория'],
         y=df_ci['Процент'],
@@ -671,18 +663,16 @@ with tab3:
         marker=dict(size=18, color='#667EEA', symbol='diamond', line=dict(width=2, color='white'))
     ))
     
-    # Добавляем линии доверительных интервалов с увеличенной толщиной
     for i, row in df_ci.iterrows():
         fig6.add_trace(go.Scatter(
             x=[row['Категория'], row['Категория']],
             y=[row['CI_нижний'], row['CI_верхний']],
             mode='lines',
-            name='95% CI',
+            name='95% CI' if i == 0 else '',
             line=dict(color='#2C3E50', width=6),
-            showlegend=False if i > 0 else True
+            showlegend=True if i == 0 else False
         ))
         
-        # Добавляем маркеры на концах интервалов
         fig6.add_trace(go.Scatter(
             x=[row['Категория']],
             y=[row['CI_нижний']],
@@ -703,7 +693,7 @@ with tab3:
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(size=12)),
-        yaxis=dict(gridcolor='#f0f0f0', title="Процент уязвимых (%)", range=[0, 100], tickfont=dict(size=12)),
+        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(size=12)),
         showlegend=True,
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5)
     )
