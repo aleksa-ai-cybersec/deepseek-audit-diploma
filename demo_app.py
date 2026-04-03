@@ -24,10 +24,13 @@ st.set_page_config(
 # ========== ПОЛНЫЕ ПЕРЕВОДЫ ==========
 translations = {
     "ru": {
+        # Шапка и бейджи
         "title": "🛡️ DeepSeek Security Auditor",
         "subtitle": "Дипломная работа Воробьевой Александры Александровны",
         "university": "Московский государственный лингвистический университет | Институт информационных наук | 2026",
         "badges": ["🎓 Дипломная работа", "🔬 27 векторов атак", "⚡ 80+ тестовых промптов", "🤖 ML-анализ", "📊 Live Dashboard", "🎯 STRIDE-AI"],
+        
+        # Метрики
         "metrics_title": "📊 Ключевые показатели аудита",
         "total_tests": "Всего тестов",
         "total_tests_value": "153",
@@ -40,7 +43,11 @@ translations = {
         "avg_response": "Среднее время ответа",
         "avg_response_value": "5.71 с",
         "response_text": "быстродействие",
+        
+        # Вкладки
         "tabs": ["📊 РЕЗУЛЬТАТЫ АУДИТА", "🎯 ТЕСТИРОВАНИЕ ПРОМПТОВ", "📈 ГЛУБОКАЯ АНАЛИТИКА", "📚 БАЗА УГРОЗ", "📋 ТАБЛИЦА 3.2", "👩‍🎓 ОБ АВТОРЕ"],
+        
+        # Таб 1
         "results_title": "📊 Результаты аудита DeepSeek-V3-0324",
         "results_subtitle": "Полные результаты тестирования по всем 27 векторам атак",
         "chart1_title": "📈 Процент уязвимых тестов по категориям",
@@ -53,6 +60,8 @@ translations = {
         "high": "Высокий",
         "medium": "Средний",
         "low": "Низкий",
+        
+        # Данные для графиков Таб 1
         "categories": {
             "prompt_injection": "Промпт-инъекции",
             "dos": "DoS-атаки",
@@ -72,6 +81,8 @@ translations = {
         "top5_threats": ["Прямые промпт-инъекции", "Манипуляция тестированием", "Подмена модели", "Кража модели", "Нарушение при обновлении"],
         "top5_counts": [15, 12, 10, 7, 6],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
+        
+        # Таб 2
         "test_title": "🎯 Интерактивный тестер уязвимостей",
         "test_subtitle": "Введите промпт для анализа. Система в реальном времени определит тип угрозы и оценит риск.",
         "input_data": "📥 Входные данные",
@@ -86,6 +97,9 @@ translations = {
         "threat_type": "Тип угрозы",
         "risk_level": "УРОВЕНЬ РИСКА",
         "select_prompt": "👆 Выберите пример промпта или введите свой и нажмите кнопку 'ЗАПУСТИТЬ АНАЛИЗ'",
+        "threat_labels": {"prompt_injection": "Прямая промпт-инъекция", "dos": "DoS-атака", "model_theft": "Кража модели", "malicious_url": "Генерация вредоносного URL", "safe": "Безопасный запрос", "role_attack": "Ролевая атака (DAN)"},
+        
+        # Таб 3
         "deep_analytics": "📈 Глубокая аналитика безопасности",
         "deep_subtitle": "Многоуровневый анализ уязвимостей с временными рядами и STRIDE-классификацией",
         "dynamics_title": "Динамика обнаружения уязвимостей",
@@ -97,6 +111,8 @@ translations = {
         "ci_percent": [75, 53, 58, 67, 0],
         "ci_lower": [68, 45, 49, 59, 0],
         "ci_upper": [82, 61, 67, 75, 5],
+        
+        # Таб 4 - База угроз (ПОЛНОСТЬЮ ПЕРЕВЕДЕНО)
         "threats_db_title": "📚 Полная база угроз (Таблицы 1.1-1.6)",
         "threats_db_subtitle": "27 векторов атак, классифицированных по этапам жизненного цикла",
         "filter_stage": "Фильтр по этапу",
@@ -104,11 +120,52 @@ translations = {
         "priority_1": "Priority 1 (критический)",
         "priority_2": "Priority 2",
         "total_threats": "Всего угроз: 27 | Отображено:",
-        "threats_names": ["Отравление данных", "Компрометация источников", "Модификация разметки", "Нарушение конфиденциальности", "Кража модели", "Отравление гиперпараметров", "Компрометация кода", "Атаки на среду обучения", "Подмена тестовых данных", "Манипуляция метриками", "Сокрытие уязвимостей", "Подмена модели", "Небезопасная конфигурация API", "Компрометация контейнеров", "Состязательные атаки", "Прямые промпт-инъекции", "Косвенные промпт-инъекции", "Многоязычные промпт-инъекции", "Несанкционированный доступ через API", "Атаки на конфиденциальность", "Изменение распределения данных", "DoS/DDoS-атаки", "Генерация вредоносных URL", "Генерация вредоносного кода", "Откат к уязвимой версии", "Компрометация пайплайна", "Нарушение целостности"],
-        "threats_stages": ["Сбор данных", "Сбор данных", "Сбор данных", "Сбор данных", "Обучение", "Обучение", "Обучение", "Обучение", "Валидация", "Валидация", "Валидация", "Развертывание", "Развертывание", "Развертывание", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация", "Обновление", "Обновление", "Обновление"],
-        "threats_stride": ["T", "I", "T", "I", "I,E", "T", "T", "DoS,E", "T", "T", "R", "T", "I,DoS,E", "E", "I,DoS", "E,I", "E,I", "E,I", "I,E", "I", "I", "DoS", "I", "I", "T", "T", "T"],
-        "threats_priority": [2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,1,1,1,2,1,2,1,2,2,2,2,2],
-        "threats_detected": [3,2,4,5,7,2,3,4,2,3,4,3,4,3,6,8,7,5,3,6,2,8,0,5,2,3,2],
+        "col_id": "ID",
+        "col_name": "Название",
+        "col_stage": "Этап",
+        "col_stride": "STRIDE",
+        "col_priority": "Приоритет",
+        "col_detected": "Обнаружено",
+        
+        # Названия угроз (27 штук)
+        "threats_names": [
+            "Отравление данных", "Компрометация источников", "Модификация разметки", "Нарушение конфиденциальности",
+            "Кража модели", "Отравление гиперпараметров", "Компрометация кода", "Атаки на среду обучения",
+            "Подмена тестовых данных", "Манипуляция метриками", "Сокрытие уязвимостей",
+            "Подмена модели", "Небезопасная конфигурация API", "Компрометация контейнеров",
+            "Состязательные атаки", "Прямые промпт-инъекции", "Косвенные промпт-инъекции",
+            "Многоязычные промпт-инъекции", "Несанкционированный доступ через API",
+            "Атаки на конфиденциальность", "Изменение распределения данных", "DoS/DDoS-атаки",
+            "Генерация вредоносных URL", "Генерация вредоносного кода",
+            "Откат к уязвимой версии", "Компрометация пайплайна", "Нарушение целостности"
+        ],
+        
+        # Этапы для каждой угрозы
+        "threats_stages": [
+            "Сбор данных", "Сбор данных", "Сбор данных", "Сбор данных",
+            "Обучение", "Обучение", "Обучение", "Обучение",
+            "Валидация", "Валидация", "Валидация",
+            "Развертывание", "Развертывание", "Развертывание",
+            "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация",
+            "Эксплуатация", "Эксплуатация", "Эксплуатация", "Эксплуатация",
+            "Эксплуатация", "Эксплуатация", "Обновление", "Обновление", "Обновление"
+        ],
+        
+        # STRIDE классы
+        "threats_stride": [
+            "T", "I", "T", "I", "I,E", "T", "T", "DoS,E",
+            "T", "T", "R", "T", "I,DoS,E", "E",
+            "I,DoS", "E,I", "E,I", "E,I", "I,E", "I", "I", "DoS",
+            "I", "I", "T", "T", "T"
+        ],
+        
+        # Приоритеты
+        "threats_priority": [2,2,2,2, 1,2,2,2, 2,2,2, 2,2,2, 1,1,1,1,2,1,2,1,2,2, 2,2,2],
+        
+        # Обнаружено уязвимостей
+        "threats_detected": [3,2,4,5, 7,2,3,4, 2,3,4, 3,4,3, 6,8,7,5,3,6,2,8,0,5, 2,3,2],
+        
+        # Таб 5 - Таблица 3.2
         "risk_table_title": "📋 Таблица 3.2: Оценка рисков",
         "risk_table_subtitle": "Динамическая оценка рисков на основе результатов аудита",
         "risk_category": "Категория риска",
@@ -116,11 +173,19 @@ translations = {
         "impact": "Воздействие",
         "risk_score": "Оценка риска",
         "level": "Уровень",
-        "risk_categories": ["Генерация вредоносных URL", "Джейлбрейк-атаки (снятие ограничений)", "Утечка конфиденциальных данных", "Генерация вредоносного кода", "Кража модели и IP", "DoS-атаки и отказ в обслуживании", "Подмена и компрометация модели", "Отравление данных и разметки", "Компрометация источников и кода", "Манипуляция тестированием", "Небезопасная конфигурация", "Изменение распределения данных", "Нарушение при обновлении"],
+        
+        "risk_categories": [
+            "Генерация вредоносных URL", "Джейлбрейк-атаки (снятие ограничений)", "Утечка конфиденциальных данных",
+            "Генерация вредоносного кода", "Кража модели и IP", "DoS-атаки и отказ в обслуживании",
+            "Подмена и компрометация модели", "Отравление данных и разметки", "Компрометация источников и кода",
+            "Манипуляция тестированием", "Небезопасная конфигурация", "Изменение распределения данных", "Нарушение при обновлении"
+        ],
         "risk_probs": ["Низкая", "Высокая", "Средняя", "Средняя", "Высокая", "Средняя", "Высокая", "Высокая", "Высокая", "Высокая", "Высокая", "Средняя", "Высокая"],
         "risk_impacts": ["Низкое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Среднее", "Низкое", "Высокое"],
         "risk_scores": [1, 9, 6, 6, 9, 6, 9, 9, 9, 9, 6, 2, 9],
         "risk_levels": ["low", "critical", "high", "high", "critical", "high", "critical", "critical", "critical", "critical", "high", "low", "critical"],
+        
+        # Таб 6
         "about_title": "👩‍🎓 Об авторе",
         "about_subtitle": "Информация о дипломнике и научной работе",
         "education": "Образование",
@@ -133,10 +198,11 @@ translations = {
         "email": "china_aleksandravorobeva@mail.ru",
         "github": "aleksa-ai-cybersec",
         "repo": "deepseek-audit-diploma",
+        
+        # Подвал
         "footer_copyright": "© Воробьева Александра Александровна, 2026",
         "footer_uni": "Московский государственный лингвистический университет",
-        "footer_institute": "Институт информационных наук | Кафедра международной информационной безопасности",
-        "threat_labels": {"prompt_injection": "Прямая промпт-инъекция", "dos": "DoS-атака", "model_theft": "Кража модели", "malicious_url": "Генерация вредоносного URL", "safe": "Безопасный запрос", "role_attack": "Ролевая атака (DAN)"}
+        "footer_institute": "Институт информационных наук | Кафедра международной информационной безопасности"
     },
     "en": {
         "title": "🛡️ DeepSeek Security Auditor",
@@ -190,6 +256,7 @@ translations = {
         "threat_type": "Threat type",
         "risk_level": "RISK LEVEL",
         "select_prompt": "👆 Select a prompt example or enter your own and click 'RUN ANALYSIS'",
+        "threat_labels": {"prompt_injection": "Direct prompt injection", "dos": "DoS attack", "model_theft": "Model theft", "malicious_url": "Malicious URL generation", "safe": "Safe request", "role_attack": "Role-play attack (DAN)"},
         "deep_analytics": "📈 Deep Security Analytics",
         "deep_subtitle": "Multi-level vulnerability analysis with time series and STRIDE classification",
         "dynamics_title": "Vulnerability detection dynamics",
@@ -208,8 +275,32 @@ translations = {
         "priority_1": "Priority 1 (critical)",
         "priority_2": "Priority 2",
         "total_threats": "Total threats: 27 | Displayed:",
-        "threats_names": ["Data Poisoning", "Data Source Compromise", "Label Modification", "Privacy Violation", "Model Theft", "Hyperparameter Poisoning", "Training Code Compromise", "Training Environment Attacks", "Test Data Replacement", "Metric Manipulation", "Vulnerability Hiding", "Model Replacement", "Insecure API Configuration", "Container Compromise", "Adversarial Attacks", "Direct Prompt Injection", "Indirect Prompt Injection", "Multilingual Prompt Injection", "Unauthorized API Access", "Privacy Attacks", "Data Distribution Shift", "DoS/DDoS Attacks", "Malicious URL Generation", "Malicious Code Generation", "Rollback to Vulnerable Version", "Update Pipeline Compromise", "Update Integrity Violation"],
-        "threats_stages": ["Data Collection", "Data Collection", "Data Collection", "Data Collection", "Training", "Training", "Training", "Training", "Validation", "Validation", "Validation", "Deployment", "Deployment", "Deployment", "Operation", "Operation", "Operation", "Operation", "Operation", "Operation", "Operation", "Operation", "Operation", "Operation", "Update", "Update", "Update"],
+        "col_id": "ID",
+        "col_name": "Name",
+        "col_stage": "Stage",
+        "col_stride": "STRIDE",
+        "col_priority": "Priority",
+        "col_detected": "Detected",
+        "threats_names": [
+            "Data Poisoning", "Data Source Compromise", "Label Modification", "Privacy Violation",
+            "Model Theft", "Hyperparameter Poisoning", "Training Code Compromise", "Training Environment Attacks",
+            "Test Data Replacement", "Metric Manipulation", "Vulnerability Hiding",
+            "Model Replacement", "Insecure API Configuration", "Container Compromise",
+            "Adversarial Attacks", "Direct Prompt Injection", "Indirect Prompt Injection",
+            "Multilingual Prompt Injection", "Unauthorized API Access",
+            "Privacy Attacks", "Data Distribution Shift", "DoS/DDoS Attacks",
+            "Malicious URL Generation", "Malicious Code Generation",
+            "Rollback to Vulnerable Version", "Update Pipeline Compromise", "Update Integrity Violation"
+        ],
+        "threats_stages": [
+            "Data Collection", "Data Collection", "Data Collection", "Data Collection",
+            "Training", "Training", "Training", "Training",
+            "Validation", "Validation", "Validation",
+            "Deployment", "Deployment", "Deployment",
+            "Operation", "Operation", "Operation", "Operation",
+            "Operation", "Operation", "Operation", "Operation",
+            "Operation", "Operation", "Update", "Update", "Update"
+        ],
         "threats_stride": ["T", "I", "T", "I", "I,E", "T", "T", "DoS,E", "T", "T", "R", "T", "I,DoS,E", "E", "I,DoS", "E,I", "E,I", "E,I", "I,E", "I", "I", "DoS", "I", "I", "T", "T", "T"],
         "threats_priority": [2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,1,1,1,2,1,2,1,2,2,2,2,2],
         "threats_detected": [3,2,4,5,7,2,3,4,2,3,4,3,4,3,6,8,7,5,3,6,2,8,0,5,2,3,2],
@@ -239,8 +330,7 @@ translations = {
         "repo": "deepseek-audit-diploma",
         "footer_copyright": "© VOROBEVA ALEKSANDRA, 2026",
         "footer_uni": "Moscow State Linguistic University",
-        "footer_institute": "Institute of Information Sciences | Department of International Information Security",
-        "threat_labels": {"prompt_injection": "Direct prompt injection", "dos": "DoS attack", "model_theft": "Model theft", "malicious_url": "Malicious URL generation", "safe": "Safe request", "role_attack": "Role-play attack (DAN)"}
+        "footer_institute": "Institute of Information Sciences | Department of International Information Security"
     },
     "zh": {
         "title": "🛡️ DeepSeek 安全审计器",
@@ -294,6 +384,7 @@ translations = {
         "threat_type": "威胁类型",
         "risk_level": "风险等级",
         "select_prompt": "👆 选择提示词示例或输入您自己的提示词，然后点击'运行分析'",
+        "threat_labels": {"prompt_injection": "直接提示注入", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "malicious_url": "恶意URL生成", "safe": "安全请求", "role_attack": "角色扮演攻击 (DAN)"},
         "deep_analytics": "📈 深度安全分析",
         "deep_subtitle": "基于时间序列和STRIDE分类的多层次漏洞分析",
         "dynamics_title": "漏洞检测动态",
@@ -312,8 +403,32 @@ translations = {
         "priority_1": "优先级1（严重）",
         "priority_2": "优先级2",
         "total_threats": "总威胁数：27 | 显示：",
-        "threats_names": ["数据投毒", "数据源入侵", "标注修改", "隐私侵犯", "模型盗窃", "超参数投毒", "训练代码入侵", "训练环境攻击", "测试数据替换", "指标操纵", "漏洞隐藏", "模型替换", "不安全API配置", "容器入侵", "对抗攻击", "直接提示注入", "间接提示注入", "多语言提示注入", "未授权API访问", "隐私攻击", "数据分布变化", "拒绝服务攻击", "恶意URL生成", "恶意代码生成", "回滚到有漏洞版本", "更新流水线入侵", "更新完整性破坏"],
-        "threats_stages": ["数据收集", "数据收集", "数据收集", "数据收集", "训练", "训练", "训练", "训练", "验证", "验证", "验证", "部署", "部署", "部署", "运行", "运行", "运行", "运行", "运行", "运行", "运行", "运行", "运行", "运行", "更新", "更新", "更新"],
+        "col_id": "ID",
+        "col_name": "名称",
+        "col_stage": "阶段",
+        "col_stride": "STRIDE",
+        "col_priority": "优先级",
+        "col_detected": "发现数",
+        "threats_names": [
+            "数据投毒", "数据源入侵", "标注修改", "隐私侵犯",
+            "模型盗窃", "超参数投毒", "训练代码入侵", "训练环境攻击",
+            "测试数据替换", "指标操纵", "漏洞隐藏",
+            "模型替换", "不安全API配置", "容器入侵",
+            "对抗攻击", "直接提示注入", "间接提示注入",
+            "多语言提示注入", "未授权API访问",
+            "隐私攻击", "数据分布变化", "拒绝服务攻击",
+            "恶意URL生成", "恶意代码生成",
+            "回滚到有漏洞版本", "更新流水线入侵", "更新完整性破坏"
+        ],
+        "threats_stages": [
+            "数据收集", "数据收集", "数据收集", "数据收集",
+            "训练", "训练", "训练", "训练",
+            "验证", "验证", "验证",
+            "部署", "部署", "部署",
+            "运行", "运行", "运行", "运行",
+            "运行", "运行", "运行", "运行",
+            "运行", "运行", "更新", "更新", "更新"
+        ],
         "threats_stride": ["T", "I", "T", "I", "I,E", "T", "T", "DoS,E", "T", "T", "R", "T", "I,DoS,E", "E", "I,DoS", "E,I", "E,I", "E,I", "I,E", "I", "I", "DoS", "I", "I", "T", "T", "T"],
         "threats_priority": [2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,1,1,1,2,1,2,1,2,2,2,2,2],
         "threats_detected": [3,2,4,5,7,2,3,4,2,3,4,3,4,3,6,8,7,5,3,6,2,8,0,5,2,3,2],
@@ -343,8 +458,7 @@ translations = {
         "repo": "deepseek-audit-diploma",
         "footer_copyright": "© VOROBEVA ALEKSANDRA, 2026",
         "footer_uni": "莫斯科国立语言大学",
-        "footer_institute": "信息科学研究所 | 国际信息安全系",
-        "threat_labels": {"prompt_injection": "直接提示注入", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "malicious_url": "恶意URL生成", "safe": "安全请求", "role_attack": "角色扮演攻击 (DAN)"}
+        "footer_institute": "信息科学研究所 | 国际信息安全系"
     }
 }
 
@@ -748,7 +862,7 @@ with tab3:
     )
     st.plotly_chart(fig6, use_container_width=True)
 
-# ==================== ТАБ 4: БАЗА УГРОЗ ====================
+# ==================== ТАБ 4: БАЗА УГРОЗ (ПОЛНОСТЬЮ ПЕРЕВЕДЕНО) ====================
 with tab4:
     st.markdown(f"""
     <div class="content-card">
@@ -758,24 +872,24 @@ with tab4:
     """, unsafe_allow_html=True)
     
     threats_data = {
-        'ID': [f'T1.{i}' for i in range(1,5)] + [f'T2.{i}' for i in range(1,5)] +
-              [f'T3.{i}' for i in range(1,4)] + [f'T4.{i}' for i in range(1,4)] +
-              [f'T5.{i}' for i in range(1,11)] + [f'T6.{i}' for i in range(1,4)],
-        'Название': t['threats_names'],
-        'Этап': t['threats_stages'],
-        'STRIDE': t['threats_stride'],
-        'Приоритет': t['threats_priority'],
-        'Обнаружено': t['threats_detected']
+        t['col_id']: [f'T1.{i}' for i in range(1,5)] + [f'T2.{i}' for i in range(1,5)] +
+                     [f'T3.{i}' for i in range(1,4)] + [f'T4.{i}' for i in range(1,4)] +
+                     [f'T5.{i}' for i in range(1,11)] + [f'T6.{i}' for i in range(1,4)],
+        t['col_name']: t['threats_names'],
+        t['col_stage']: t['threats_stages'],
+        t['col_stride']: t['threats_stride'],
+        t['col_priority']: t['threats_priority'],
+        t['col_detected']: t['threats_detected']
     }
     df_threats = pd.DataFrame(threats_data)
     
     col_f1, col_f2 = st.columns(2)
     with col_f1:
-        stage_filter = st.multiselect(t['filter_stage'], options=sorted(df_threats['Этап'].unique()), default=sorted(df_threats['Этап'].unique()))
+        stage_filter = st.multiselect(t['filter_stage'], options=sorted(df_threats[t['col_stage']].unique()), default=sorted(df_threats[t['col_stage']].unique()))
     with col_f2:
         priority_filter = st.multiselect(t['filter_priority'], options=[1, 2], default=[1, 2], format_func=lambda x: t['priority_1'] if x == 1 else t['priority_2'])
     
-    mask = (df_threats['Этап'].isin(stage_filter)) & (df_threats['Приоритет'].isin(priority_filter))
+    mask = (df_threats[t['col_stage']].isin(stage_filter)) & (df_threats[t['col_priority']].isin(priority_filter))
     filtered_df = df_threats[mask]
     st.dataframe(filtered_df, use_container_width=True, height=400)
     st.info(f"{t['total_threats']} {len(filtered_df)}")
