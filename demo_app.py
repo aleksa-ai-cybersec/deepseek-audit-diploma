@@ -52,8 +52,11 @@ translations = {
         "results_title": "📊 Результаты аудита DeepSeek-V3-0324",
         "results_subtitle": "Полные результаты тестирования по всем 27 векторам атак",
         "chart1_title": "📈 Процент уязвимых тестов по категориям",
+        "chart1_hover": "Категория: %{y}<br>Уязвимо: %{text}%<br>Всего тестов: %{customdata}",
         "chart2_title": "🔄 По этапам жизненного цикла",
+        "chart2_hover": "Этап: %{x}<br>Уязвимо: %{text}<br>",
         "chart3_title": "⚠️ Топ-5 самых опасных угроз",
+        "chart3_hover": "Угроза: %{y}<br>Успешных атак: %{x}<br>Риск: %{marker.color}",
         "threat": "Угроза",
         "successful_attacks": "Успешных атак",
         "risk": "Риск",
@@ -104,10 +107,14 @@ translations = {
         "deep_analytics": "📈 Глубокая аналитика безопасности",
         "deep_subtitle": "Многоуровневый анализ уязвимостей с временными рядами и STRIDE-классификацией",
         "dynamics_title": "Динамика обнаружения уязвимостей",
+        "dynamics_hover": "Дата: %{x}<br>Новые уязвимости: %{y}<br>",
+        "cumulative_hover": "Дата: %{x}<br>Всего накоплено: %{y}<br>",
         "new_vuln": "Новые уязвимости",
         "cumulative": "Накоплено",
         "stride_title": "Распределение по STRIDE-AI",
+        "stride_hover": "Класс: %{label}<br>Количество: %{value}<br>Доля: %{percent}",
         "ci_title": "Доверительные интервалы (метод Вильсона, 95%)",
+        "ci_hover": "Категория: %{x}<br>Оценка: %{y}%<br>95% ДИ: [%{customdata[0]}% - %{customdata[1]}%]",
         "ci_categories": ["Промпт-инъекции", "DoS-атаки", "Кража модели", "Утечка данных", "Вредоносные URL"],
         "ci_percent": [75, 53, 58, 67, 0],
         "ci_lower": [68, 45, 49, 59, 0],
@@ -218,8 +225,11 @@ translations = {
         "results_title": "📊 DeepSeek-V3-0324 Audit Results",
         "results_subtitle": "Complete testing results for all 27 attack vectors",
         "chart1_title": "📈 Vulnerability percentage by category",
+        "chart1_hover": "Category: %{y}<br>Vulnerable: %{text}%<br>Total tests: %{customdata}",
         "chart2_title": "🔄 By lifecycle stage",
+        "chart2_hover": "Stage: %{x}<br>Vulnerable: %{text}<br>",
         "chart3_title": "⚠️ Top 5 most dangerous threats",
+        "chart3_hover": "Threat: %{y}<br>Successful attacks: %{x}<br>Risk: %{marker.color}",
         "threat": "Threat",
         "successful_attacks": "Successful attacks",
         "risk": "Risk",
@@ -253,10 +263,14 @@ translations = {
         "deep_analytics": "📈 Deep Security Analytics",
         "deep_subtitle": "Multi-level vulnerability analysis with time series and STRIDE classification",
         "dynamics_title": "Vulnerability detection dynamics",
+        "dynamics_hover": "Date: %{x}<br>New vulnerabilities: %{y}<br>",
+        "cumulative_hover": "Date: %{x}<br>Total accumulated: %{y}<br>",
         "new_vuln": "New vulnerabilities",
         "cumulative": "Cumulative",
         "stride_title": "STRIDE-AI Distribution",
+        "stride_hover": "Class: %{label}<br>Count: %{value}<br>Share: %{percent}",
         "ci_title": "Confidence intervals (Wilson method, 95%)",
+        "ci_hover": "Category: %{x}<br>Estimate: %{y}%<br>95% CI: [%{customdata[0]}% - %{customdata[1]}%]",
         "ci_categories": ["Prompt Injection", "DoS Attacks", "Model Theft", "Data Leak", "Malicious URLs"],
         "ci_percent": [75, 53, 58, 67, 0],
         "ci_lower": [68, 45, 49, 59, 0],
@@ -348,8 +362,11 @@ translations = {
         "results_title": "📊 DeepSeek-V3-0324 审计结果",
         "results_subtitle": "所有27个攻击向量的完整测试结果",
         "chart1_title": "📈 各类别漏洞百分比",
+        "chart1_hover": "类别: %{y}<br>漏洞: %{text}%<br>总测试数: %{customdata}",
         "chart2_title": "🔄 按生命周期阶段",
+        "chart2_hover": "阶段: %{x}<br>漏洞: %{text}<br>",
         "chart3_title": "⚠️ 最危险的5种威胁",
+        "chart3_hover": "威胁: %{y}<br>成功攻击数: %{x}<br>风险: %{marker.color}",
         "threat": "威胁",
         "successful_attacks": "成功攻击数",
         "risk": "风险",
@@ -383,10 +400,14 @@ translations = {
         "deep_analytics": "📈 深度安全分析",
         "deep_subtitle": "基于时间序列和STRIDE分类的多层次漏洞分析",
         "dynamics_title": "漏洞检测动态",
+        "dynamics_hover": "日期: %{x}<br>新漏洞: %{y}<br>",
+        "cumulative_hover": "日期: %{x}<br>累计: %{y}<br>",
         "new_vuln": "新漏洞",
         "cumulative": "累计",
         "stride_title": "STRIDE-AI 分布",
+        "stride_hover": "类别: %{label}<br>数量: %{value}<br>占比: %{percent}",
         "ci_title": "置信区间（威尔逊方法，95%）",
+        "ci_hover": "类别: %{x}<br>估计值: %{y}%<br>95%置信区间: [%{customdata[0]}% - %{customdata[1]}%]",
         "ci_categories": ["提示注入", "拒绝服务攻击", "模型盗窃", "数据泄露", "恶意URL"],
         "ci_percent": [75, 53, 58, 67, 0],
         "ci_lower": [68, 45, 49, 59, 0],
@@ -591,11 +612,13 @@ with tab1:
     fig1 = px.bar(df_cat, y='Категория', x='Процент', 
                   labels={'Процент': '%', 'Категория': ''},
                   color='Процент', color_continuous_scale='RdYlGn_r',
-                  orientation='h', text='Процент')
+                  orientation='h', text='Процент',
+                  custom_data=['Всего'])
     fig1.update_traces(
         texttemplate='<b>%{text}%</b>',
         textposition='outside',
-        textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif')
+        textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
+        hovertemplate=t['chart1_hover']
     )
     fig1.update_layout(
         height=450, 
@@ -619,7 +642,8 @@ with tab1:
             marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
             text=[f'<b>{p}%</b>' for p in t['stages_pct']], 
             textposition='outside',
-            textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif')
+            textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
+            hovertemplate=t['chart2_hover']
         ))
         fig2.update_layout(
             height=350, 
@@ -647,7 +671,8 @@ with tab1:
             textposition='outside',
             textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
             insidetextanchor='middle',
-            cliponaxis=False
+            cliponaxis=False,
+            hovertemplate=t['chart3_hover']
         )
         fig3.update_layout(
             height=350, 
@@ -770,10 +795,12 @@ with tab3:
         fig4.add_trace(go.Bar(x=df_time['Дата'], y=df_time[t['new_vuln']], name=t['new_vuln'], 
                               marker_color='#FFA726',
                               text=df_time[t['new_vuln']], textposition='outside',
-                              textfont=dict(size=11, color='#FFFFFF', weight='bold')), secondary_y=False)
+                              textfont=dict(size=11, color='#FFFFFF', weight='bold'),
+                              hovertemplate=t['dynamics_hover']), secondary_y=False)
         fig4.add_trace(go.Scatter(x=df_time['Дата'], y=df_time[t['cumulative']], name=t['cumulative'], 
                                   mode='lines+markers',
-                                  line=dict(color='#667EEA', width=3), marker=dict(size=8, color='#667EEA')),
+                                  line=dict(color='#667EEA', width=3), marker=dict(size=8, color='#667EEA'),
+                                  hovertemplate=t['cumulative_hover']),
                                   secondary_y=True)
         fig4.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
                           hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF', size=9)),
@@ -793,7 +820,8 @@ with tab3:
             textposition='inside', 
             textinfo='percent+label', 
             textfont=dict(size=11, color='#FFFFFF', weight='bold'),
-            insidetextorientation='radial'
+            insidetextorientation='radial',
+            hovertemplate=t['stride_hover']
         )
         fig5.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=False)
         st.plotly_chart(fig5, use_container_width=True)
@@ -817,7 +845,9 @@ with tab3:
         marker=dict(size=16, color='#667EEA', symbol='diamond', line=dict(width=2, color='white')),
         text=[f'<b>{p}%</b>' for p in df_ci['Процент']],
         textposition='top center',
-        textfont=dict(size=12, color='#FFFFFF', family='Arial, sans-serif')
+        textfont=dict(size=12, color='#FFFFFF', family='Arial, sans-serif'),
+        customdata=np.stack((df_ci['CI_нижний'], df_ci['CI_верхний']), axis=-1),
+        hovertemplate=t['ci_hover']
     ))
     
     for i, row in df_ci.iterrows():
@@ -827,7 +857,8 @@ with tab3:
             mode='lines',
             name='95% CI' if i == 0 else '',
             line=dict(color='#FFFFFF', width=4),
-            showlegend=True if i == 0 else False
+            showlegend=True if i == 0 else False,
+            hovertemplate='95% CI: %{y}%'
         ))
         
         fig6.add_trace(go.Scatter(
