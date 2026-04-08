@@ -234,7 +234,18 @@ translations = {
         "high": "High",
         "medium": "Medium",
         "low": "Low",
-        "categories": {"prompt_injection": "Prompt Injection", "dos": "DoS Attacks", "model_theft": "Model Theft", "data_leak": "Data Leak", "malicious_url": "Malicious URLs", "data_poisoning": "Data Poisoning", "api_compromise": "API Compromise", "metric_manip": "Metric Manipulation", "privacy": "Privacy", "updates": "Updates"},
+        "categories": {
+            "prompt_injection": "Prompt Injection",
+            "dos": "DoS Attacks",
+            "model_theft": "Model Theft",
+            "data_leak": "Data Leak",
+            "malicious_url": "Malicious URLs",
+            "data_poisoning": "Data Poisoning",
+            "api_compromise": "API Compromise",
+            "metric_manip": "Metric Manipulation",
+            "privacy": "Privacy",
+            "updates": "Updates"
+        },
         "vuln_counts": [18, 8, 7, 12, 0, 5, 4, 6, 9, 3],
         "total_counts": [24, 15, 12, 18, 12, 10, 8, 12, 15, 8],
         "stages": ["Data Collection", "Training", "Validation", "Deployment", "Operation", "Update"],
@@ -375,7 +386,18 @@ translations = {
         "high": "高危",
         "medium": "中危",
         "low": "低危",
-        "categories": {"prompt_injection": "提示注入", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "data_leak": "数据泄露", "malicious_url": "恶意URL", "data_poisoning": "数据投毒", "api_compromise": "API入侵", "metric_manip": "指标操纵", "privacy": "隐私", "updates": "更新"},
+        "categories": {
+            "prompt_injection": "提示注入",
+            "dos": "拒绝服务攻击",
+            "model_theft": "模型盗窃",
+            "data_leak": "数据泄露",
+            "malicious_url": "恶意URL",
+            "data_poisoning": "数据投毒",
+            "api_compromise": "API入侵",
+            "metric_manip": "指标操纵",
+            "privacy": "隐私",
+            "updates": "更新"
+        },
         "vuln_counts": [18, 8, 7, 12, 0, 5, 4, 6, 9, 3],
         "total_counts": [24, 15, 12, 18, 12, 10, 8, 12, 15, 8],
         "stages": ["数据收集", "训练", "验证", "部署", "运行", "更新"],
@@ -615,19 +637,23 @@ with tab1:
     df_cat['Процент'] = (df_cat['Уязвимо'] / df_cat['Всего'] * 100).round(1)
     df_cat = df_cat.sort_values('Процент', ascending=True)
     
-    # Явные цвета для категорий (песочная гамма)
-    category_colors = {
-        'Обновления': '#D4A574',      # Песочный/бежевый
-        'Вредоносные URL': '#D4A574',  # Такой же песочный для 0%
-        'Отравление данных': '#F4A261',
-        'Компрометация API': '#F4A261',
-        'Манипуляция метриками': '#E9C46A',
-        'Конфиденциальность': '#E9C46A',
-        'Кража модели': '#2A9D8F',
-        'Утечка данных': '#2A9D8F',
-        'DoS-атаки': '#264653',
-        'Промпт-инъекции': '#9B5DE5'
+    # Явные цвета для категорий (по ключу, а не по названию)
+    category_color_map = {
+        'prompt_injection': '#9B5DE5',   # Промпт-инъекции
+        'dos': '#264653',                 # DoS-атаки
+        'model_theft': '#2A9D8F',         # Кража модели
+        'data_leak': '#2A9D8F',           # Утечка данных
+        'malicious_url': '#D4A574',       # Вредоносные URL (песочный)
+        'data_poisoning': '#F4A261',      # Отравление данных
+        'api_compromise': '#F4A261',      # Компрометация API
+        'metric_manip': '#E9C46A',        # Манипуляция метриками
+        'privacy': '#E9C46A',             # Конфиденциальность
+        'updates': '#D4A574'              # Обновления (песочный)
     }
+    
+    # Получаем цвета в том же порядке, что и категории
+    category_keys = list(t['categories'].keys())
+    category_colors_list = [category_color_map.get(key, '#888888') for key in category_keys]
     
     fig1 = px.bar(df_cat, y='Категория', x='Процент', 
                   labels={'Процент': '%', 'Категория': ''},
@@ -638,7 +664,7 @@ with tab1:
         textposition='outside',
         textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif', weight='bold'),
         hovertemplate=t['chart1_hover'],
-        marker_color=[category_colors.get(cat, '#888888') for cat in df_cat['Категория']],
+        marker_color=category_colors_list,
         marker=dict(line=dict(width=1, color='#333333'))
     )
     fig1.update_layout(
