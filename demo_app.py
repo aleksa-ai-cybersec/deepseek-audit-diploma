@@ -21,17 +21,29 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ========== ОПРЕДЕЛЕНИЕ УСТРОЙСТВА ==========
+def is_mobile():
+    """Определяет, открыто ли приложение на мобильном устройстве"""
+    try:
+        user_agent = st.context.headers.get('User-Agent', '')
+        mobile_keywords = ['Mobile', 'Android', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+        return any(keyword in user_agent for keyword in mobile_keywords)
+    except:
+        return False
+
+is_mobile_device = is_mobile()
+# Цвет текста: на мобильных белый, на компьютере чёрный
+AXIS_COLOR = '#FFFFFF' if is_mobile_device else '#000000'
+LEGEND_COLOR = '#FFFFFF' if is_mobile_device else '#000000'
+
 # ========== ПОЛНЫЕ ПЕРЕВОДЫ ==========
 translations = {
     "ru": {
-        # Шапка и бейджи
         "title": "🛡️ DeepSeek Security Auditor",
         "subtitle": "Дипломная работа Воробьевой Александры Александровны",
         "university": "Московский государственный лингвистический университет | Институт информационных наук | 2026",
         "badges": ["🎓 Дипломная работа", "🔬 27 векторов атак", "⚡ 80+ тестовых промптов", "🤖 ML-анализ", "📊 Live Dashboard", "🎯 STRIDE-AI"],
         "plus80": "+80 запросов",
-        
-        # Метрики
         "metrics_title": "📊 Ключевые показатели аудита",
         "total_tests": "Всего тестов",
         "total_tests_value": "153",
@@ -44,11 +56,7 @@ translations = {
         "avg_response": "Среднее время ответа",
         "avg_response_value": "5.71 с",
         "response_text": "быстродействие",
-        
-        # Вкладки
         "tabs": ["📊 РЕЗУЛЬТАТЫ АУДИТА", "🎯 ТЕСТИРОВАНИЕ ПРОМПТОВ", "📈 ГЛУБОКАЯ АНАЛИТИКА", "📚 БАЗА УГРОЗ", "📋 ТАБЛИЦА 3.2", "👩‍🎓 ОБ АВТОРЕ"],
-        
-        # Таб 1
         "results_title": "📊 Результаты аудита DeepSeek-V3-0324",
         "results_subtitle": "Полные результаты тестирования по всем 27 векторам атак",
         "chart1_title": "📈 Процент уязвимых тестов по категориям",
@@ -64,8 +72,6 @@ translations = {
         "high": "Высокий",
         "medium": "Средний",
         "low": "Низкий",
-        
-        # Данные для графиков Таб 1
         "categories": {
             "prompt_injection": "Промпт-инъекции",
             "dos": "DoS-атаки",
@@ -85,8 +91,6 @@ translations = {
         "top5_threats": ["Прямые промпт-инъекции", "Манипуляция тестированием", "Подмена модели", "Кража модели", "Нарушение при обновлении"],
         "top5_counts": [15, 12, 10, 7, 6],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
-        
-        # Таб 2
         "test_title": "🎯 Интерактивный тестер уязвимостей",
         "test_subtitle": "Введите промпт для анализа. Система в реальном времени определит тип угрозы и оценит риск.",
         "input_data": "📥 Входные данные",
@@ -107,8 +111,6 @@ translations = {
         "status_ml": "ML-предсказание...",
         "status_risk": "Оценка рисков...",
         "status_report": "Формирование отчета...",
-        
-        # Таб 3
         "deep_analytics": "📈 Глубокая аналитика безопасности",
         "deep_subtitle": "Многоуровневый анализ уязвимостей с временными рядами и STRIDE-классификацией",
         "dynamics_title": "Динамика обнаружения уязвимостей",
@@ -124,8 +126,6 @@ translations = {
         "ci_percent": [75, 53, 58, 67, 0],
         "ci_lower": [68, 45, 49, 59, 0],
         "ci_upper": [82, 61, 67, 75, 5],
-        
-        # Таб 4 - База угроз
         "threats_db_title": "📚 Полная база угроз (Таблицы 1.1-1.6)",
         "threats_db_subtitle": "27 векторов атак, классифицированных по этапам жизненного цикла",
         "filter_stage": "Фильтр по этапу",
@@ -139,7 +139,6 @@ translations = {
         "col_stride": "STRIDE",
         "col_priority": "Приоритет",
         "col_detected": "Обнаружено",
-        
         "threats_names": [
             "Отравление данных", "Компрометация источников", "Модификация разметки", "Нарушение конфиденциальности",
             "Кража модели", "Отравление гиперпараметров", "Компрометация кода", "Атаки на среду обучения",
@@ -166,10 +165,8 @@ translations = {
             "I,DoS", "E,I", "E,I", "E,I", "I,E", "I", "I", "DoS",
             "I", "I", "T", "T", "T"
         ],
-        "threats_priority": [2,2,2,2, 1,2,2,2, 2,2,2, 2,2,2, 1,1,1,1,2,1,2,1,2,2, 2,2,2],
-        "threats_detected": [3,2,4,5, 7,2,3,4, 2,3,4, 3,4,3, 6,8,7,5,3,6,2,8,0,5, 2,3,2],
-        
-        # Таб 5
+        "threats_priority": [2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,1,1,1,2,1,2,1,2,2,2,2,2],
+        "threats_detected": [3,2,4,5,7,2,3,4,2,3,4,3,4,3,6,8,7,5,3,6,2,8,0,5,2,3,2],
         "risk_table_title": "📋 Таблица 3.2: Оценка рисков",
         "risk_table_subtitle": "Динамическая оценка рисков на основе результатов аудита",
         "risk_category": "Категория риска",
@@ -187,8 +184,6 @@ translations = {
         "risk_impacts": ["Низкое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Высокое", "Среднее", "Низкое", "Высокое"],
         "risk_scores": [1, 9, 6, 6, 9, 6, 9, 9, 9, 9, 6, 2, 9],
         "risk_levels": ["low", "critical", "high", "high", "critical", "high", "critical", "critical", "critical", "critical", "high", "low", "critical"],
-        
-        # Таб 6
         "about_title": "👩‍🎓 Об авторе",
         "about_subtitle": "Информация о дипломнике и научной работе",
         "education": "Образование",
@@ -201,8 +196,6 @@ translations = {
         "email": "china_aleksandravorobeva@mail.ru",
         "github": "aleksa-ai-cybersec",
         "repo": "deepseek-audit-diploma",
-        
-        # Подвал
         "footer_copyright": "© Воробьева Александра Александровна, 2026",
         "footer_uni": "Московский государственный лингвистический университет",
         "footer_institute": "Институт информационных наук | Кафедра международной информационной безопасности"
@@ -213,7 +206,6 @@ translations = {
         "university": "Moscow State Linguistic University | Institute of Information Sciences | 2026",
         "badges": ["🎓 Diploma Thesis", "🔬 27 attack vectors", "⚡ 80+ test prompts", "🤖 ML analysis", "📊 Live Dashboard", "🎯 STRIDE-AI"],
         "plus80": "+80 requests",
-        
         "metrics_title": "📊 Key Audit Metrics",
         "total_tests": "Total tests",
         "total_tests_value": "153",
@@ -270,7 +262,6 @@ translations = {
         "status_ml": "ML prediction...",
         "status_risk": "Risk assessment...",
         "status_report": "Generating report...",
-        
         "deep_analytics": "📈 Deep Security Analytics",
         "deep_subtitle": "Multi-level vulnerability analysis with time series and STRIDE classification",
         "dynamics_title": "Vulnerability detection dynamics",
@@ -356,7 +347,6 @@ translations = {
         "university": "莫斯科国立语言大学 | 信息科学研究所 | 2026",
         "badges": ["🎓 毕业论文", "🔬 27个攻击向量", "⚡ 80+测试提示词", "🤖 机器学习分析", "📊 实时仪表板", "🎯 STRIDE-AI"],
         "plus80": "+80次请求",
-        
         "metrics_title": "📊 关键审计指标",
         "total_tests": "总测试数",
         "total_tests_value": "153",
@@ -413,7 +403,6 @@ translations = {
         "status_ml": "机器学习预测...",
         "status_risk": "风险评估...",
         "status_report": "生成报告...",
-        
         "deep_analytics": "📈 深度安全分析",
         "deep_subtitle": "基于时间序列和STRIDE分类的多层次漏洞分析",
         "dynamics_title": "漏洞检测动态",
@@ -643,9 +632,17 @@ with tab1:
         coloraxis_showscale=False,
         plot_bgcolor='rgba(0,0,0,0)', 
         paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=10)),
-        yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=10)),
-        margin=dict(l=5, r=5, t=30, b=5)
+        xaxis=dict(
+            gridcolor='#f0f0f0', 
+            tickfont=dict(color=AXIS_COLOR, size=11, weight='bold'),
+            title_font=dict(color=AXIS_COLOR, size=12)
+        ),
+        yaxis=dict(
+            gridcolor='#f0f0f0', 
+            tickfont=dict(color=AXIS_COLOR, size=11, weight='bold'),
+            title_font=dict(color=AXIS_COLOR, size=12)
+        ),
+        margin=dict(l=10, r=10, t=30, b=10)
     )
     st.plotly_chart(fig1, use_container_width=True)
     
@@ -666,10 +663,20 @@ with tab1:
             height=350, 
             plot_bgcolor='rgba(0,0,0,0)', 
             paper_bgcolor='rgba(0,0,0,0)',
-            xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color='#FFFFFF', size=9)), 
-            yaxis=dict(gridcolor='#f0f0f0', title="%", tickfont=dict(color='#FFFFFF', size=10)),
+            xaxis=dict(
+                gridcolor='#f0f0f0', 
+                tickangle=-30, 
+                tickfont=dict(color=AXIS_COLOR, size=10, weight='bold'),
+                title_font=dict(color=AXIS_COLOR, size=11)
+            ), 
+            yaxis=dict(
+                gridcolor='#f0f0f0', 
+                title="%", 
+                tickfont=dict(color=AXIS_COLOR, size=10, weight='bold'),
+                title_font=dict(color=AXIS_COLOR, size=11)
+            ),
             showlegend=False,
-            margin=dict(l=5, r=5, t=30, b=5)
+            margin=dict(l=10, r=10, t=30, b=10)
         )
         st.plotly_chart(fig2, use_container_width=True)
     
@@ -695,12 +702,20 @@ with tab1:
             height=350, 
             plot_bgcolor='rgba(0,0,0,0)', 
             paper_bgcolor='rgba(0,0,0,0)',
-            xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=10), 
-                       title=t['successful_attacks'], title_font=dict(color='#FFFFFF', size=10)),
-            yaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=9)),
+            xaxis=dict(
+                gridcolor='#f0f0f0', 
+                tickfont=dict(color=AXIS_COLOR, size=10, weight='bold'), 
+                title=t['successful_attacks'], 
+                title_font=dict(color=AXIS_COLOR, size=11, weight='bold')
+            ),
+            yaxis=dict(
+                gridcolor='#f0f0f0', 
+                tickfont=dict(color=AXIS_COLOR, size=10, weight='bold'),
+                title_font=dict(color=AXIS_COLOR, size=11)
+            ),
             showlegend=True,
-            legend=dict(font=dict(color='#FFFFFF', size=9), orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
-            margin=dict(l=5, r=30, t=30, b=5)
+            legend=dict(font=dict(color=LEGEND_COLOR, size=9), orientation='h', yanchor='bottom', y=1.02, xanchor='center', x=0.5),
+            margin=dict(l=10, r=30, t=30, b=10)
         )
         st.plotly_chart(fig3, use_container_width=True)
 
@@ -820,11 +835,11 @@ with tab3:
                                   hovertemplate=t['cumulative_hover']),
                                   secondary_y=True)
         fig4.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF', size=9)),
+                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color=LEGEND_COLOR, size=9)),
                           margin=dict(l=5, r=5, t=30, b=5))
-        fig4.update_xaxes(gridcolor='#f0f0f0', tickfont=dict(color='#FFFFFF', size=9))
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False, tickfont=dict(color='#FFFFFF', size=9))
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True, tickfont=dict(color='#FFFFFF', size=9))
+        fig4.update_xaxes(gridcolor='#f0f0f0', tickfont=dict(color=AXIS_COLOR, size=9))
+        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False, tickfont=dict(color=AXIS_COLOR, size=9))
+        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True, tickfont=dict(color=AXIS_COLOR, size=9))
         st.plotly_chart(fig4, use_container_width=True)
     
     with col2:
@@ -897,10 +912,10 @@ with tab3:
         height=450,
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(gridcolor='#f0f0f0', tickangle=-45, tickfont=dict(color='#FFFFFF', size=9)),
-        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color='#FFFFFF', size=10)),
+        xaxis=dict(gridcolor='#f0f0f0', tickangle=-45, tickfont=dict(color=AXIS_COLOR, size=9)),
+        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color=AXIS_COLOR, size=10)),
         showlegend=True,
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color='#FFFFFF', size=9)),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color=LEGEND_COLOR, size=9)),
         margin=dict(l=5, r=5, t=30, b=40)
     )
     st.plotly_chart(fig6, use_container_width=True)
