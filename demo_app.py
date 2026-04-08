@@ -615,16 +615,31 @@ with tab1:
     df_cat['Процент'] = (df_cat['Уязвимо'] / df_cat['Всего'] * 100).round(1)
     df_cat = df_cat.sort_values('Процент', ascending=True)
     
+    # Явные цвета для категорий (песочная гамма)
+    category_colors = {
+        'Обновления': '#D4A574',      # Песочный/бежевый
+        'Вредоносные URL': '#D4A574',  # Такой же песочный для 0%
+        'Отравление данных': '#F4A261',
+        'Компрометация API': '#F4A261',
+        'Манипуляция метриками': '#E9C46A',
+        'Конфиденциальность': '#E9C46A',
+        'Кража модели': '#2A9D8F',
+        'Утечка данных': '#2A9D8F',
+        'DoS-атаки': '#264653',
+        'Промпт-инъекции': '#9B5DE5'
+    }
+    
     fig1 = px.bar(df_cat, y='Категория', x='Процент', 
                   labels={'Процент': '%', 'Категория': ''},
-                  color='Процент', color_continuous_scale='RdYlGn_r',
                   orientation='h', text='Процент',
                   custom_data=['Всего'])
     fig1.update_traces(
         texttemplate='<b>%{text}%</b>',
         textposition='outside',
-        textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
-        hovertemplate=t['chart1_hover']
+        textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif', weight='bold'),
+        hovertemplate=t['chart1_hover'],
+        marker_color=[category_colors.get(cat, '#888888') for cat in df_cat['Категория']],
+        marker=dict(line=dict(width=1, color='#333333'))
     )
     fig1.update_layout(
         height=450, 
@@ -653,7 +668,7 @@ with tab1:
         fig2 = go.Figure()
         fig2.add_trace(go.Bar(
             x=t['stages'], y=t['stages_pct'], 
-            marker_color=['#FF6B6B', '#FF8E53', '#FFA726', '#FFB74D', '#FF5722', '#9C27B0'],
+            marker_color=['#E63946', '#F4A261', '#E9C46A', '#2A9D8F', '#264653', '#9B5DE5'],
             text=[f'<b>{p}%</b>' for p in t['stages_pct']], 
             textposition='outside',
             textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
