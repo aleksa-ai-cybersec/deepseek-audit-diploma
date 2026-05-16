@@ -88,8 +88,15 @@ translations = {
         "total_counts": [24, 15, 12, 18, 12, 10, 8, 12, 15, 8],
         "stages": ["Сбор данных", "Обучение", "Валидация", "Развертывание", "Эксплуатация", "Обновление"],
         "stages_pct": [33.3, 71.4, 88.9, 66.7, 12.9, 77.8],
-        "top5_threats": ["Прямые промпт-инъекции", "Манипуляция тестированием", "Подмена модели", "Кража модели", "Нарушение при обновлении"],
-        "top5_counts": [15, 12, 10, 7, 6],
+        # ИСПРАВЛЕНО: топ-5 угроз по таблице 3.2 диплома
+        "top5_threats": [
+            "Кража модели и IP",
+            "Подмена и компрометация модели",
+            "Компрометация источников и кода",
+            "Манипуляция тестированием",
+            "Нарушение при обновлении"
+        ],
+        "top5_counts": [8, 6, 8, 8, 2],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
         "test_title": "🎯 Интерактивный тестер уязвимостей",
         "test_subtitle": "Введите промпт для анализа. Система в реальном времени определит тип угрозы и оценит риск.",
@@ -122,10 +129,10 @@ translations = {
         "stride_hover": "Класс: %{label}<br>Количество: %{value}<br>Доля: %{percent}",
         "ci_title": "Доверительные интервалы (метод Вильсона, 95%)",
         "ci_hover": "Категория: %{x}<br>Оценка: %{y}%<br>95% ДИ: [%{customdata[0]}% - %{customdata[1]}%]",
-        "ci_categories": ["Промпт-инъекции", "DoS-атаки", "Кража модели", "Утечка данных", "Вредоносные URL"],
-        "ci_percent": [75, 53, 58, 67, 0],
-        "ci_lower": [68, 45, 49, 59, 0],
-        "ci_upper": [82, 61, 67, 75, 5],
+        "ci_categories": ["Кража модели", "DoS-атаки", "Атаки на конфиденциальность", "Отравление гиперпараметров", "Несанкционированный доступ"],
+        "ci_percent": [66.7, 33.3, 33.3, 100.0, 100.0],
+        "ci_lower": [39.1, 13.8, 13.8, 43.9, 43.9],
+        "ci_upper": [86.2, 60.9, 60.9, 100.0, 100.0],
         "threats_db_title": "📚 Полная база угроз (Таблицы 1.1-1.6)",
         "threats_db_subtitle": "27 векторов атак, классифицированных по этапам жизненного цикла",
         "filter_stage": "Фильтр по этапу",
@@ -250,8 +257,15 @@ translations = {
         "total_counts": [24, 15, 12, 18, 12, 10, 8, 12, 15, 8],
         "stages": ["Data Collection", "Training", "Validation", "Deployment", "Operation", "Update"],
         "stages_pct": [33.3, 71.4, 88.9, 66.7, 12.9, 77.8],
-        "top5_threats": ["Direct Prompt Injection", "Testing Manipulation", "Model Replacement", "Model Theft", "Update Violation"],
-        "top5_counts": [15, 12, 10, 7, 6],
+        # ИСПРАВЛЕНО: топ-5 угроз по таблице 3.2 диплома
+        "top5_threats": [
+            "Model Theft and IP",
+            "Model Replacement and Compromise",
+            "Source and Code Compromise",
+            "Testing Manipulation",
+            "Update Violation"
+        ],
+        "top5_counts": [8, 6, 8, 8, 2],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
         "test_title": "🎯 Interactive Vulnerability Tester",
         "test_subtitle": "Enter a prompt for analysis. The system will identify the threat type and assess the risk in real time.",
@@ -284,10 +298,10 @@ translations = {
         "stride_hover": "Class: %{label}<br>Count: %{value}<br>Share: %{percent}",
         "ci_title": "Confidence intervals (Wilson method, 95%)",
         "ci_hover": "Category: %{x}<br>Estimate: %{y}%<br>95% CI: [%{customdata[0]}% - %{customdata[1]}%]",
-        "ci_categories": ["Prompt Injection", "DoS Attacks", "Model Theft", "Data Leak", "Malicious URLs"],
-        "ci_percent": [75, 53, 58, 67, 0],
-        "ci_lower": [68, 45, 49, 59, 0],
-        "ci_upper": [82, 61, 67, 75, 5],
+        "ci_categories": ["Model Theft", "DoS Attacks", "Privacy Attacks", "Hyperparameter Poisoning", "Unauthorized Access"],
+        "ci_percent": [66.7, 33.3, 33.3, 100.0, 100.0],
+        "ci_lower": [39.1, 13.8, 13.8, 43.9, 43.9],
+        "ci_upper": [86.2, 60.9, 60.9, 100.0, 100.0],
         "threats_db_title": "📚 Complete Threat Database (Tables 1.1-1.6)",
         "threats_db_subtitle": "27 attack vectors classified by lifecycle stages",
         "filter_stage": "Filter by stage",
@@ -402,8 +416,15 @@ translations = {
         "total_counts": [24, 15, 12, 18, 12, 10, 8, 12, 15, 8],
         "stages": ["数据收集", "训练", "验证", "部署", "运行", "更新"],
         "stages_pct": [33.3, 71.4, 88.9, 66.7, 12.9, 77.8],
-        "top5_threats": ["直接提示注入", "测试操纵", "模型替换", "模型盗窃", "更新违规"],
-        "top5_counts": [15, 12, 10, 7, 6],
+        # ИСПРАВЛЕНО: топ-5 угроз по таблице 3.2 диплома
+        "top5_threats": [
+            "模型盗窃和知识产权",
+            "模型替换和破坏",
+            "源代码和代码入侵",
+            "测试操纵",
+            "更新违规"
+        ],
+        "top5_counts": [8, 6, 8, 8, 2],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
         "test_title": "🎯 交互式漏洞测试器",
         "test_subtitle": "输入提示词进行分析。系统将实时识别威胁类型并评估风险。",
@@ -436,10 +457,10 @@ translations = {
         "stride_hover": "类别: %{label}<br>数量: %{value}<br>占比: %{percent}",
         "ci_title": "置信区间（威尔逊方法，95%）",
         "ci_hover": "类别: %{x}<br>估计值: %{y}%<br>95%置信区间: [%{customdata[0]}% - %{customdata[1]}%]",
-        "ci_categories": ["提示注入", "拒绝服务攻击", "模型盗窃", "数据泄露", "恶意URL"],
-        "ci_percent": [75, 53, 58, 67, 0],
-        "ci_lower": [68, 45, 49, 59, 0],
-        "ci_upper": [82, 61, 67, 75, 5],
+        "ci_categories": ["模型盗窃", "拒绝服务攻击", "隐私攻击", "超参数投毒", "未授权访问"],
+        "ci_percent": [66.7, 33.3, 33.3, 100.0, 100.0],
+        "ci_lower": [39.1, 13.8, 13.8, 43.9, 43.9],
+        "ci_upper": [86.2, 60.9, 60.9, 100.0, 100.0],
         "threats_db_title": "📚 完整威胁数据库（表1.1-1.6）",
         "threats_db_subtitle": "按生命周期阶段分类的27个攻击向量",
         "filter_stage": "按阶段筛选",
@@ -885,9 +906,11 @@ with tab3:
     
     with col2:
         st.markdown(f"#### {t['stride_title']}")
-        stride_data = {'Класс': ['Spoofing', 'Tampering', 'Repudiation', 'Information Disclosure', 'Denial of Service', 'Elevation of Privilege'],
-                       'Количество': [4, 12, 3, 18, 8, 7]}
-        df_stride = pd.DataFrame(stride_data)
+        # 5 классов из диплома (I=102, E=60, DoS=30, T=30, R=3)
+        stride_classes = ['I (Information Disclosure)', 'E (Elevation of Privilege)', 
+                          'DoS (Denial of Service)', 'T (Tampering)', 'R (Repudiation)']
+        stride_counts = [102, 60, 30, 30, 3]
+        df_stride = pd.DataFrame({'Класс': stride_classes, 'Количество': stride_counts})
         fig5 = px.pie(df_stride, values='Количество', names='Класс', color_discrete_sequence=px.colors.qualitative.Set2)
         fig5.update_traces(
             textposition='inside', 
