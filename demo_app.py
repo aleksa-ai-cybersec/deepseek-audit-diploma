@@ -10,7 +10,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import time
 
 # ========== НАСТРОЙКА СТРАНИЦЫ ==========
@@ -32,11 +31,10 @@ def is_mobile():
         return False
 
 is_mobile_device = is_mobile()
-# Цвет текста: на мобильных белый, на компьютере чёрный
 AXIS_COLOR = '#FFFFFF' if is_mobile_device else '#000000'
 LEGEND_COLOR = '#FFFFFF' if is_mobile_device else '#000000'
 
-# ========== ПОЛНЫЕ ПЕРЕВОДЫ ==========
+# ========== ПЕРЕВОДЫ ==========
 translations = {
     "ru": {
         "title": "🛡️ DeepSeek Security Auditor",
@@ -61,9 +59,7 @@ translations = {
         "results_subtitle": "Полные результаты тестирования по всем 27 векторам атак",
         "semantic_title": "📊 Семантический анализ ответов модели (рис. 3.9)",
         "chart2_title": "🔄 По этапам жизненного цикла (рис. 3.4)",
-        "chart2_hover": "Этап: %{y}<br>Уязвимо: %{x}%<br>",
         "chart3_title": "⚠️ Топ-5 самых опасных угроз (табл. 3.2)",
-        "chart3_hover": "Угроза: %{y}<br>Обнаружено уязвимостей: %{x}<br>Риск: %{marker.color}",
         "threat": "Угроза",
         "successful_attacks": "Обнаружено уязвимостей",
         "risk": "Риск",
@@ -79,9 +75,8 @@ translations = {
             "question_answer": "вопрос-ответ"
         },
         "semantic_counts": [65, 21, 14, 5, 6],
-        "stages": ["Сбор и подготовка данных", "Разработка и обучение", "Валидация и тестирование", "Развертывание", "Эксплуатация", "Обновление"],
+        "stages": ["Сбор данных", "Обучение", "Валидация", "Развертывание", "Эксплуатация", "Обновление"],
         "stages_pct": [33.3, 71.4, 88.9, 66.7, 12.9, 77.8],
-        # Топ-5 угроз по таблице 3.2 диплома (IMG_6345-6346)
         "top5_threats": [
             "Кража модели и IP",
             "Подмена и компрометация модели",
@@ -92,7 +87,7 @@ translations = {
         "top5_counts": [8, 6, 8, 8, 2],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
         "test_title": "🎯 Интерактивный тестер уязвимостей",
-        "test_subtitle": "Введите промпт для анализа. Система в реальном времени определит тип угрозы и оценит риск.",
+        "test_subtitle": "Введите промпт для анализа. Система определит тип угрозы и оценит риск.",
         "input_data": "📥 Входные данные",
         "select_example": "Выберите пример промпта:",
         "examples": {"safe": "Безопасный запрос", "direct_injection": "Прямая промпт-инъекция", "role_attack": "Ролевая атака (DAN)", "dos": "DoS-атака", "model_theft": "Кража модели", "malicious_url": "Генерация вредоносного URL"},
@@ -104,7 +99,7 @@ translations = {
         "probability": "Вероятность уязвимости",
         "threat_type": "Тип угрозы",
         "risk_level": "УРОВЕНЬ РИСКА",
-        "select_prompt": "👆 Выберите пример промпта или введите свой и нажмите кнопку 'ЗАПУСТИТЬ АНАЛИЗ'",
+        "select_prompt": "👆 Выберите пример промпта или введите свой и нажмите кнопку",
         "threat_labels": {"prompt_injection": "Прямая промпт-инъекция", "dos": "DoS-атака", "model_theft": "Кража модели", "malicious_url": "Генерация вредоносного URL", "safe": "Безопасный запрос", "role_attack": "Ролевая атака (DAN)"},
         "ml_analyzer_working": "🔄 ML-анализатор в работе...",
         "status_semantic": "Анализ семантики...",
@@ -112,16 +107,9 @@ translations = {
         "status_risk": "Оценка рисков...",
         "status_report": "Формирование отчета...",
         "deep_analytics": "📈 Глубокая аналитика безопасности",
-        "deep_subtitle": "Многоуровневый анализ уязвимостей с временными рядами и STRIDE-классификацией",
-        "dynamics_title": "Динамика обнаружения уязвимостей",
-        "dynamics_hover": "Дата: %{x}<br>Новые уязвимости: %{y}<br>",
-        "cumulative_hover": "Дата: %{x}<br>Всего накоплено: %{y}<br>",
-        "new_vuln": "Новые уязвимости",
-        "cumulative": "Накоплено",
+        "deep_subtitle": "STRIDE-классификация и доверительные интервалы",
         "stride_title": "Распределение по STRIDE-AI (рис. 3.7-3.8)",
-        "stride_hover": "Класс: %{label}<br>Количество: %{value}<br>Доля: %{percent}",
         "ci_title": "Доверительные интервалы (метод Вильсона, 95%)",
-        "ci_hover": "Категория: %{x}<br>Оценка: %{y}%<br>95% ДИ: [%{customdata[0]}% - %{customdata[1]}%]",
         "ci_categories": ["Кража модели", "DoS-атаки", "Атаки на конфиденциальность", "Отравление гиперпараметров", "Несанкционированный доступ"],
         "ci_percent": [66.7, 33.3, 33.3, 100.0, 100.0],
         "ci_lower": [39.1, 13.8, 13.8, 43.9, 43.9],
@@ -175,9 +163,9 @@ translations = {
         "risk_score": "Оценка риска",
         "level": "Уровень",
         "risk_categories": [
-            "Генерация вредоносных URL", "Джейлбрейк-атаки (снятие ограничений)", "Утечка конфиденциальных данных",
-            "Генерация вредоносного кода", "Кража модели и IP", "DoS-атаки и отказ в обслуживании",
-            "Подмена и компрометация модели", "Отравление данных и разметки", "Компрометация источников и кода",
+            "Генерация вредоносных URL", "Джейлбрейк-атаки", "Утечка конфиденциальных данных",
+            "Генерация вредоносного кода", "Кража модели и IP", "DoS-атаки",
+            "Подмена и компрометация модели", "Отравление данных", "Компрометация источников и кода",
             "Манипуляция тестированием", "Небезопасная конфигурация", "Изменение распределения данных", "Нарушение при обновлении"
         ],
         "risk_probs": ["Низкая", "Высокая", "Средняя", "Средняя", "Высокая", "Средняя", "Высокая", "Высокая", "Высокая", "Высокая", "Высокая", "Средняя", "Высокая"],
@@ -223,9 +211,7 @@ translations = {
         "results_subtitle": "Complete testing results for all 27 attack vectors",
         "semantic_title": "📊 Semantic analysis of model responses (fig. 3.9)",
         "chart2_title": "🔄 By lifecycle stage (fig. 3.4)",
-        "chart2_hover": "Stage: %{y}<br>Vulnerable: %{x}%<br>",
         "chart3_title": "⚠️ Top 5 most dangerous threats (table 3.2)",
-        "chart3_hover": "Threat: %{y}<br>Vulnerabilities detected: %{x}<br>Risk: %{marker.color}",
         "threat": "Threat",
         "successful_attacks": "Vulnerabilities detected",
         "risk": "Risk",
@@ -241,7 +227,7 @@ translations = {
             "question_answer": "question-answer"
         },
         "semantic_counts": [65, 21, 14, 5, 6],
-        "stages": ["Data Collection", "Development & Training", "Validation & Testing", "Deployment", "Operation", "Update"],
+        "stages": ["Data Collection", "Training", "Validation", "Deployment", "Operation", "Update"],
         "stages_pct": [33.3, 71.4, 88.9, 66.7, 12.9, 77.8],
         "top5_threats": [
             "Model Theft and IP",
@@ -253,7 +239,7 @@ translations = {
         "top5_counts": [8, 6, 8, 8, 2],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
         "test_title": "🎯 Interactive Vulnerability Tester",
-        "test_subtitle": "Enter a prompt for analysis. The system will identify the threat type and assess the risk in real time.",
+        "test_subtitle": "Enter a prompt for analysis. The system will identify the threat type and assess the risk.",
         "input_data": "📥 Input Data",
         "select_example": "Select a prompt example:",
         "examples": {"safe": "Safe request", "direct_injection": "Direct prompt injection", "role_attack": "Role-play attack (DAN)", "dos": "DoS attack", "model_theft": "Model theft", "malicious_url": "Malicious URL generation"},
@@ -265,7 +251,7 @@ translations = {
         "probability": "Vulnerability probability",
         "threat_type": "Threat type",
         "risk_level": "RISK LEVEL",
-        "select_prompt": "👆 Select a prompt example or enter your own and click 'RUN ANALYSIS'",
+        "select_prompt": "👆 Select a prompt example or enter your own and click the button",
         "threat_labels": {"prompt_injection": "Direct prompt injection", "dos": "DoS attack", "model_theft": "Model theft", "malicious_url": "Malicious URL generation", "safe": "Safe request", "role_attack": "Role-play attack (DAN)"},
         "ml_analyzer_working": "🔄 ML analyzer working...",
         "status_semantic": "Semantic analysis...",
@@ -273,16 +259,9 @@ translations = {
         "status_risk": "Risk assessment...",
         "status_report": "Generating report...",
         "deep_analytics": "📈 Deep Security Analytics",
-        "deep_subtitle": "Multi-level vulnerability analysis with time series and STRIDE classification",
-        "dynamics_title": "Vulnerability detection dynamics",
-        "dynamics_hover": "Date: %{x}<br>New vulnerabilities: %{y}<br>",
-        "cumulative_hover": "Date: %{x}<br>Total accumulated: %{y}<br>",
-        "new_vuln": "New vulnerabilities",
-        "cumulative": "Cumulative",
+        "deep_subtitle": "STRIDE classification and confidence intervals",
         "stride_title": "STRIDE-AI Distribution (fig. 3.7-3.8)",
-        "stride_hover": "Class: %{label}<br>Count: %{value}<br>Share: %{percent}",
         "ci_title": "Confidence intervals (Wilson method, 95%)",
-        "ci_hover": "Category: %{x}<br>Estimate: %{y}%<br>95% CI: [%{customdata[0]}% - %{customdata[1]}%]",
         "ci_categories": ["Model Theft", "DoS Attacks", "Privacy Attacks", "Hyperparameter Poisoning", "Unauthorized Access"],
         "ci_percent": [66.7, 33.3, 33.3, 100.0, 100.0],
         "ci_lower": [39.1, 13.8, 13.8, 43.9, 43.9],
@@ -330,7 +309,7 @@ translations = {
         "impact": "Impact",
         "risk_score": "Risk Score",
         "level": "Level",
-        "risk_categories": ["Malicious URL Generation", "Jailbreak Attacks (bypass restrictions)", "Confidential Data Leakage", "Malicious Code Generation", "Model Theft and IP", "DoS Attacks and Service Denial", "Model Replacement and Compromise", "Data and Label Poisoning", "Source and Code Compromise", "Testing Manipulation", "Insecure Configuration", "Data Distribution Shift", "Update Violation"],
+        "risk_categories": ["Malicious URL Generation", "Jailbreak Attacks", "Confidential Data Leakage", "Malicious Code Generation", "Model Theft and IP", "DoS Attacks", "Model Replacement and Compromise", "Data Poisoning", "Source and Code Compromise", "Testing Manipulation", "Insecure Configuration", "Data Distribution Shift", "Update Violation"],
         "risk_probs": ["Low", "High", "Medium", "Medium", "High", "Medium", "High", "High", "High", "High", "High", "Medium", "High"],
         "risk_impacts": ["Low", "High", "High", "High", "High", "High", "High", "High", "High", "High", "Medium", "Low", "High"],
         "risk_scores": [1, 9, 6, 6, 9, 6, 9, 9, 9, 9, 6, 2, 9],
@@ -374,9 +353,7 @@ translations = {
         "results_subtitle": "所有27个攻击向量的完整测试结果",
         "semantic_title": "📊 模型响应的语义分析（图3.9）",
         "chart2_title": "🔄 按生命周期阶段（图3.4）",
-        "chart2_hover": "阶段: %{y}<br>漏洞: %{x}%<br>",
         "chart3_title": "⚠️ 最危险的5种威胁（表3.2）",
-        "chart3_hover": "威胁: %{y}<br>发现的漏洞: %{x}<br>风险: %{marker.color}",
         "threat": "威胁",
         "successful_attacks": "发现的漏洞",
         "risk": "风险",
@@ -392,7 +369,7 @@ translations = {
             "question_answer": "问答"
         },
         "semantic_counts": [65, 21, 14, 5, 6],
-        "stages": ["数据收集", "开发与训练", "验证与测试", "部署", "运行", "更新"],
+        "stages": ["数据收集", "训练", "验证", "部署", "运行", "更新"],
         "stages_pct": [33.3, 71.4, 88.9, 66.7, 12.9, 77.8],
         "top5_threats": [
             "模型盗窃和知识产权",
@@ -404,7 +381,7 @@ translations = {
         "top5_counts": [8, 6, 8, 8, 2],
         "top5_risks": ["critical", "critical", "critical", "critical", "critical"],
         "test_title": "🎯 交互式漏洞测试器",
-        "test_subtitle": "输入提示词进行分析。系统将实时识别威胁类型并评估风险。",
+        "test_subtitle": "输入提示词进行分析。系统将识别威胁类型并评估风险。",
         "input_data": "📥 输入数据",
         "select_example": "选择提示词示例：",
         "examples": {"safe": "安全请求", "direct_injection": "直接提示注入", "role_attack": "角色扮演攻击 (DAN)", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "malicious_url": "恶意URL生成"},
@@ -416,7 +393,7 @@ translations = {
         "probability": "漏洞概率",
         "threat_type": "威胁类型",
         "risk_level": "风险等级",
-        "select_prompt": "👆 选择提示词示例或输入您自己的提示词，然后点击'运行分析'",
+        "select_prompt": "👆 选择提示词示例或输入您自己的提示词，然后点击按钮",
         "threat_labels": {"prompt_injection": "直接提示注入", "dos": "拒绝服务攻击", "model_theft": "模型盗窃", "malicious_url": "恶意URL生成", "safe": "安全请求", "role_attack": "角色扮演攻击 (DAN)"},
         "ml_analyzer_working": "🔄 机器学习分析器中...",
         "status_semantic": "语义分析...",
@@ -424,16 +401,9 @@ translations = {
         "status_risk": "风险评估...",
         "status_report": "生成报告...",
         "deep_analytics": "📈 深度安全分析",
-        "deep_subtitle": "基于时间序列和STRIDE分类的多层次漏洞分析",
-        "dynamics_title": "漏洞检测动态",
-        "dynamics_hover": "日期: %{x}<br>新漏洞: %{y}<br>",
-        "cumulative_hover": "日期: %{x}<br>累计: %{y}<br>",
-        "new_vuln": "新漏洞",
-        "cumulative": "累计",
+        "deep_subtitle": "STRIDE分类和置信区间",
         "stride_title": "STRIDE-AI 分布（图3.7-3.8）",
-        "stride_hover": "类别: %{label}<br>数量: %{value}<br>占比: %{percent}",
         "ci_title": "置信区间（威尔逊方法，95%）",
-        "ci_hover": "类别: %{x}<br>估计值: %{y}%<br>95%置信区间: [%{customdata[0]}% - %{customdata[1]}%]",
         "ci_categories": ["模型盗窃", "拒绝服务攻击", "隐私攻击", "超参数投毒", "未授权访问"],
         "ci_percent": [66.7, 33.3, 33.3, 100.0, 100.0],
         "ci_lower": [39.1, 13.8, 13.8, 43.9, 43.9],
@@ -481,7 +451,7 @@ translations = {
         "impact": "影响",
         "risk_score": "风险评分",
         "level": "等级",
-        "risk_categories": ["恶意URL生成", "越狱攻击（绕过限制）", "机密数据泄露", "恶意代码生成", "模型盗窃和知识产权", "拒绝服务攻击", "模型替换和破坏", "数据和标签投毒", "源代码破坏", "测试操纵", "不安全配置", "数据分布变化", "更新违规"],
+        "risk_categories": ["恶意URL生成", "越狱攻击", "机密数据泄露", "恶意代码生成", "模型盗窃和知识产权", "拒绝服务攻击", "模型替换和破坏", "数据投毒", "源代码破坏", "测试操纵", "不安全配置", "数据分布变化", "更新违规"],
         "risk_probs": ["低", "高", "中", "中", "高", "中", "高", "高", "高", "高", "高", "中", "高"],
         "risk_impacts": ["低", "高", "高", "高", "高", "高", "高", "高", "高", "高", "中", "低", "高"],
         "risk_scores": [1, 9, 6, 6, 9, 6, 9, 9, 9, 9, 6, 2, 9],
@@ -624,7 +594,7 @@ with tab1:
     </div>
     """, unsafe_allow_html=True)
     
-    # ===== ГРАФИК 1: СЕМАНТИЧЕСКИЙ АНАЛИЗ (рис. 3.9) =====
+    # Семантический анализ (рис. 3.9)
     st.markdown(f"### {t['semantic_title']}")
     
     semantic_types = list(t['semantic_types'].values())
@@ -635,7 +605,6 @@ with tab1:
         'Количество': semantic_counts
     }).sort_values('Количество', ascending=True)
     
-    # Цвета: красный для уязвимостей, зелёный для защиты, оранжевый для промежуточных
     semantic_colors = ['#ff6b6b', '#4CAF50', '#ff6b6b', '#ffa726', '#ffa726']
     
     fig_semantic = px.bar(
@@ -663,41 +632,28 @@ with tab1:
     )
     st.plotly_chart(fig_semantic, use_container_width=True)
     
-    # ===== ДВА ГРАФИКА В РЯД =====
+    # Два графика в ряд
     col_left, col_right = st.columns(2)
     
     with col_left:
         st.markdown(f"### {t['chart2_title']}")
-        # Горизонтальный бар-чарт, как в дипломе (рис. 3.4)
-        df_stages = pd.DataFrame({
-            'Этап': t['stages'],
-            'Процент': t['stages_pct']
-        }).sort_values('Процент', ascending=True)
-        
-        fig2 = px.bar(
-            df_stages,
-            x='Процент',
-            y='Этап',
-            orientation='h',
-            text=[f'{p}%' for p in df_stages['Процент']],
-            labels={'x': '%', 'y': ''},
-            color='Процент',
-            color_continuous_scale=['#E63946', '#F4A261', '#E9C46A', '#2A9D8F', '#264653', '#9B5DE5']
-        )
-        fig2.update_traces(
+        fig2 = go.Figure()
+        fig2.add_trace(go.Bar(
+            x=t['stages'],
+            y=t['stages_pct'],
+            marker_color=['#E63946', '#F4A261', '#E9C46A', '#2A9D8F', '#264653', '#9B5DE5'],
+            text=[f'{p}%' for p in t['stages_pct']],
             textposition='outside',
-            textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif', weight='bold'),
-            hovertemplate=t['chart2_hover']
-        )
+            textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif')
+        ))
         fig2.update_layout(
             height=400,
-            showlegend=False,
-            coloraxis_showscale=False,
             plot_bgcolor='rgba(0,0,0,0)',
             paper_bgcolor='rgba(0,0,0,0)',
-            xaxis=dict(gridcolor='#f0f0f0', tickfont=dict(color=AXIS_COLOR, size=10), title_font=dict(color=AXIS_COLOR)),
-            yaxis=dict(tickfont=dict(color=AXIS_COLOR, size=10), title_font=dict(color=AXIS_COLOR)),
-            margin=dict(l=10, r=30, t=30, b=10)
+            xaxis=dict(gridcolor='#f0f0f0', tickangle=-30, tickfont=dict(color=AXIS_COLOR, size=10), title_font=dict(color=AXIS_COLOR)),
+            yaxis=dict(gridcolor='#f0f0f0', title="%", tickfont=dict(color=AXIS_COLOR, size=10), title_font=dict(color=AXIS_COLOR)),
+            showlegend=False,
+            margin=dict(l=10, r=10, t=30, b=10)
         )
         st.plotly_chart(fig2, use_container_width=True)
     
@@ -722,8 +678,7 @@ with tab1:
             textposition='outside',
             textfont=dict(size=13, color='#FFFFFF', family='Arial, sans-serif'),
             insidetextanchor='middle',
-            cliponaxis=False,
-            hovertemplate=t['chart3_hover']
+            cliponaxis=False
         )
         fig3.update_layout(
             height=400,
@@ -832,35 +787,6 @@ with tab3:
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown(f"#### {t['dynamics_title']}")
-        dates = pd.date_range(start='2026-03-01', end='2026-03-14', freq='D')
-        daily = [8, 7, 6, 7, 4, 3, 5, 4, 3, 2, 2, 1, 1, 1]
-        cumulative = []
-        total = 0
-        for d in daily:
-            total += d
-            cumulative.append(total)
-        df_time = pd.DataFrame({'Дата': dates, t['new_vuln']: daily, t['cumulative']: cumulative})
-        fig4 = make_subplots(specs=[[{"secondary_y": True}]])
-        fig4.add_trace(go.Bar(x=df_time['Дата'], y=df_time[t['new_vuln']], name=t['new_vuln'], 
-                              marker_color='#FFA726',
-                              text=df_time[t['new_vuln']], textposition='outside',
-                              textfont=dict(size=11, color='#FFFFFF', weight='bold'),
-                              hovertemplate=t['dynamics_hover']), secondary_y=False)
-        fig4.add_trace(go.Scatter(x=df_time['Дата'], y=df_time[t['cumulative']], name=t['cumulative'], 
-                                  mode='lines+markers',
-                                  line=dict(color='#667EEA', width=3), marker=dict(size=8, color='#667EEA'),
-                                  hovertemplate=t['cumulative_hover']),
-                                  secondary_y=True)
-        fig4.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                          hovermode='x unified', legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color=LEGEND_COLOR, size=9)),
-                          margin=dict(l=5, r=5, t=30, b=5))
-        fig4.update_xaxes(gridcolor='#f0f0f0', tickfont=dict(color=AXIS_COLOR, size=9))
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=False, tickfont=dict(color=AXIS_COLOR, size=9))
-        fig4.update_yaxes(gridcolor='#f0f0f0', secondary_y=True, tickfont=dict(color=AXIS_COLOR, size=9))
-        st.plotly_chart(fig4, use_container_width=True)
-    
-    with col2:
         st.markdown(f"#### {t['stride_title']}")
         stride_classes = ['I (Information Disclosure)', 'E (Elevation of Privilege)', 
                           'DoS (Denial of Service)', 'T (Tampering)', 'R (Repudiation)']
@@ -871,73 +797,54 @@ with tab3:
             textposition='inside', 
             textinfo='percent+label', 
             textfont=dict(size=11, color='#FFFFFF', weight='bold'),
-            insidetextorientation='radial',
-            hovertemplate=t['stride_hover']
+            insidetextorientation='radial'
         )
         fig5.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=False)
         st.plotly_chart(fig5, use_container_width=True)
     
-    st.markdown(f"#### {t['ci_title']}")
-    
-    df_ci = pd.DataFrame({
-        'Категория': t['ci_categories'],
-        'Процент': t['ci_percent'],
-        'CI_нижний': t['ci_lower'],
-        'CI_верхний': t['ci_upper']
-    })
-    
-    fig6 = go.Figure()
-    
-    fig6.add_trace(go.Scatter(
-        x=df_ci['Категория'],
-        y=df_ci['Процент'],
-        mode='markers',
-        name='Оценка',
-        marker=dict(size=16, color='#667EEA', symbol='diamond', line=dict(width=2, color='white')),
-        text=[f'<b>{p}%</b>' for p in df_ci['Процент']],
-        textposition='top center',
-        textfont=dict(size=12, color='#FFFFFF', family='Arial, sans-serif'),
-        customdata=np.stack((df_ci['CI_нижний'], df_ci['CI_верхний']), axis=-1),
-        hovertemplate=t['ci_hover']
-    ))
-    
-    for i, row in df_ci.iterrows():
+    with col2:
+        st.markdown(f"#### {t['ci_title']}")
+        df_ci = pd.DataFrame({
+            'Категория': t['ci_categories'],
+            'Процент': t['ci_percent'],
+            'CI_нижний': t['ci_lower'],
+            'CI_верхний': t['ci_upper']
+        })
+        
+        fig6 = go.Figure()
         fig6.add_trace(go.Scatter(
-            x=[row['Категория'], row['Категория']],
-            y=[row['CI_нижний'], row['CI_верхний']],
-            mode='lines',
-            name='95% CI' if i == 0 else '',
-            line=dict(color='#FFFFFF', width=4),
-            showlegend=True if i == 0 else False,
-            hovertemplate='95% CI: %{y}%'
+            x=df_ci['Категория'],
+            y=df_ci['Процент'],
+            mode='markers',
+            name='Оценка',
+            marker=dict(size=16, color='#667EEA', symbol='diamond', line=dict(width=2, color='white')),
+            text=[f'<b>{p}%</b>' for p in df_ci['Процент']],
+            textposition='top center',
+            textfont=dict(size=12, color='#FFFFFF', family='Arial, sans-serif'),
+            customdata=np.stack((df_ci['CI_нижний'], df_ci['CI_верхний']), axis=-1)
         ))
         
-        fig6.add_trace(go.Scatter(
-            x=[row['Категория']],
-            y=[row['CI_нижний']],
-            mode='markers',
-            marker=dict(size=8, color='#FFFFFF', symbol='line-ns'),
-            showlegend=False
-        ))
-        fig6.add_trace(go.Scatter(
-            x=[row['Категория']],
-            y=[row['CI_верхний']],
-            mode='markers',
-            marker=dict(size=8, color='#FFFFFF', symbol='line-ns'),
-            showlegend=False
-        ))
-    
-    fig6.update_layout(
-        height=450,
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(gridcolor='#f0f0f0', tickangle=-45, tickfont=dict(color=AXIS_COLOR, size=9)),
-        yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color=AXIS_COLOR, size=10)),
-        showlegend=True,
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color=LEGEND_COLOR, size=9)),
-        margin=dict(l=5, r=5, t=30, b=40)
-    )
-    st.plotly_chart(fig6, use_container_width=True)
+        for i, row in df_ci.iterrows():
+            fig6.add_trace(go.Scatter(
+                x=[row['Категория'], row['Категория']],
+                y=[row['CI_нижний'], row['CI_верхний']],
+                mode='lines',
+                name='95% CI' if i == 0 else '',
+                line=dict(color='#FFFFFF', width=4),
+                showlegend=True if i == 0 else False
+            ))
+        
+        fig6.update_layout(
+            height=450,
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)',
+            xaxis=dict(gridcolor='#f0f0f0', tickangle=-45, tickfont=dict(color=AXIS_COLOR, size=9)),
+            yaxis=dict(gridcolor='#f0f0f0', title="%", range=[0, 100], tickfont=dict(color=AXIS_COLOR, size=10)),
+            showlegend=True,
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(color=LEGEND_COLOR, size=9)),
+            margin=dict(l=5, r=5, t=30, b=40)
+        )
+        st.plotly_chart(fig6, use_container_width=True)
 
 # ==================== ТАБ 4: БАЗА УГРОЗ ====================
 with tab4:
