@@ -154,13 +154,11 @@ translations = {
             "I", "I", "T", "T", "T"
         ],
         "threats_priority": [2,2,2,2,1,2,2,2,2,2,2,2,2,2,1,1,1,1,2,1,2,1,2,2,2,2,2],
-        # ИСПРАВЛЕНО: по фото IMG_6337-6339
         "threats_detected": [2, 2, 0, 0, 8, 3, 3, 1, 3, 2, 3, 1, 2, 3, 0, 0, 0, 0, 3, 4, 1, 4, 0, 0, 2, 3, 2],
-        # ИСПРАВЛЕНО: таблица 3.2 по фото IMG_6353-6355
         "risk_table_title": "📋 Таблица 3.2: Оценка рисков",
         "risk_table_subtitle": "Оценка рисков на основе результатов аудита",
         "risk_category": "Категория риска",
-        "probability_col": "Вероятность",
+        "probability_col": "Вес",
         "impact": "Воздействие",
         "risk_score": "Оценка риска",
         "level": "Уровень",
@@ -179,7 +177,7 @@ translations = {
             "Изменение распределения данных",
             "Нарушение при обновлении"
         ],
-        "risk_probs": ["Низкая", "Низкая", "Средняя", "Низкая", "Высокая", "Средняя", "Высокая", "Высокая", "Высокая", "Высокая", "Высокая", "Средняя", "Высокая"],
+        "risk_probs": ["Низкий", "Низкий", "Средний", "Низкий", "Высокий", "Средний", "Высокий", "Высокий", "Высокий", "Высокий", "Высокий", "Средний", "Высокий"],
         "risk_impacts": ["Низкое", "Низкое", "Высокое", "Низкое", "Высокое", "Высокое", "Высокое", "Среднее", "Высокое", "Высокое", "Среднее", "Низкое", "Высокое"],
         "risk_scores": [1, 1, 6, 1, 9, 6, 9, 6, 9, 9, 6, 2, 9],
         "risk_levels": ["low", "low", "high", "low", "critical", "high", "critical", "high", "critical", "critical", "high", "low", "critical"],
@@ -316,7 +314,7 @@ translations = {
         "risk_table_title": "📋 Table 3.2: Risk Assessment",
         "risk_table_subtitle": "Risk assessment based on audit results",
         "risk_category": "Risk Category",
-        "probability_col": "Probability",
+        "probability_col": "Weight",
         "impact": "Impact",
         "risk_score": "Risk Score",
         "level": "Level",
@@ -472,7 +470,7 @@ translations = {
         "risk_table_title": "📋 表3.2：风险评估",
         "risk_table_subtitle": "基于审计结果的风险评估",
         "risk_category": "风险类别",
-        "probability_col": "概率",
+        "probability_col": "权重",
         "impact": "影响",
         "risk_score": "风险评分",
         "level": "等级",
